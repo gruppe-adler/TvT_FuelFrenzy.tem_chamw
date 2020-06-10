@@ -2,8 +2,10 @@ if (!isServer) exitWith {};
 
 private _fuelTrucksEast = entities "O_G_Van_01_fuel_F";
 private _fuelTrucksWest = entities "RHS_Ural_Fuel_VDV_01";
+private _fuelTrucksIndependent = entities "C_Truck_02_fuel_F";
+private _fuelTrucksCivilian = entities "gm_gc_army_ural375d_refuel";
 
-private _allFuelTrucks = (_fuelTrucksWest + _fuelTrucksEast);
+private _allFuelTrucks = (_fuelTrucksWest + _fuelTrucksEast + _fuelTrucksIndependent + _fuelTrucksCivilian);
 
 [{
 

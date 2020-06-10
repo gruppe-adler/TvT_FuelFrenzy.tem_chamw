@@ -3,4 +3,5 @@
 */
 #include "mafia_it.hpp"
 #include "mafia_rus.hpp"
-#include "special_forces.hpp"
+#include "mafia_chin.hpp"
+#include "mafia_ger.hpp"
