@@ -8,7 +8,7 @@ class EditorData
 	toggles=33;
 	class ItemIDProvider
 	{
-		nextID=1455;
+		nextID=1466;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=172;
+		nextID=177;
 	};
 	class Camera
 	{
-		pos[]={5717.25,10.855314,3664.2207};
-		dir[]={-0.4374077,-0.53846276,0.72024751};
-		up[]={-0.27950603,0.84264469,0.46024197};
-		aside[]={0.85473442,6.6196662e-008,0.51908207};
+		pos[]={5721.938,11.006192,3661.1375};
+		dir[]={-0.56689286,-0.40046561,0.71992755};
+		up[]={-0.24775204,0.91631138,0.31463456};
+		aside[]={0.78567988,-1.1920929e-007,0.61866498};
 	};
 };
 binarizationWanted=0;
@@ -83,7 +83,8 @@ addons[]=
 	"ace_chemlights",
 	"gm_vehicles_land_wheeled_ural375d_gc_army_ural375d",
 	"A3_Structures_F_Ind_FuelStation_Small",
-	"ace_refuel"
+	"ace_refuel",
+	"A3_Soft_F_Exp_Truck_01"
 };
 class AddonsMetaData
 {
@@ -3365,7 +3366,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=306;
+		items=309;
 		class Item0
 		{
 			dataType="Layer";
@@ -5365,7 +5366,6 @@ class Mission
 							class Attributes
 							{
 								description="Gruppenführer";
-								isPlayer=1;
 								isPlayable=1;
 							};
 							id=1265;
@@ -33949,6 +33949,136 @@ class Mission
 			};
 			id=1454;
 			type="Land_fs_feed_F";
+		};
+		class Item306
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5711.3003,8.6827278,3663.5566};
+				angles[]={6.2157807,1.8675023,0.0049916417};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				fuel=0.47138819;
+				textures="Blue";
+			};
+			id=1455;
+			type="C_Truck_02_fuel_F";
+			atlOffset=-0.00099992752;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ammoBox";
+					expression="[_this,_value] call bis_fnc_initAmmoBox;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="[[[[""FirstAidKit""],[4]],[[],[]],[[],[]],[[],[]]],false]";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item307
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5717.833,6.5000362,3667.8682};
+					};
+					side="West";
+					flags=7;
+					class Attributes
+					{
+						isPlayer=1;
+					};
+					id=1458;
+					type="B_crew_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Male08ENG";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=1.02;
+								};
+							};
+						};
+						nAttributes=2;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=1457;
+		};
+		class Item308
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5721.9238,8.4825296,3671.7693};
+				angles[]={6.268187,3.2463126,6.278194};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=1465;
+			type="B_T_Truck_01_fuel_F";
+			atlOffset=-0.00063657761;
 		};
 	};
 	class Connections

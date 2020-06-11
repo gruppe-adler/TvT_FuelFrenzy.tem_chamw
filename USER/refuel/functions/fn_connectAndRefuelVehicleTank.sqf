@@ -123,7 +123,8 @@ private _attachPosModel = _sink worldToModel (ASLtoAGL _bestPosASL);
         if (_nozzle isKindOf "Land_CanisterFuel_F") then { _nozzle setVariable [QEGVAR(cargo,canLoad), false, true]; };
         _nozzle setVariable [QGVAR(sink), _sink, true];
         _nozzle setVariable [QGVAR(isConnected), true, true];
-        _sink setVariable [QGVAR(nozzle), _nozzle, true];
+        // _sink setVariable [QGVAR(nozzle), _nozzle, true];
+        _sink setVariable ["ff_refuel_nozzle", _nozzle, true];
 
         _source = _nozzle getVariable QGVAR(source);
         private _fuel = [_source] call FUNC(getFuel);
@@ -132,7 +133,7 @@ private _attachPosModel = _sink worldToModel (ASLtoAGL _bestPosASL);
         } else {
             _source setVariable [QGVAR(fuelCounter), _fuel, true];
         };
-        [_unit, _sink, _nozzle, _endPosTestOffset] call refuel_fnc_refuelCargo;
+        [_unit, _sink, _nozzle, _endPosTestOffset] call refuel_fnc_refuelVehicleTank;
 
         if ([_unit, _nozzle] call refuel_fnc_canTurnOn) then {
             _nozzle setVariable [QGVAR(sinkFuel), nil];

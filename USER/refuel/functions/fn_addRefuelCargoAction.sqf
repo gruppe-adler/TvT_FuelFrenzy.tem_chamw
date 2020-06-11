@@ -18,7 +18,30 @@ private _fillCargoTankAction = [
     }, {
         private _nozzle = player getVariable ["ace_refuel_nozzle", objNull];
         !(isNull _nozzle)/* && ((player distance _target) <= REFUEL_NOZZLE_ACTION_DISTANCE)*/ && !(_nozzle getVariable ["ace_refuel_isConnected", false])
-    }] call ace_interact_menu_fnc_createAction;
+    }
+] call ace_interact_menu_fnc_createAction;
+
+
+// refuel tank
+private _refuelReplacementAction = [
+    "RefuelTank",
+    "Fahrzeugtank befüllen",
+    "",
+    {
+        private _virtualPosASL = (eyePos player) vectorAdd (positionCameraToWorld [0,0,0.6]) vectorDiff (positionCameraToWorld [0,0,0]);
+        [
+            player,
+            _target,
+            _virtualPosASL,
+            player getVariable ["ace_refuel_nozzle", objNull]
+        ] call refuel_fnc_connectAndRefuelVehicleTank;
+    }, {
+        private _nozzle = player getVariable ["ace_refuel_nozzle", objNull];
+        !(isNull _nozzle)/* && ((player distance _target) <= REFUEL_NOZZLE_ACTION_DISTANCE)*/ && 
+        !(_nozzle getVariable ["ace_refuel_isConnected", false]) &&
+        isNull (_target getVariable ["ff_refuel_nozzle", objNull])
+    }
+] call ace_interact_menu_fnc_createAction;
 
 
 private _endPointAction = [
@@ -58,14 +81,14 @@ private _returnNozzleAction = [
     private _className = _x;
     {
         [_className, 0, ["ACE_MainActions", "ace_refuel_Refuel"], _x] call ace_interact_menu_fnc_addActionToClass;
-    } forEach [_fillCargoTankAction, _returnNozzleAction];
+    } forEach [_fillCargoTankAction, _returnNozzleAction, _refuelReplacementAction];
 } forEach _staticClasses;
 
 {
     private _className = _x;
     {
         [_className, 0, ["ACE_MainActions", "ace_refuel_Refuel"], _x, true] call ace_interact_menu_fnc_addActionToClass;
-    } forEach [_fillCargoTankAction, _returnNozzleAction];
+    } forEach [_fillCargoTankAction, _returnNozzleAction, _refuelReplacementAction];
 } forEach _dynamicClasses;
 
 [

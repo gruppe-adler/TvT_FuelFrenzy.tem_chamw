@@ -77,14 +77,15 @@ if (isServer) then {
         private _fuelTrucksEast = [worldsize/2, worldsize/2] nearEntities ["O_G_Van_01_fuel_F",14000];
         private _fuelTrucksWest = [worldsize/2, worldsize/2] nearEntities ["RHS_Ural_Fuel_VDV_01",14000];
         private _fuelTrucksIndependent = [worldsize/2, worldsize/2] nearEntities ["C_Truck_02_fuel_F",14000];
-        private _fuelTrucksCivilian = [worldsize/2, worldsize/2] nearEntities ["gm_gc_army_ural375d_refuel",14000];
+        private _fuelTrucksCivilian = [worldsize/2, worldsize/2] nearEntities ["B_T_Truck_01_fuel_F",14000];
         private _fuelTrucks = _fuelTrucksEast + _fuelTrucksWest + _fuelTrucksIndependent + _fuelTrucksCivilian;
+        missionNamespace setVariable ["FF_fuelTrucks", _fuelTrucks, true];
 
         {
           [_x, 0] call ace_refuel_fnc_setfuel;
           _x setVariable ["ace_refuel_fuelMaxCargo", 3000, true];
+          _x setVariable ["ace_refuel_nozzle", _x, true]; // hack to hide CONNECT action to make all actions equally distinctive
         } forEach _fuelTrucks;
-
 
         // private _fuelStations = nearestTerrainObjects [[worldSize/2, worldSize/2], ["Fuelstation"], worldSize/2] select { !isObjectHidden _x};
         

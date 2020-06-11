@@ -6,9 +6,13 @@ class refuel
        class all
        {
            file = "USER\refuel\functions";
-           class addRefuelCargoAction {};
-           class connectAndRefuelCargo {};
-           class refuelCargo {};
-           class canTurnOn {};
+           class addRefuelCargoAction;
+           class connectAndRefuelCargo;
+           class connectAndRefuelVehicleTank;
+           class refuelCargo;
+           class refuelVehicleTank;
+           class canTurnOn;
+           class vehicleTrackingInit { postInit = 1};
+           class vehicleTrackingLoop;
        };
    };
