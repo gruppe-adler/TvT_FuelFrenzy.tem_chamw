@@ -42,7 +42,7 @@ if (hasInterface) then {
 
     playMusic "EventTrack01_F_Curator";
     [player, true] call TFAR_fnc_forceSpectator;
-    [player, player] call ACE_medical_fnc_treatmentAdvanced_fullHealLocal;
+    [player, player] call ace_medical_treatment_fnc_fullHeal;
 
 
 
@@ -50,7 +50,7 @@ if (hasInterface) then {
     private _screenWidth = safeZoneW;
     private _screenHeight = safeZoneH;
 
-    private _columnWidth = _screenWidth/26;
+    private _columnWidth = _screenWidth/30;
     private _rowHeight = _screenHeight/40;
 
     disableSerialization;
@@ -67,19 +67,25 @@ if (hasInterface) then {
     private _iconTotal = "\A3\ui_f\data\igui\cfg\mptable\total_ca.paa";
     // text = "\A3\ui_f\data\igui\cfg\mptable\air_ca.paa";
 
-    private _columns = ["", "Russen", "Italiener"];
+    private _columns = ["", "Russen", "Italiener", "Chinesen", "Deutsche"];
     private _picturePath = ["", _iconInf, _iconSoft, _iconFuel, _iconTotal];
     private _picturePathDescription = ["", "Infanterie", "Autos", "Treibstoff", "Insgesamt"];
 
     private _resultInf_west = str (([west, "Players killed"] call grad_points_fnc_getPointsCategory) + ([west, "AI killed"] call grad_points_fnc_getPointsCategory));
     private _resultInf_east = str (([east, "Players killed"] call grad_points_fnc_getPointsCategory) + ([east, "AI killed"] call grad_points_fnc_getPointsCategory));
+    private _resultInf_independent = str (([independent, "Players killed"] call grad_points_fnc_getPointsCategory) + ([independent, "AI killed"] call grad_points_fnc_getPointsCategory));
+    private _resultInf_civilian = str (([civilian, "Players killed"] call grad_points_fnc_getPointsCategory) + ([civilian, "AI killed"] call grad_points_fnc_getPointsCategory));
     // private _resultArmored = ["", "1", "2", "3", "4"];
 
     private _resultSoft_west = str ([west, "VEHICLEKILLED"] call grad_points_fnc_getPointsCategory);
     private _resultSoft_east = str ([east, "VEHICLEKILLED"] call grad_points_fnc_getPointsCategory);
+    private _resultSoft_independent = str ([independent, "VEHICLEKILLED"] call grad_points_fnc_getPointsCategory);
+    private _resultSoft_civilian = str ([civilian, "VEHICLEKILLED"] call grad_points_fnc_getPointsCategory);
     // private _resultArmored = ["", "1", "2", "3", "4"];
     private _resultFuel_west = format ["%1", [west] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
     private _resultFuel_east = format ["%1", [east] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
+    private _resultFuel_independent = format ["%1", [independent] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
+    private _resultFuel_civilian = format ["%1", [civilian] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
 
 
 
@@ -89,25 +95,44 @@ if (hasInterface) then {
     systemChat _resultFuel_west;
     */
 
-    private _resultTotalNumber_west = ((parseNumber _resultInf_west) + (parseNumber _resultSoft_west) + (parseNumber _resultFuel_west));
-    private _resultTotalNumber_east = ((parseNumber _resultInf_east) + (parseNumber _resultSoft_east) + (parseNumber _resultFuel_east));
+    private _resultTotalNumber_west = [((parseNumber _resultInf_west) + (parseNumber _resultSoft_west) + (parseNumber _resultFuel_west)), west];
+    private _resultTotalNumber_east = [((parseNumber _resultInf_east) + (parseNumber _resultSoft_east) + (parseNumber _resultFuel_east)), east];
+    private _resultTotalNumber_independent = [((parseNumber _resultInf_independent) + (parseNumber _resultSoft_independent) + (parseNumber _resultFuel_independent)), independent];
+    private _resultTotalNumber_civilian = [((parseNumber _resultInf_civilian) + (parseNumber _resultSoft_civilian) + (parseNumber _resultFuel_civilian)), civilian];
 
-    private _resultTotal_west = str _resultTotalNumber_west;
-    private _resultTotal_east= str _resultTotalNumber_east;
+    _resultTotalNumber_west params ["_resultTotal_west"];
+    _resultTotalNumber_east params ["_resultTotal_east"];
+    _resultTotalNumber_independent params ["_resultTotal_independent"];
+    _resultTotalNumber_civilian params ["_resultTotal_civilian"];
 
-    private _results_west = ["", _resultInf_west, _resultSoft_west, _resultFuel_west, _resultTotal_west];
-    private _results_east = ["", _resultInf_east, _resultSoft_east, _resultFuel_east, _resultTotal_east];
+    private _results_west = ["", _resultInf_west, _resultSoft_west, _resultFuel_west, str _resultTotal_west];
+    private _results_east = ["", _resultInf_east, _resultSoft_east, _resultFuel_east, str _resultTotal_east];
+    private _results_independent = ["", _resultInf_independent, _resultSoft_independent, _resultFuel_independent, str _resultTotal_independent];
+    private _results_civilian = ["", _resultInf_civilian, _resultSoft_civilian, _resultFuel_civilian, str _resultTotal_civilian];
 
-    private _eastWins = _resultTotalNumber_east > _resultTotalNumber_west;
-    private _draw = _resultTotalNumber_west == _resultTotalNumber_east;
+    private _totalNumbers = [_resultTotalNumber_west, _resultTotalNumber_east, _resultTotalNumber_independent, _resultTotalNumber_civilian];
+    _totalNumbers sort false;
+
+    private _winner = _totalNumbers select 0 select 1;
+    private _draw = _resultTotal_west isEqualTo _resultTotal_east &&
+                    _resultTotal_independent isEqualTo _resultTotal_civilian &&
+                    _resultTotal_west isEqualTo _resultTotal_civilian;
 
     private _display = findDisplay 46 createDisplay "RscDisplayEmpty";
 
     _display displayAddEventHandler ["KeyDown", "if (((_this select 1) == 1) && (!isServer)) then {true} else {false};"];
 
 
-    private _resultText = if (!_draw && _eastWins) then { "Ital. Mafia gewinnt" } else { "russ. Mafia gewinnt"  };
-    if (_draw) then { _resultText = "Unentschieden!" };
+    private _resultText = "Unentschieden!";
+    if (!_draw) then {
+        switch (_winner) do { 
+            case west : { "Ital. Mafia gewinnt"  }; 
+            case east : {  "russ. Mafia gewinnt"  }; 
+            case west : { "chin. Mafia gewinnt"   }; 
+            case east : {  "dt. Mafia gewinnt" }; 
+            default {}; 
+        };
+    };
 
     private _background = _display ctrlCreate ["RscText", -1];
     _background ctrlSetPosition [safezoneX, safeZoneY, _screenWidth, _screenHeight];
@@ -129,7 +154,7 @@ if (hasInterface) then {
 
 
 
-    for "_i" from 1 to 3 do {
+    for "_i" from 1 to 5 do {
 
         private _multiplicator = _i * 5;
 

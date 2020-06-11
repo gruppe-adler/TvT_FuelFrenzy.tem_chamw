@@ -1,18 +1,19 @@
 if (!isServer) exitWith {};
 
-private _fuelTrucksEast = entities "O_G_Van_01_fuel_F";
-private _fuelTrucksWest = entities "RHS_Ural_Fuel_VDV_01";
-private _fuelTrucksIndependent = entities "C_Truck_02_fuel_F";
-private _fuelTrucksCivilian = entities "gm_gc_army_ural375d_refuel";
+private _fuelTrucksEast = [worldsize/2, worldsize/2] nearEntities ["O_G_Van_01_fuel_F",14000];
+private _fuelTrucksWest = [worldsize/2, worldsize/2] nearEntities ["RHS_Ural_Fuel_VDV_01",14000];
+private _fuelTrucksIndependent = [worldsize/2, worldsize/2] nearEntities ["C_Truck_02_fuel_F",14000];
+private _fuelTrucksCivilian = [worldsize/2, worldsize/2] nearEntities ["gm_gc_army_ural375d_refuel",14000];
+
+private _fuelStations = nearestObjects [[worldsize/2, worldsize/2], ["Land_fs_feed_F"], worldsize/2];
 
 private _allFuelTrucks = (_fuelTrucksWest + _fuelTrucksEast + _fuelTrucksIndependent + _fuelTrucksCivilian);
 
 [{
 
     params ["_args", "_handle"];
-    _args params ["_allFuelTrucks"];
+    _args params ["_allFuelTrucks", "_fuelStations"];
 
-    private _fuelStations = missionNamespace getVariable ["FF_allFuelStations", []];
     private _fuelStationsAreEmpty = true;
     private _allFuelTrucksDestroyedOrEmpty = false;
     private _allTrucksDestroyed = count (_allFuelTrucks select { (!(canMove _x)) })  == count _allFuelTrucks;
@@ -45,4 +46,4 @@ private _allFuelTrucks = (_fuelTrucksWest + _fuelTrucksEast + _fuelTrucksIndepen
         };
     };
     
-}, 1, [_allFuelTrucks]] call CBA_fnc_addPerFramehandler;
+}, 1, [_allFuelTrucks, _fuelStations]] call CBA_fnc_addPerFramehandler;

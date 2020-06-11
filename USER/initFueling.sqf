@@ -2,9 +2,8 @@
 [] call refuel_fnc_addRefuelCargoAction;
 grad_refuel_rate = 10;
 
-private _soundPath = [(str missionConfigFile), 0, -15] call BIS_fnc_trimString;
-private _refuelingSoundPath = _soundPath + "USER\sounds\fueling.ogg";
-private _refuelingSoundPathEnd = _soundPath + "USER\sounds\fueling_end.ogg";
+private _refuelingSoundPath = getMissionPath "USER\sounds\fueling.ogg";
+private _refuelingSoundPathEnd = getMissionPath "USER\sounds\fueling_end.ogg";
 missionNamespace setVariable ["FF_fuelingSound", _refuelingSoundPath];
 missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 
@@ -54,34 +53,32 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 
 if (isServer) then {
 
-        if (isServer) then {
-            [fuelSellPoint_east, 0] call ace_refuel_fnc_makeSource;
-            fuelSellPoint_east setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
-            fuelSellPoint_east setVariable ["ace_refuel_cargoRate", 200, true];
-            fuelSellPoint_east setVariable ["FF_sellingPoint", east, true];
+        [fuelSellPoint_east, 0] call ace_refuel_fnc_makeSource;
+        fuelSellPoint_east setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
+        fuelSellPoint_east setVariable ["ace_refuel_cargoRate", 200, true];
+        fuelSellPoint_east setVariable ["FF_sellingPoint", east, true];
 
-            [fuelSellPoint_west, 0] call ace_refuel_fnc_makeSource;
-            fuelSellPoint_west setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
-            fuelSellPoint_west setVariable ["ace_refuel_cargoRate", 200, true];
-            fuelSellPoint_west setVariable ["FF_sellingPoint", west, true];
+        [fuelSellPoint_west, 0] call ace_refuel_fnc_makeSource;
+        fuelSellPoint_west setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
+        fuelSellPoint_west setVariable ["ace_refuel_cargoRate", 200, true];
+        fuelSellPoint_west setVariable ["FF_sellingPoint", west, true];
 
-            [fuelSellPoint_independent, 0] call ace_refuel_fnc_makeSource;
-            fuelSellPoint_independent setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
-            fuelSellPoint_independent setVariable ["ace_refuel_cargoRate", 200, true];
-            fuelSellPoint_independent setVariable ["FF_sellingPoint", independent, true];
+        [fuelSellPoint_independent, 0] call ace_refuel_fnc_makeSource;
+        fuelSellPoint_independent setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
+        fuelSellPoint_independent setVariable ["ace_refuel_cargoRate", 200, true];
+        fuelSellPoint_independent setVariable ["FF_sellingPoint", independent, true];
 
-            [fuelSellPoint_civilian, 0] call ace_refuel_fnc_makeSource;
-            fuelSellPoint_civilian setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
-            fuelSellPoint_civilian setVariable ["ace_refuel_cargoRate", 200, true];
-            fuelSellPoint_civilian setVariable ["FF_sellingPoint", civilian, true];
-        };
+        [fuelSellPoint_civilian, 0] call ace_refuel_fnc_makeSource;
+        fuelSellPoint_civilian setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
+        fuelSellPoint_civilian setVariable ["ace_refuel_cargoRate", 200, true];
+        fuelSellPoint_civilian setVariable ["FF_sellingPoint", civilian, true];
+    
 
-        private _fuelTrucksEast = entities "O_G_Van_01_fuel_F";
-        private _fuelTrucksWest = entities "RHS_Ural_Fuel_VDV_01";
-        private _fuelTrucksIndependent = entities "O_G_Van_01_fuel_F";
-        private _fuelTrucksCivilian = entities "RHS_Ural_Fuel_VDV_01";
-
-        private _fuelTrucks = _fuelTrucksEast + _fuelTrucksWest;
+        private _fuelTrucksEast = [worldsize/2, worldsize/2] nearEntities ["O_G_Van_01_fuel_F",14000];
+        private _fuelTrucksWest = [worldsize/2, worldsize/2] nearEntities ["RHS_Ural_Fuel_VDV_01",14000];
+        private _fuelTrucksIndependent = [worldsize/2, worldsize/2] nearEntities ["C_Truck_02_fuel_F",14000];
+        private _fuelTrucksCivilian = [worldsize/2, worldsize/2] nearEntities ["gm_gc_army_ural375d_refuel",14000];
+        private _fuelTrucks = _fuelTrucksEast + _fuelTrucksWest + _fuelTrucksIndependent + _fuelTrucksCivilian;
 
         {
           [_x, 0] call ace_refuel_fnc_setfuel;
@@ -89,7 +86,9 @@ if (isServer) then {
         } forEach _fuelTrucks;
 
 
-        private _fuelStations = nearestTerrainObjects [[worldSize/2, worldSize/2], ["Fuelstation"], worldSize/2] select { !isObjectHidden _x};
+        // private _fuelStations = nearestTerrainObjects [[worldSize/2, worldSize/2], ["Fuelstation"], worldSize/2] select { !isObjectHidden _x};
+        
+        private _fuelStations = nearestObjects [[worldsize/2, worldsize/2], ["Land_fs_feed_F"], worldsize/2];
 
         {
             private _fuelStation = _x;
@@ -98,14 +97,12 @@ if (isServer) then {
             _fuelStation setVariable ["ace_refuel_fuelMaxCargo", 3000, true];
             _fuelStation setVariable ["ace_refuel_currentFuelCargo", 3000, true];
 
-            /*
+            
             private _marker = createMarker [format ["fuelstation_%1", _position], _position];
             _marker setMarkerShape "ICON";
             _marker setMarkerType "hd_dot";
-            */
+            
         } forEach _fuelStations;
-
-        missionNamespace setVariable ["FF_allFuelStations", _fuelStations, true];        
 
         [] execVM "USER\winstats\checkWinConditions.sqf";
         [] execVM "USER\loadout\changeLoadoutFactions.sqf";
