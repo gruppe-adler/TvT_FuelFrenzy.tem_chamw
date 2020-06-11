@@ -12,7 +12,7 @@ class refuel
            class refuelCargo;
            class refuelVehicleTank;
            class canTurnOn;
-           class vehicleTrackingInit { postInit = 1};
+           class vehicleTrackingInit { postInit = 1; };
            class vehicleTrackingLoop;
        };
    };

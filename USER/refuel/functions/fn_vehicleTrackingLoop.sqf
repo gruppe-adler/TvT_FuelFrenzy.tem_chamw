@@ -20,13 +20,13 @@
                     private _maxCargo = _x getVariable ['ace_refuel_fuelMaxCargo', 0];
                 
                     ((findDisplay 12) displayCtrl 51) drawIcon [
-                        getText (configFile >> 'CfgVehicles' >> typeOf _x >> 'Icon'),
+                        getMissionPath 'USER\refuel\fueltruck2.paa',
                         [_sidePlayer, false] call BIS_fnc_sideColor,
                         _position,
-                        24,
-                        24,
-                        getDir _x,
-                        groupId group driver _x + ' | ' + (str _fuelCargo + '/' + str _maxCargo),
+                        64,
+                        64,
+                        0,
+                        '<br/><br/><br/><br/>' + groupId group driver _x + ' | ' + (str _fuelCargo + '/' + str _maxCargo),
                         2,
                         0.03,
                         'TahomaB',
@@ -37,18 +37,18 @@
 
 
         {
-            private _sideGroup = (leader _x) getVariable ['FF_originalSide', sideUnknown];
             private _group = _x;
+            private _sideGroup = (leader _group) getVariable ['FF_originalSide', sideUnknown];
 
-            if (_sideGroup isEqualTo _sidePlayer && isNull (objectParent leader _group)) then {
+            if (_sideGroup isEqualTo _sidePlayer) then {
                 ((findDisplay 12) displayCtrl 51) drawIcon [
-                        [_group] call ace_common_fnc_getMarkerType,
+                        getMissionPath 'USER\refuel\mafia2.paa',
                         [_sidePlayer, false] call BIS_fnc_sideColor,
-                        _position,
-                        24,
-                        24,
+                        getPos leader _group,
+                        64,
+                        64,
                         0,
-                        groupId _group,
+                        '<br/>' + groupId _group,
                         2,
                         0.03,
                         'TahomaB',
