@@ -447,7 +447,7 @@ class CustomAttributes
 								};
 								class value
 								{
-									items=69;
+									items=71;
 									class Item0
 									{
 										class data
@@ -1414,6 +1414,34 @@ class CustomAttributes
 											value="ace_medical_ai_enabledfor";
 										};
 									};
+									class Item69
+									{
+										class data
+										{
+											class type
+											{
+												type[]=
+												{
+													"STRING"
+												};
+											};
+											value="ace_map_bft_hideaigroups";
+										};
+									};
+									class Item70
+									{
+										class data
+										{
+											class type
+											{
+												type[]=
+												{
+													"STRING"
+												};
+											};
+											value="ace_markers_moverestriction";
+										};
+									};
 								};
 							};
 						};
@@ -1430,7 +1458,7 @@ class CustomAttributes
 								};
 								class value
 								{
-									items=69;
+									items=71;
 									class Item0
 									{
 										class data
@@ -2131,7 +2159,7 @@ class CustomAttributes
 																"BOOL"
 															};
 														};
-														value=1;
+														value=0;
 													};
 												};
 												class Item1
@@ -4517,6 +4545,96 @@ class CustomAttributes
 															};
 														};
 														value=2;
+													};
+												};
+												class Item1
+												{
+													class data
+													{
+														class type
+														{
+															type[]=
+															{
+																"SCALAR"
+															};
+														};
+														value=1;
+													};
+												};
+											};
+										};
+									};
+									class Item69
+									{
+										class data
+										{
+											class type
+											{
+												type[]=
+												{
+													"ARRAY"
+												};
+											};
+											class value
+											{
+												items=2;
+												class Item0
+												{
+													class data
+													{
+														class type
+														{
+															type[]=
+															{
+																"BOOL"
+															};
+														};
+														value=1;
+													};
+												};
+												class Item1
+												{
+													class data
+													{
+														class type
+														{
+															type[]=
+															{
+																"SCALAR"
+															};
+														};
+														value=1;
+													};
+												};
+											};
+										};
+									};
+									class Item70
+									{
+										class data
+										{
+											class type
+											{
+												type[]=
+												{
+													"ARRAY"
+												};
+											};
+											class value
+											{
+												items=2;
+												class Item0
+												{
+													class data
+													{
+														class type
+														{
+															type[]=
+															{
+																"SCALAR"
+															};
+														};
+														value=-1;
 													};
 												};
 												class Item1
