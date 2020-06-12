@@ -8,7 +8,16 @@ missionNamespace setVariable ["FF_fuelingSound", _refuelingSoundPath];
 missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 
 ["ace_common_fueling", {
-    params ["_sourceObject", "_amount", "_sinkObject"];
+    params ["_sourceObject", "_amount", "_sinkObject", "_unit"];
+
+    private _fuelLeft = [_sourceObject] call ace_refuel_fnc_getFuel;
+    private _side = _unit getVariable ["FF_originalSide", sideUnknown];
+    private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
+    private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
+    private _currentTime = [dayTime, "HH:MM"] call BIS_fnc_timeToString;
+    _sourceObject setVariable [_fuelKnownFormat, _fuelLeft, true];
+    _sourceObject setVariable [_fuelKnownTimeFormat, _currentTime, true];
+
 
     private _liters = [_sinkObject] call ace_refuel_fnc_getFuel;
     hintSilent parseText ("<t color='#FF0000'><t size='2'><t align='center'>" + (str (floor _liters)) + "<br/><br/><t align='center'><t size='1'><t color='#ffffff'>Liter");
@@ -20,13 +29,26 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 ["ace_common_addCargoFuelFinished", {
     // systemChat str _this;
     // diag_log str _this;
-    params ["_sourceObject", "_startFuel", "_newFuel"];
+    params ["_sourceObject", "_startFuel", "_newFuel", "_unit"];
+
+    // update map stuff
+    private _side = _unit getVariable ["FF_originalSide", sideUnknown];
+    private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
+    private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
+    private _currentTime = [dayTime, "HH:MM"] call BIS_fnc_timeToString;
+    _sourceObject setVariable [_fuelKnownFormat, _startFuel - _newFuel, true];
+    _sourceObject setVariable [_fuelKnownTimeFormat, _currentTime, true];
+
+    // assign points
     private _newPoints = _newFuel - _startFuel;
+
+    // play satisfying sound
     private _refuelingSoundPathEnd = missionNamespace getVariable ["FF_fuelingSoundEnd", ""];
     playSound3D [_refuelingSoundPathEnd, _sourceObject, false, getPos _sourceObject, 10, 1, 100];
 
     systemChat ("made " + (str (_points + _newPoints)) + " points");
 
+    // show hint if fuel is sold
     if (_sourceObject == fuelSellPoint_west || _sourceObject == fuelSellPoint_east) then {
         [
             {
@@ -98,12 +120,21 @@ if (isServer) then {
             _fuelStation setVariable ["ace_refuel_fuelMaxCargo", 3000, true];
             _fuelStation setVariable ["ace_refuel_currentFuelCargo", 3000, true];
 
-            
+            {   
+                private _side = _x;
+                private _fuelKnownFormat = format ["ace_refuel_currentFuelKnown_%1", _side];
+                private _fuelKnownTimeFormat = format ["ace_refuel_currentFuelKnownTime_%1", _side];
+                private _currentTime = [dayTime, "HH:MM"] call BIS_fnc_timeToString;
+                _fuelStation setVariable [_fuelKnownFormat, 3000, true];
+                _fuelStation setVariable [_fuelKnownTimeFormat, _currentTime, true];
+            } forEach [west, east, independent, civilian];
+
             private _marker = createMarker [format ["fuelstation_%1", _position], _position];
             _marker setMarkerShape "ICON";
             _marker setMarkerType "hd_dot";
             
         } forEach _fuelStations;
+        missionNamespace setVariable ["FF_fuelStations", _fuelStations, true];
 
         [] execVM "USER\winstats\checkWinConditions.sqf";
         [] execVM "USER\loadout\changeLoadoutFactions.sqf";
