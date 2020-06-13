@@ -92,7 +92,7 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
             private _group = _x;
             private _sideGroup = (leader _group) getVariable ['FF_originalSide', sideUnknown];
             private _color = [_sideGroup, false] call BIS_fnc_sideColor;
-            private _groupID = parseText ['<br/>%1', groupId _group];
+            private _groupID = parseText format ['<br/>%1', groupId _group];
 
             if (_sideGroup isEqualTo _sidePlayer) then {
                 _map drawIcon [
