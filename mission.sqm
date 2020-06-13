@@ -8,7 +8,7 @@ class EditorData
 	toggles=33;
 	class ItemIDProvider
 	{
-		nextID=1466;
+		nextID=1467;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=187;
+		nextID=197;
 	};
 	class Camera
 	{
-		pos[]={5717.5952,10.267844,3665.1646};
-		dir[]={-0.50488085,-0.47646558,0.71981108};
-		up[]={-0.27360511,0.8791908,0.39008158};
-		aside[]={0.81871402,7.233466e-007,0.57424694};
+		pos[]={879.75085,31.250181,644.47864};
+		dir[]={0.16088362,-0.53399634,0.83004171};
+		up[]={0.10161163,0.84548581,0.52424061};
+		aside[]={0.98173022,-4.7264621e-008,-0.19028495};
 	};
 };
 binarizationWanted=0;
@@ -35169,26 +35169,10 @@ class Mission
 		};
 		class Item302
 		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={5713.5283,7.5076108,3669.0913};
-				angles[]={0,2.3212879,0};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-			};
-			id=1451;
-			type="Land_fs_feed_F";
-		};
-		class Item303
-		{
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={5713.3335,6.6816106,3669.1335};
+				position[]={5713.1709,6.6816111,3669.1504};
 			};
 			areaSize[]={1,0,1};
 			flags=1;
@@ -35237,7 +35221,7 @@ class Mission
 				nAttributes=2;
 			};
 		};
-		class Item304
+		class Item303
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -35291,7 +35275,7 @@ class Mission
 				nAttributes=2;
 			};
 		};
-		class Item305
+		class Item304
 		{
 			dataType="Object";
 			class PositionInfo
@@ -35307,7 +35291,7 @@ class Mission
 			id=1454;
 			type="Land_fs_feed_F";
 		};
-		class Item306
+		class Item305
 		{
 			dataType="Object";
 			class PositionInfo
@@ -35349,7 +35333,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item307
+		class Item306
 		{
 			dataType="Group";
 			side="West";
@@ -35420,7 +35404,7 @@ class Mission
 			};
 			id=1457;
 		};
-		class Item308
+		class Item307
 		{
 			dataType="Object";
 			class PositionInfo
@@ -35436,6 +35420,22 @@ class Mission
 			id=1465;
 			type="B_T_Truck_01_fuel_F";
 			atlOffset=-0.00063657761;
+		};
+		class Item308
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5815.4468,8.0083303,3766.0386};
+				angles[]={0,2.3212879,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=1466;
+			type="Land_fs_feed_F";
 		};
 	};
 	class Connections

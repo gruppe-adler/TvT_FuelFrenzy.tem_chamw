@@ -18,17 +18,20 @@ private _allFuelStations = missionNamespace getVariable ['FF_fuelStations', []];
 
 private _sidePlayer = player getVariable ['FF_originalSide', sideUnknown];
 private _color = [_sidePlayer, false] call BIS_fnc_sideColor;
-// private _font = 'TahomaB';
+// private _font = 'RobotoCondensedBold';
 // private _fontSize = 0.3;
 
 private _allVehicleControls = [];
 
 {
-    private _vehicleLabel = _mapDisplay ctrlCreate ["RscText", -1]; 
+    private _vehicleLabel = _mapDisplay ctrlCreate ["RscStructuredText", -1]; 
     _vehicleLabel ctrlsetText "BLABLA";
     _vehicleLabel ctrlSetPosition [0,0,0.05,0.03];
     _vehicleLabel ctrlSetBackgroundColor [0,0,0,1];
+    _vehicleLabel ctrlSetFontHeight 0.03;
+    _vehicleLabel ctrlsetFont 'RobotoCondensedBold';
     _vehicleLabel ctrlCommit 0;
+
 
     private _vehicleIcon = _mapDisplay ctrlCreate ["RscPicture", -1];
     _vehicleIcon ctrlsetText (getMissionPath 'USER\refuel\fueltruck2.paa');
@@ -51,10 +54,12 @@ private _allFuelStationControls = [];
 
 {
     private _fuelStation = _x;
-    private _vehicleLabel = _mapDisplay ctrlCreate ["RscText", -1]; 
+    private _vehicleLabel = _mapDisplay ctrlCreate ["RscStructuredText", -1]; 
     _vehicleLabel ctrlsetText "BLABLA";
     _vehicleLabel ctrlSetPosition [0,0,0.05,0.03];
     _vehicleLabel ctrlSetBackgroundColor [0,0,0,1];
+    _vehicleLabel ctrlSetFontHeight 0.03;
+    _vehicleLabel ctrlsetFont 'RobotoCondensedBold';
     _vehicleLabel ctrlCommit 0;
 
     private _vehicleIcon = _mapDisplay ctrlCreate ["RscPicture", -1];
@@ -74,12 +79,40 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
 
 
 
+
+
 (_mapDisplay displayCtrl 51) ctrlAddEventHandler ["Draw","
     params ['_map'];
 
     if (visibleMap) then {
         private _allVehicles = missionNamespace getVariable ['FF_fuelTrucks', []];
         private _sidePlayer = player getVariable ['FF_originalSide', sideUnknown];
+
+        {
+            private _group = _x;
+            private _sideGroup = (leader _group) getVariable ['FF_originalSide', sideUnknown];
+            private _color = [_sideGroup, false] call BIS_fnc_sideColor;
+            private _groupID = parseText ['<br/>%1', groupId _group];
+
+            if (_sideGroup isEqualTo _sidePlayer) then {
+                _map drawIcon [
+                        getMissionPath 'USER\refuel\mafia.paa',
+                        _color,
+                        getPos leader _group,
+                        64,
+                        64,
+                        0,
+                        _groupID,
+                        2,
+                        0.03,
+                        'RobotoCondensedBold',
+                        'center'
+                    ];
+            };
+            
+        } forEach allGroups;
+
+
         
         private _allVehicleControls = uiNamespace getVariable ['FF_allVehicleControls', []];
 
@@ -94,7 +127,7 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
 
             if (_sideVehicle isEqualTo _sidePlayer) then {         
 
-                private _fuelCargo = _vehicle getVariable ['currentFuelCargo', 0];
+                private _fuelCargo = _vehicle getVariable ['ace_refuel_currentFuelCargo', 0];
                 private _maxCargo = _vehicle getVariable ['ace_refuel_fuelMaxCargo', 0];
                 private _vehicleEmpty = isNull (driver _vehicle);
                 private _groupName = if (_vehicleEmpty) then { ('Empty') } else { (groupId (group (driver _vehicle))) };
@@ -186,7 +219,7 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
 /*
 if (_sideVehicle isEqualTo _sidePlayer) then {
 
-                    private _fuelCargo = _vehicle getVariable ['currentFuelCargo', 0];
+                    private _fuelCargo = _vehicle getVariable ['ace_refuel_currentFuelCargo', 0];
                     private _maxCargo = _vehicle getVariable ['ace_refuel_fuelMaxCargo', 0];
                     // private _fuelTruckEntry = (groupId (group (driver _vehicle)) + ' | ' + (str _fuelCargo + '/' + str _maxCargo));
 
@@ -242,7 +275,7 @@ if (_sideVehicle isEqualTo _sidePlayer) then {
             
             if (_sideVehicle isEqualTo _sidePlayer) then {
 
-                    private _fuelCargo = _vehicle getVariable ['currentFuelCargo', 0];
+                    private _fuelCargo = _vehicle getVariable ['ace_refuel_currentFuelCargo', 0];
                     private _maxCargo = _vehicle getVariable ['ace_refuel_fuelMaxCargo', 0];
                     // private _fuelTruckEntry = (groupId (group (driver _vehicle)) + ' | ' + (str _fuelCargo + '/' + str _maxCargo));
 

@@ -3,6 +3,7 @@ params ["_vehicle", "_side"];
 if (!isServer) exitWith {};
 
 _vehicle setVariable ["FF_originalSide", _side, true];
+_vehicle setVariable ["FF_trackedForSide", _side, true];
 
 _vehicle addEventHandler ["Killed", {
         params ["_unit", "_killer", "_instigator", "_useEffects"];
