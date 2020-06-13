@@ -153,5 +153,17 @@ if (isServer) then {
                 case civilian : {  [_x] joinSilent _civilianGroup; }; 
                 default {}; 
             };
+
+            [   
+                _x,
+                [_x] call refuel_fnc_getFace,
+                "Male01ENGB",
+                1.0,
+                name player
+            ] remoteExec [
+                "BIS_fnc_setIdentity",
+                0,
+                true
+            ];
         } forEach playableUnits + switchableUnits;
 };

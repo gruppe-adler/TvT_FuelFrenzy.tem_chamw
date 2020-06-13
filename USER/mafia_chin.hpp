@@ -1,10 +1,10 @@
 class mafia_chin {
     class AllUnits {
-        uniform[] = {"rds_uniform_Functionary1"};
-        vest = "V_LegStrapBag_black_F";
-        backpack = "B_LegStrapBag_black_F";
-        headgear[] = {"H_Hat_brown", "H_Hat_grey", "H_StrawHat_dark", "H_Hat_tan", "H_Hat_checker"};
-        goggles = "G_Aviator";
+        uniform[] = {"U_I_C_Soldier_Para_5_F", "U_I_C_Soldier_Bandit_4_F", "U_I_C_Soldier_Bandit_1_F", "U_I_C_Soldier_Bandit_5_F", "U_C_Poloshirt_blue", "U_C_Poloshirt_salmon", "rds_uniform_schoolteacher"};
+        vest = "V_Chestrig_khk";
+        backpack = "rhs_sidor";
+        headgear[] = {"rhssaf_booniehat_woodland", "rhs_Booniehat_m81", "H_Hat_brown", "H_Hat_grey", "H_Booniehat_oli", "H_Booniehat_tan", "H_Booniehat_khk_hs", "H_Bandanna_sgg", "H_Bandanna_sand"};
+        goggles[] = {"rhsusf_shemagh_od", "rhsusf_shemagh2_od", "rhsusf_shemagh2_grn", "rhsusf_shemagh_grn"};
 
         primaryWeapon = "rhs_weap_akm";
         primaryWeaponOptics = "";

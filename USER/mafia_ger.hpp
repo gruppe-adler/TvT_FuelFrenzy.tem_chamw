@@ -1,10 +1,10 @@
 class mafia_ger {
     class AllUnits {
-        uniform[] = {"rds_uniform_Functionary1"};
-        vest = "V_LegStrapBag_black_F";
-        backpack = "B_LegStrapBag_black_F";
-        headgear[] = {"H_Hat_brown", "H_Hat_grey", "H_StrawHat_dark", "H_Hat_tan", "H_Hat_checker"};
-        goggles = "G_Aviator";
+        uniform[] = {"U_BG_Guerilla3_1", "U_Marshal", "U_BG_Guerilla2_2", "U_BG_Guerrilla_6_1", "U_BG_Guerilla2_3", "U_I_C_Soldier_Bandit_3_F", "grad_u_combatCasual_khaki_grey", "grad_u_combatCasual_ranger_grey"};
+        vest = "V_Chestrig_blk";
+        backpack = "grad_kitbag_black";
+        headgear[] = {"H_Watchcap_blk", "H_Watchcap_cbr", "H_Watchcap_camo", "H_Watchcap_khk", "H_Beret_blk", "rhs_beanie_green", "H_Watchcap_blk", "H_Watchcap_blk"};
+        goggles[] = {"TRYK_Beard", "TRYK_Beard", "TRYK_Beard_BW", "TRYK_Beard2", "TRYK_Beard_BW2"};
 
         primaryWeapon = "rhs_weap_akm";
         primaryWeaponOptics = "";

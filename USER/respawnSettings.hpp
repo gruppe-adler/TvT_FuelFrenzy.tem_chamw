@@ -15,9 +15,10 @@ indepInterruptCondition = "missionNameSpace getVariable ['tembelanTrap_lastFight
 
 waverespawntimePlayer = 10;                                                     //Spielerrespawnzeit, bevor er der Welle hinzugefügt wird
 
-waverespawntimeBlu = 240;                                                        //Wellenrespawnzeit Blufor in Sekunden
-waverespawntimeOpf = 240;                                                        //Wellenrespawnzeit Opfor in Sekunden
-waverespawntimeInd = 240;                                                        //Wellenrespawnzeit Independent in Sekunden
+// todo remove debug
+waverespawntimeBlu = 10;                                                        //Wellenrespawnzeit Blufor in Sekunden
+waverespawntimeOpf = 10;                                                        //Wellenrespawnzeit Opfor in Sekunden
+waverespawntimeInd = 10;                                                        //Wellenrespawnzeit Independent in Sekunden
 
 
 //NORMALER RESPAWN =============================================================//Diese Einträge sind nur bei ausgeschaltetem Wave Respawn wichtig

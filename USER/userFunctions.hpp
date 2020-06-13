@@ -15,4 +15,11 @@ class refuel
            class vehicleTrackingInit { postInit = 1; };
            class vehicleTrackingLoop;
        };
-   };
+
+
+       class faces
+       {
+           file = "USER\faces";
+           class getFace;
+       };
+};

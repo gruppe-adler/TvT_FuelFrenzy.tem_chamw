@@ -8,7 +8,11 @@ private _mapDisplay = findDisplay 12;
 (_mapDisplay displayCtrl 51) ctrlRemoveAllEventHandlers "Draw";
 { 
     private _ctrlIcon = _x getVariable ['FF_iconAssigned', controlNull];
+    private _ctrlFuelBar = _x getVariable ['FF_fuelBarAssigned', controlNull];
+    private _ctrlFuelBarBG = _x getVariable ['FF_fuelBarBGAssigned', controlNull];
     ctrlDelete _ctrlIcon;
+    ctrlDelete _ctrlFuelBar;
+    ctrlDelete _ctrlFuelBarBG;
     ctrlDelete _x;
 } forEach ((uiNamespace getVariable ["FF_allVehicleControls", []]) + (uiNamespace getVariable ["FF_allFuelStationControls", []]));
 
@@ -24,6 +28,18 @@ private _color = [_sidePlayer, false] call BIS_fnc_sideColor;
 private _allVehicleControls = [];
 
 {
+    private _fuelBarBG = _mapDisplay ctrlCreate ["RscText", -1]; 
+    _fuelBarBG ctrlsetText "";
+    _fuelBarBG ctrlSetPosition [0,0,0.05,0.025];
+    _fuelBarBG ctrlSetBackgroundColor [0,0,0,1];
+    _fuelBarBG ctrlCommit 0;
+
+    private _fuelBar = _mapDisplay ctrlCreate ["RscText", -1]; 
+    _fuelBar ctrlsetText "";
+    _fuelBar ctrlSetPosition [0,0,0.05,0.025];
+    _fuelBar ctrlSetBackgroundColor [0.2,0.8,0.2,1];
+    _fuelBar ctrlCommit 0;
+
     private _vehicleLabel = _mapDisplay ctrlCreate ["RscText", -1]; 
     _vehicleLabel ctrlsetText "BLABLA";
     _vehicleLabel ctrlSetPosition [0,0,0.05,0.03];
@@ -38,13 +54,26 @@ private _allVehicleControls = [];
     _vehicleIcon ctrlSetPosition [0,0,0.05,0.05*4/3];
     _vehicleIcon ctrlSetBackgroundColor [0,0,0,1];
     _vehicleIcon ctrlSetTextColor _color;
-    _vehicleIcon ctrlCommit 0;    
+    _vehicleIcon ctrlCommit 0;
 
     _vehicleLabel setVariable ["FF_vehicleAssigned", _x];
     _vehicleLabel setVariable ["FF_iconAssigned", _vehicleIcon];
+    _vehicleLabel setVariable ["FF_fuelBarBGAssigned", _fuelBarBG];
+    _vehicleLabel setVariable ["FF_fuelBarAssigned", _fuelBar];
 
     _allVehicleControls pushBackUnique _vehicleLabel;
+
 } forEach _allVehicles;
+
+{
+    _x ctrlShow false;
+    private _ctrlIcon = _x getVariable ['FF_iconAssigned', controlNull];
+    private _ctrlFuelBar = _x getVariable ['FF_fuelBarAssigned', controlNull];
+    private _ctrlFuelBarBG = _x getVariable ['FF_fuelBarBGAssigned', controlNull];
+    _ctrlIcon ctrlShow false;
+    _ctrlFuelBar ctrlShow false;
+    _ctrlFuelBarBG ctrlShow false;
+} forEach _allVehicleControls;
 
 uiNamespace setVariable ["FF_allVehicleControls", _allVehicleControls];
 
@@ -108,7 +137,7 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
             private _sideGroup = (leader _group) getVariable ['FF_originalSide', sideUnknown];
             private _color = [_sideGroup, false] call BIS_fnc_sideColor;
 
-            if (_sideGroup isEqualTo _sidePlayer) then {
+            if (_sideGroup isEqualTo _sidePlayer && isNull (objectParent (leader _group)) then {
                 _map drawIcon [
                         getMissionPath 'USER\refuel\mafia.paa',
                         _color,
@@ -117,8 +146,8 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
                         64,
                         0,
                         groupId _group,
-                        2,
-                        0.025,
+                        0,
+                        0.05,
                         'RobotoCondensedBold',
                         'center'
                     ];
@@ -136,8 +165,11 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
             private _ctrlIcon = _vehicleLabel getVariable ['FF_iconAssigned', controlNull];
             private _ctrlIcon = _vehicleLabel getVariable ['FF_iconAssigned', controlNull];
             private _sideVehicle = _vehicle getVariable ['FF_trackedForSide', sideUnknown];
+            private _fuelBarBG = _vehicleLabel getVariable ['FF_fuelBarBGAssigned', controlNull];
+            private _fuelBar = _vehicleLabel getVariable ['FF_fuelBarAssigned', controlNull];
+            private _position = (position _vehicle);
 
-            private _ctrlPosition = _map ctrlMapWorldToScreen (position _vehicle);
+            private _ctrlPosition = _map ctrlMapWorldToScreen _position;
             _ctrlPosition params ['_ctrlPositionX', '_ctrlPositionY'];
 
             if (_sideVehicle isEqualTo _sidePlayer) then {         
@@ -146,7 +178,7 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
                 private _maxCargo = _vehicle getVariable ['ace_refuel_fuelMaxCargo', 0];
                 private _vehicleEmpty = isNull (driver _vehicle);
                 private _groupName = if (_vehicleEmpty) then { ('Empty') } else { (groupId (group (driver _vehicle))) };
-                private _fuelTruckEntry = (_groupName + '  ' + (str _fuelCargo + '|' + str _maxCargo));
+                private _fuelTruckEntry = (_groupName + '  ' + (str (round _fuelCargo) + '|' + str _maxCargo));
                 private _color = [_sidePlayer, false] call BIS_fnc_sideColor;
                 if (_vehicleEmpty) then {
                     _color = [0,0,0,1];
@@ -155,19 +187,39 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
                 if (!(ctrlshown _vehicleLabel)) then {
                     _vehicleLabel ctrlShow true;
                     _ctrlIcon ctrlShow true;
+                    _ctrlFuelBar ctrlShow true;
+                    _ctrlFuelBarBG ctrlShow true;
+                };
+
+                private _fuelBarOffsetY = _ctrlPositionY + 0.03;
+                private _fuelBarMaxHeight = 0.03*4/3;
+
+                _fuelBarBG ctrlSetPosition [_ctrlPositionX + 0.04, _fuelBarOffsetY, 0.005, _fuelBarMaxHeight];
+                _fuelBarBG ctrlCommit 0;
+
+                private _fuelBarHeight = linearConversion [0, _maxCargo, _fuelCargo, 0, _fuelBarMaxHeight, true];
+                _fuelBar ctrlSetPosition [_ctrlPositionX + 0.04, _fuelBarOffsetY + _fuelBarMaxHeight - _fuelBarHeight, 0.005, _fuelBarHeight];
+                _fuelBar ctrlCommit 0;
+
+                private _positionMouseInWorld = _map ctrlMapScreenToWorld getMousePosition;
+
+                if (_positionMouseInWorld distance2D _position < 70 || !_vehicleEmpty) then {
+                    _vehicleLabel ctrlShow true;
+                } else {
+                    _vehicleLabel ctrlShow false;
                 };
 
                 _vehicleLabel ctrlSetText _fuelTruckEntry;
                             
                 _vehicleLabel ctrlSetPosition [ 
                     _ctrlPositionX-(ctrlTextWidth _vehicleLabel)/2, 
-                    _ctrlPositionY + 0.06*4/3,
+                    _ctrlPositionY + 0.02*4/3,
                     ctrlTextWidth _vehicleLabel,
                     ctrlTextHeight _vehicleLabel
                 ];
                 _vehicleLabel ctrlCommit 0;
 
-                _ctrlIcon ctrlSetPosition [_ctrlPositionX-0.04, _ctrlPositionY, 0.08, 0.08*4/3];
+                _ctrlIcon ctrlSetPosition [_ctrlPositionX-0.04, _ctrlPositionY-0.04*4/3, 0.08, 0.08*4/3];
                 _ctrlIcon ctrlSetTextColor _color;
                 _ctrlIcon ctrlCommit 0;
                
@@ -175,6 +227,8 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
                 if (ctrlshown _vehicleLabel) then {
                     _vehicleLabel ctrlShow false;
                     _ctrlIcon ctrlShow false;
+                    _ctrlFuelBar ctrlShow false;
+                    _ctrlFuelBarBG ctrlShow false;
                 };
             };            
         } forEach _allVehicleControls;
@@ -186,12 +240,15 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
             private _fuelStation = _x getVariable ['FF_vehicleAssigned', objNull];
             private _side = _sidePlayer;
             private _position = position _fuelStation;
+
             private _fuelStationIcon = _fuelStationLabel getVariable ['FF_iconAssigned', controlNull];
             private _fuelBarBG = _fuelStationLabel getVariable ['FF_fuelBarBGAssigned', controlNull];
             private _fuelBar = _fuelStationLabel getVariable ['FF_fuelBarAssigned', controlNull];
             private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
             private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
             private _fuelKnown = _fuelStation getVariable [_fuelKnownFormat, 0];
+            private _fuelCargo = _fuelStation getVariable ['ace_refuel_currentFuelCargo', 0];
+            private _fuelMax = _fuelStation getVariable ['ace_refuel_fuelMaxCargo', 0];
             private _fuelKnownTime = _fuelStation getVariable [_fuelKnownTimeFormat, '00:00'];
             private _fuelStationEntry = (str (round _fuelKnown) + ' | ' + _fuelKnownTime);
 
@@ -199,27 +256,30 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
             _ctrlPosition params ['_ctrlPositionX', '_ctrlPositionY'];
 
 
-            _fuelBarBG ctrlSetPosition [_ctrlPositionX - 0.04, _ctrlPositionY, 0.005, 0.05*4/3];
+            private _fuelBarOffsetY = _ctrlPositionY-0.025;
+            private _fuelBarMaxHeight = 0.04*4/3;
+
+            _fuelBarBG ctrlSetPosition [_ctrlPositionX + 0.02, _fuelBarOffsetY, 0.005, _fuelBarMaxHeight];
             _fuelBarBG ctrlCommit 0;
 
-            private _fuelBarHeight = linearConversion [0, 3000, _fuelKnown, 0, 0.05*4/3, true];
-            _fuelBar ctrlSetPosition [_ctrlPositionX - 0.04, _ctrlPositionY, 0.005, _fuelBarHeight];
+            private _fuelBarHeight = linearConversion [0, _fuelMax, _fuelCargo, 0, _fuelBarMaxHeight, true];
+            _fuelBar ctrlSetPosition [_ctrlPositionX + 0.02, _fuelBarOffsetY + _fuelBarMaxHeight - _fuelBarHeight, 0.005, _fuelBarHeight];
             _fuelBar ctrlCommit 0;
 
              
             private _positionMouseInWorld = _map ctrlMapScreenToWorld getMousePosition;
 
-            if (_positionMouseInWorld distance2D _position < 20) then {
+            if (_positionMouseInWorld distance2D _position < 70) then {
                 _fuelStationLabel ctrlShow true;
             } else {
                 _fuelStationLabel ctrlShow false;
             };
 
             _fuelStationLabel ctrlsetText _fuelStationEntry;
-            _fuelStationLabel ctrlSetPosition [_ctrlPositionX - (ctrlTextWidth _fuelStationLabel/2), _ctrlPositionY + 0.06*4/3, ctrlTextWidth _fuelStationLabel, ctrlTextHeight _fuelStationLabel];
+            _fuelStationLabel ctrlSetPosition [_ctrlPositionX - (ctrlTextWidth _fuelStationLabel/2), _ctrlPositionY + 0.02*4/3, ctrlTextWidth _fuelStationLabel, ctrlTextHeight _fuelStationLabel];
             _fuelStationLabel ctrlCommit 0;           
 
-            _fuelStationIcon ctrlSetPosition  [_ctrlPositionX - 0.025, _ctrlPositionY];
+            _fuelStationIcon ctrlSetPosition  [_ctrlPositionX - 0.025, _ctrlPositionY-0.025];
             _fuelStationIcon ctrlCommit 0;
             
         } forEach _allFuelStationControls;
