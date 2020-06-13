@@ -92,7 +92,6 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
             private _group = _x;
             private _sideGroup = (leader _group) getVariable ['FF_originalSide', sideUnknown];
             private _color = [_sideGroup, false] call BIS_fnc_sideColor;
-            private _groupID = parseText format ['<br/>%1', groupId _group];
 
             if (_sideGroup isEqualTo _sidePlayer) then {
                 _map drawIcon [
@@ -102,7 +101,7 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
                         64,
                         64,
                         0,
-                        _groupID,
+                        groupId _group,
                         2,
                         0.03,
                         'RobotoCondensedBold',
