@@ -53,7 +53,6 @@ class mafia_it {
 
         //Asst. Autorifleman
         class soldier_AAR_F: Soldier_F {
-            addVest = "LOP_6sh46";
             addItemsToVest[] = {
                 LIST_7("rhs_30Rnd_762x39mm"),
                 LIST_2("rhs_mag_rgd5"),
@@ -75,7 +74,6 @@ class mafia_it {
 
         //Combat Life Saver
         class medic_F: Soldier_F {
-            vest = "rhs_6sh46";
             addItemsToVest[] = {
                 LIST_15("ACE_fieldDressing"),
                 LIST_8("ACE_morphine"),

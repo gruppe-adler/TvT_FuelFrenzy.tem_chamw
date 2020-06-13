@@ -43,7 +43,7 @@ class mafia_ger {
     };
     class Type {
         //Rifleman
-        class Soldier_F {
+        class man_1 {
             addItemsToBackpack[] = {
                 LIST_7("rhs_30Rnd_762x39mm"),
                 LIST_2("rhs_mag_rdg2_white"),
@@ -52,8 +52,7 @@ class mafia_ger {
         };
 
         //Asst. Autorifleman
-        class soldier_AAR_F: Soldier_F {
-            addVest = "LOP_6sh46";
+        class man_sport_1_F: man_1 {
             addItemsToVest[] = {
                 LIST_7("rhs_30Rnd_762x39mm"),
                 LIST_2("rhs_mag_rgd5"),
@@ -65,7 +64,7 @@ class mafia_ger {
         };
 
         //Autorifleman
-        class soldier_AR_F: Soldier_F {
+        class man_sport_2_F: man_1 {
             primaryWeapon = "rhs_weap_pkp";
             primaryWeaponMagazine = "rhs_100Rnd_762x54mmR";
             addItemsToBackpack[] = {
@@ -74,8 +73,7 @@ class mafia_ger {
         };
 
         //Combat Life Saver
-        class medic_F: Soldier_F {
-            vest = "rhs_6sh46";
+        class man_p_beggar_F: man_1 {
             addItemsToVest[] = {
                 LIST_15("ACE_fieldDressing"),
                 LIST_8("ACE_morphine"),
@@ -86,12 +84,12 @@ class mafia_ger {
         };
 
         //Rifleman (AT)
-        class soldier_LAT_F: Soldier_F {
+        class man_sport_3_F: man_1 {
             secondaryWeapon = "rhs_weap_rpg26";
         };
 
         //Squad Leader
-        class Soldier_TL_F: Soldier_F {
+        class Man_casual_1_F: man_1 {
             primaryWeapon = "rhs_weap_akm_gp25";
             primaryWeaponUnderbarrelMagazine = "rhs_GRD40_White";
 
@@ -105,7 +103,7 @@ class mafia_ger {
         };
 
         //Team Leader
-        class Soldier_SL_F: Soldier_TL_F {
+        class Man_casual_2_F: Man_casual_1_F {
             uniform = "U_NikosAgedBody";
         };
     };
