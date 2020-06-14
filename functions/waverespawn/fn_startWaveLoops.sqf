@@ -73,7 +73,7 @@
 //INDEP ========================================================================
 [{
     if (EGVAR(common,gamePaused)) exitWith {};
-        
+
     [QGVAR(WAVERESPAWNSTATUSIND),[INDEPENDENT] call FUNC(getStatus)] call CBA_fnc_publicVariable;
 
     //dont execute while respawning is possible
@@ -100,6 +100,42 @@
             GVAR(WAVERESPAWNTIMELEFTIND) = GVAR(WAVERESPAWNTIMEIND);
             publicVariable QGVAR(WAVERESPAWNTIMELEFTIND);
             INFO("Respawning no longer possible for Independent.");
+        },[],(GVAR(RESPAWNWAVEEXTRATIME) max 7)] call CBA_fnc_waitAndExecute;
+    };
+}, 1, []] call CBA_fnc_addPerFrameHandler;
+
+
+
+//CIV ========================================================================
+[{
+    if (EGVAR(common,gamePaused)) exitWith {};
+
+    [QGVAR(WAVERESPAWNSTATUSCIV),[CIVILIAN] call FUNC(getStatus)] call CBA_fnc_publicVariable;
+
+    //dont execute while respawning is possible
+    if (GVAR(WAVERESPAWNCIV)) exitWith {};
+
+    //start countdown once first player is added to wave
+    if (count GVAR(wavePlayersInd) > 0) then {
+        GVAR(WAVERESPAWNTIMELEFTCIV) = (GVAR(WAVERESPAWNTIMELEFTCIV) - 1) max 0;
+        publicVariable QGVAR(WAVERESPAWNTIMELEFTCIV);
+    } else {
+        [QGVAR(WAVERESPAWNTIMELEFTCIV),GVAR(WAVERESPAWNTIMECIV)] call CBA_fnc_publicVariable;
+    };
+
+    //enable respawning when wave is full
+    if (["CIVILIAN"] call FUNC(canRespawn)) then {
+
+        GVAR(WAVERESPAWNCIV) = true;
+        publicVariable QGVAR(WAVERESPAWNCIV);
+        INFO("Respawning now possible for Civilian.");
+
+        [{
+            GVAR(WAVERESPAWNCIV) = false;
+            publicVariable QGVAR(WAVERESPAWNCIV);
+            GVAR(WAVERESPAWNTIMELEFTCIV) = GVAR(WAVERESPAWNTIMECIV);
+            publicVariable QGVAR(WAVERESPAWNTIMELEFTCIV);
+            INFO("Respawning no longer possible for Civilian.");
         },[],(GVAR(RESPAWNWAVEEXTRATIME) max 7)] call CBA_fnc_waitAndExecute;
     };
 }, 1, []] call CBA_fnc_addPerFrameHandler;

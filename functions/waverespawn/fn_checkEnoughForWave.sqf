@@ -9,6 +9,7 @@ private _waitingPlayersArray = switch (_side) do {
     case (WEST): {GVAR(waitingPlayersBlu)};
     case (EAST): {GVAR(waitingPlayersOpf)};
     case (INDEPENDENT): {GVAR(waitingPlayersInd)};
+    case (CIVILIAN): {GVAR(waitingPlayersCiv)};
     default {[]};
 };
 
@@ -25,6 +26,7 @@ private _waveSize = switch (_side) do {
     case (WEST): {GVAR(BLUFORWAVESIZE)};
     case (EAST): {GVAR(OPFORWAVESIZE)};
     case (INDEPENDENT): {GVAR(INDEPWAVESIZE)};
+    case (CIVILIAN): {GVAR(CIVWAVESIZE)};
     default {-1};
 };
 if (_waveSize < 0) exitWith {};

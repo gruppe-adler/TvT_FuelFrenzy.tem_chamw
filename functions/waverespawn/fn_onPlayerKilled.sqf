@@ -20,6 +20,7 @@ private _maxRespawns = switch (playerSide) do {
     case (WEST): {[missionConfigFile >> "missionsettings","bluforWaveLifes",9999] call BIS_fnc_returnConfigEntry};
     case (EAST): {[missionConfigFile >> "missionsettings","opforWaveLifes",9999] call BIS_fnc_returnConfigEntry};
     case (INDEPENDENT): {[missionConfigFile >> "missionsettings","indepWaveLifes",9999] call BIS_fnc_returnConfigEntry};
+    case (CIVILIAN): {[missionConfigFile >> "missionsettings","civWaveLifes",9999] call BIS_fnc_returnConfigEntry};
     default {9999};
 };
 

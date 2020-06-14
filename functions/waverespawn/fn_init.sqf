@@ -5,12 +5,15 @@ if (([missionConfigFile >> "missionsettings","waveRespawnEnabled",0] call BIS_fn
 GVAR(wavePlayersBlu) = [];
 GVAR(wavePlayersOpf) = [];
 GVAR(wavePlayersInd) = [];
+GVAR(wavePlayersCiv) = [];
 GVAR(waitingPlayersBlu) = [];
 GVAR(waitingPlayersOpf) = [];
 GVAR(waitingPlayersInd) = [];
+GVAR(waitingPlayersCiv) = [];
 GVAR(newBluSpawns) = [];
 GVAR(newOpfSpawns) = [];
 GVAR(newIndSpawns) = [];
+GVAR(newCivSpawns) = [];
 
 if (isServer) then {
     [] call FUNC(setWaveSize);

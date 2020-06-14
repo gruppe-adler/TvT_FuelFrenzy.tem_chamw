@@ -30,14 +30,25 @@ switch (_side) do {
         };
     };
 
-    default {ERROR_1("Player %1 is neither WEST nor EAST nor INDEPENDENT.", _unit)};
+    case (CIVILIAN): {
+        if (_unit in GVAR(wavePlayersCiv)) then {
+            GVAR(wavePlayersCiv) deleteAt (GVAR(wavePlayersCiv) find _unit);
+            INFO_1("Player %1 respawned and has been removed from wavePlayersCiv.", _unit);
+        } else {
+            ERROR_1("Player %1 is not in wavePlayersCiv", _unit);
+        };
+    };
+
+    default {ERROR_1("Player %1 is neither WEST nor EAST nor INDEPENDENT nor CIVILIAN.", _unit)};
 };
 
 [{
     GVAR(WAVERESPAWNPLAYERSLEFTBLU) = GVAR(BLUFORWAVESIZE) - (count GVAR(wavePlayersBlu));
     GVAR(WAVERESPAWNPLAYERSLEFTOPF) = GVAR(OPFORWAVESIZE) - (count GVAR(wavePlayersOpf));
     GVAR(WAVERESPAWNPLAYERSLEFTIND) = GVAR(INDEPWAVESIZE) - (count GVAR(wavePlayersInd));
+    GVAR(WAVERESPAWNPLAYERSLEFTCIV) = GVAR(CIVWAVESIZE) - (count GVAR(wavePlayersCiv));
     publicVariable QGVAR(WAVERESPAWNPLAYERSLEFTBLU);
     publicVariable QGVAR(WAVERESPAWNPLAYERSLEFTOPF);
     publicVariable QGVAR(WAVERESPAWNPLAYERSLEFTIND);
+    publicVariable QGVAR(WAVERESPAWNPLAYERSLEFTCIV);
 }, [], (GVAR(RESPAWNWAVEEXTRATIME) max 7)] call CBA_fnc_waitAndExecute;
