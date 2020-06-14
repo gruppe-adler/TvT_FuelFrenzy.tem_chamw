@@ -5,7 +5,8 @@ if (player getVariable "wr_isFreeRespawn") exitWith {player setVariable ["wr_wav
 
 INFO("Player countdown done. Starting wave countdown...");
 
-[player,playerSide] remoteExec [QFUNC(addToWave),2,false];
+private _playerSide = [player] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
+[player, _playerSide] remoteExec [QFUNC(addToWave),2,false];
 
 [{
 

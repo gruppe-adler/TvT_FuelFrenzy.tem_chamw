@@ -1,6 +1,8 @@
 #include "component.hpp"
 
-switch (playerSide) do {
+private _playerSide = [player] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
+
+switch (_playerSide) do {
     case (WEST): {
         player setVariable ["wr_waitCondition", {!GVAR(WAVERESPAWNBLU)}];
         player setVariable ["wr_interruptCondition", compile ([missionConfigFile >> "missionsettings","bluforInterruptCondition","false"] call BIS_fnc_returnConfigEntry)];
@@ -30,7 +32,7 @@ switch (playerSide) do {
         player setVariable ["wr_waveSize", {GVAR(CIVWAVESIZE)}];
     };
     default {
-        ERROR_1("Playerside is %1",playerSide);
+        ERROR_1("Playerside is %1",_playerSide);
     };
 };
 
