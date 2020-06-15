@@ -17,3 +17,11 @@ class fueling_end
     sound[] = { "USER\sounds\fueling_end.ogg", 4, 1, 150 };
     titles[] = { 0, "" };
 };
+
+class glitch
+{
+    name = "glitch";
+    // filename, volume, pitch, distance (optional)
+    sound[] = { "USER\intro\glitch.ogg", 4, 1, 150 };
+    titles[] = { 0, "" };
+};

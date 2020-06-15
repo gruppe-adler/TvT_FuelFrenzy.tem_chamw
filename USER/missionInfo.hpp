@@ -5,7 +5,7 @@
 author = "nomisum für Gruppe Adler";                                               //Missionsersteller (Du)
 onLoadName = "TVT Fuel Frenzy";                                                    //Name der Mission
 onLoadMission = "";                                                             //Beschreibung der Mission (wird im Ladebildschirm unterhalb des Ladebildes angezeigt)
-loadScreen = "USER\loading\loading.jpg";                                                //Ladebild
+loadScreen = "USER\intro\loading.jpg";                                                //Ladebild
 
 
 class CfgHints
