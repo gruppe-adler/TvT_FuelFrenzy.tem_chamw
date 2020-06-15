@@ -1,4 +1,11 @@
+/*
 
+    execVM "USER\winstats\showStats.sqf";
+
+*/
+
+// todo remove debug
+/*
 if (isServer) then {
     [] spawn {
         private _resultInf_west = str (([west, "Players killed"] call grad_points_fnc_getPointsCategory) + ([west, "AI killed"] call grad_points_fnc_getPointsCategory));
@@ -37,6 +44,7 @@ if (isServer) then {
         };
     };
 };
+*/
 
 if (hasInterface) then {
 
@@ -50,7 +58,7 @@ if (hasInterface) then {
     private _screenWidth = safeZoneW;
     private _screenHeight = safeZoneH;
 
-    private _columnWidth = _screenWidth/30;
+    private _columnWidth = _screenWidth/40;
     private _rowHeight = _screenHeight/40;
 
     disableSerialization;

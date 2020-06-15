@@ -10,6 +10,7 @@ private _points = switch (_event) do {
             case (WEST): {grad_points_playerKilled_west};
             case (EAST): {grad_points_playerKilled_east};
             case (INDEPENDENT): {grad_points_playerKilled_independent};
+            case (CIVILIAN): {grad_points_playerKilled_civilian};
             default {0};
         }
     };
@@ -18,6 +19,7 @@ private _points = switch (_event) do {
             case (WEST): {grad_points_aiKilled_west};
             case (EAST): {grad_points_aiKilled_east};
             case (INDEPENDENT): {grad_points_aiKilled_independent};
+            case (CIVILIAN): {grad_points_aiKilled_civilian};
             default {0};
         }
     };
@@ -26,6 +28,7 @@ private _points = switch (_event) do {
             case (WEST): {grad_points_civKilled_west};
             case (EAST): {grad_points_civKilled_east};
             case (INDEPENDENT): {grad_points_civKilled_independent};
+            case (CIVILIAN): {grad_points_civKilled_civilian};
             default {0};
         }
     };
