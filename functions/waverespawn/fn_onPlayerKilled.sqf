@@ -15,7 +15,7 @@ private _playerSide = [player, true] call BIS_fnc_objectSide; // JIP/init proof 
 if (serverTime - _joinTime < 30 && didJIP) exitWith {INFO("Player is JIP. Exiting onPlayerKilled.")};
 
 ["Terminate"] call BIS_fnc_EGSpectator;
-["Initialize", [player, [_playerSide, false, false, false, true, true, true, true, true]] call BIS_fnc_EGSpectator;
+["Initialize", [player, [[_playerSide], false, false, false, true, true, true, true, true]] call BIS_fnc_EGSpectator;
 
 private _maxRespawns = switch (_playerSide) do {
     case (WEST): {[missionConfigFile >> "missionsettings","bluforWaveLifes",9999] call BIS_fnc_returnConfigEntry};

@@ -12,7 +12,7 @@ if (player getVariable ["wr_interrupted", false]) exitWith {
     [player, true] call TFAR_fnc_forceSpectator;
 
     ["Terminate"] call BIS_fnc_EGSpectator;
-    ["Initialize", [player, [WEST,EAST,INDEPENDENT], true]] call BIS_fnc_EGSpectator;
+    ["Initialize", [player, [WEST,EAST,INDEPENDENT, CIVILIAN], true]] call BIS_fnc_EGSpectator;
     [player,_playerSide,false] remoteExec [QFUNC(addToWaiting),2,false];
 
     _explanation = parseText format ["<t align='center' size='1.4'>%1</t>", "No respawn available."];
