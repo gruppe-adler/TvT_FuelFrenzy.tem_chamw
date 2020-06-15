@@ -20,7 +20,7 @@ if (isServer) then {
     [] call FUNC(startWaveLoops);
     addMissionEventHandler ["HandleDisconnect", {
         params [["_unit",objNull]];
-        private _unitSide = [_unit] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
+        private _unitSide = [_unit, true] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
 
         [_unit, [_unitSide]] call FUNC(removeFromWave);
         [_unit, _unitSide, false] call FUNC(addToWaiting);
