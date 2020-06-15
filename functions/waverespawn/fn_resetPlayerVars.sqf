@@ -1,6 +1,6 @@
 #include "component.hpp"
 
-private _playerSide = [player] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
+private _playerSide = [player, true] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
 
 switch (_playerSide) do {
     case (WEST): {

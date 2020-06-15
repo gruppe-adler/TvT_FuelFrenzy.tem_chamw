@@ -11,7 +11,7 @@ if (player getVariable ["wr_interrupted", false]) exitWith {};
 
 //check JIP player is spawning for the first time
 private _joinTime = player getVariable ["joinTime", 0];
-private _playerSide = [player] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
+private _playerSide = [player, true] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
 if (serverTime - _joinTime < 30 && didJIP) exitWith {INFO("Player is JIP. Exiting onPlayerKilled.")};
 
 ["Terminate"] call BIS_fnc_EGSpectator;

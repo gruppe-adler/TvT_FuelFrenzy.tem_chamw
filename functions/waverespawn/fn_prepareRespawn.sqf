@@ -4,7 +4,7 @@ INFO("Ready to respawn. Preparing...");
 
 //respawn not possible
 if (player getVariable ["wr_interrupted", false]) exitWith {
-    private _playerSide = [player] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
+    private _playerSide = [player, true] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
 
     player allowDamage true;
     player setDamage 1;

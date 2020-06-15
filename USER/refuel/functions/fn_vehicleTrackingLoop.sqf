@@ -137,7 +137,7 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
             private _sideGroup = (leader _group) getVariable ['FF_originalSide', sideUnknown];
             private _color = [_sideGroup, false] call BIS_fnc_sideColor;
 
-            if (_sideGroup isEqualTo _sidePlayer && isNull (objectParent (leader _group)) then {
+            if (_sideGroup isEqualTo _sidePlayer && isNull (objectParent (leader _group))) then {
                 _map drawIcon [
                         getMissionPath 'USER\refuel\mafia.paa',
                         _color,

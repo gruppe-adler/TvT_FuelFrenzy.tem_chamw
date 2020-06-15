@@ -7,7 +7,7 @@ INFO("Starting player countdown...");
 [{
     _timeOfDeath = (_this select 0) select 0;
 
-    private _playerSide = [player] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
+    private _playerSide = [player, true] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
 
     //check interrupt
     if (player getVariable "wr_interrupted") exitWith {
