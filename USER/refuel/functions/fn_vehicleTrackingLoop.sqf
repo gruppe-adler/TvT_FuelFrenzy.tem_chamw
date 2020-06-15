@@ -122,7 +122,41 @@ private _allFuelStationControls = [];
 uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
 
 
+private _fuelSellPointControls = [];
 
+{
+    private _fuelSellPoint = _x;
+
+    // dont create control points of other factions
+    if (_sidePlayer == (_x getVariable ['FF_sellingPoint', sideUnknown])) then {
+        private _vehicleLabel = _mapDisplay ctrlCreate ["RscText", -1]; 
+        _vehicleLabel ctrlsetText "BLABLA";
+        _vehicleLabel ctrlSetPosition [0,0,0.05,0.025];
+        _vehicleLabel ctrlSetBackgroundColor [0,0,0,1];
+        _vehicleLabel ctrlSetFontHeight 0.03;
+        _vehicleLabel ctrlsetFont 'RobotoCondensedBold';
+        _vehicleLabel ctrlCommit 0;
+
+        private _vehicleIcon = _mapDisplay ctrlCreate ["RscPicture", -1];
+        _vehicleIcon ctrlsetText '\A3\ui_f\data\map\mapcontrol\fuelstation_ca.paa';
+        _vehicleIcon ctrlSetPosition [0,0,0.05,0.05*4/3];
+        _vehicleIcon ctrlSetBackgroundColor [0,0,0,1];
+        _vehicleIcon ctrlSetTextColor [1,1,1,1];
+        _vehicleIcon ctrlCommit 0;    
+
+        _vehicleLabel setVariable ["FF_vehicleAssigned", _fuelSellPoint];
+        _vehicleLabel setVariable ["FF_iconAssigned", _vehicleIcon];
+
+        _fuelSellPointControls pushBackUnique _vehicleLabel;
+    };
+} forEach [
+    fuelSellPoint_west,
+    fuelSellPoint_east,
+    fuelSellPoint_independent,
+    fuelSellPoint_civilian
+];
+
+uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
 
 
 (_mapDisplay displayCtrl 51) ctrlAddEventHandler ["Draw","
@@ -238,14 +272,13 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
         {
             private _fuelStationLabel = _x;
             private _fuelStation = _x getVariable ['FF_vehicleAssigned', objNull];
-            private _side = _sidePlayer;
             private _position = position _fuelStation;
 
             private _fuelStationIcon = _fuelStationLabel getVariable ['FF_iconAssigned', controlNull];
             private _fuelBarBG = _fuelStationLabel getVariable ['FF_fuelBarBGAssigned', controlNull];
             private _fuelBar = _fuelStationLabel getVariable ['FF_fuelBarAssigned', controlNull];
-            private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
-            private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
+            private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _sidePlayer];
+            private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _sidePlayer];
             private _fuelKnown = _fuelStation getVariable [_fuelKnownFormat, 0];
             private _fuelCargo = _fuelStation getVariable ['ace_refuel_currentFuelCargo', 0];
             private _fuelMax = _fuelStation getVariable ['ace_refuel_fuelMaxCargo', 0];
@@ -283,6 +316,37 @@ uiNamespace setVariable ["FF_allFuelStationControls", _allFuelStationControls];
             _fuelStationIcon ctrlCommit 0;
             
         } forEach _allFuelStationControls;
+
+
+        private _fuelSellPointControls = uiNamespace getVariable ['FF_fuelSellPointControls', []];
+
+        {
+            private _fuelStationLabel = _x;
+            private _fuelSellPoint = _x getVariable ['FF_vehicleAssigned', objNull];
+            private _position = position _fuelSellPoint;
+
+            private _fuelSellPointIcon = _fuelSellPointLabel getVariable ['FF_iconAssigned', controlNull];
+            private _fuelCargo = _fuelSellPoint getVariable ['ace_refuel_currentFuelCargo', 0];
+
+            private _ctrlPosition = _map ctrlMapWorldToScreen _position;
+            _ctrlPosition params ['_ctrlPositionX', '_ctrlPositionY'];
+             
+            private _positionMouseInWorld = _map ctrlMapScreenToWorld getMousePosition;
+
+            if (_positionMouseInWorld distance2D _position < 70) then {
+                _fuelSellPointLabel ctrlShow true;
+            } else {
+                _fuelSellPointLabel ctrlShow false;
+            };
+
+            _fuelSellPointLabel ctrlsetText str (round _fuelCargo);
+            _fuelSellPointLabel ctrlSetPosition [_ctrlPositionX - (ctrlTextWidth _fuelSellPointLabel/2), _ctrlPositionY + 0.02*4/3, ctrlTextWidth _fuelSellPointLabel, ctrlTextHeight _fuelSellPointLabel];
+            _fuelSellPointLabel ctrlCommit 0;           
+
+            _fuelSellPointIcon ctrlSetPosition  [_ctrlPositionX - 0.025, _ctrlPositionY-0.025];
+            _fuelSellPointIcon ctrlCommit 0;
+            
+        } forEach _fuelSellPointControls;
         
     };
 "];

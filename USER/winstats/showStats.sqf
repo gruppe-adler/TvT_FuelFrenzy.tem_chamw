@@ -245,7 +245,7 @@ if (hasInterface) then {
         };
     };
 
-    sleep 16;
+    sleep 5; // todo raise to 16 again
     _display displayRemoveAllEventHandlers "KeyDown";
     _display closeDisplay 1;
 
