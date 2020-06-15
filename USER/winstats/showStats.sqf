@@ -55,6 +55,7 @@ if (hasInterface) then {
 
 
 
+
     private _screenWidth = safeZoneW;
     private _screenHeight = safeZoneH;
 
@@ -93,15 +94,8 @@ if (hasInterface) then {
     private _resultFuel_west = format ["%1", [west] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
     private _resultFuel_east = format ["%1", [east] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
     private _resultFuel_independent = format ["%1", [independent] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
-    private _resultFuel_civilian = format ["%1", [civilian] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
-
-
-
-    /*
-    systemChat _resultInf_west;
-    systemChat _resultSoft_west;
-    systemChat _resultFuel_west;
-    */
+    private _resultFuel_civilian = format ["%1", [civilian] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];    
+    
 
     private _resultTotalNumber_west = [((parseNumber _resultInf_west) + (parseNumber _resultSoft_west) + (parseNumber _resultFuel_west)), west];
     private _resultTotalNumber_east = [((parseNumber _resultInf_east) + (parseNumber _resultSoft_east) + (parseNumber _resultFuel_east)), east];
@@ -121,6 +115,8 @@ if (hasInterface) then {
     private _totalNumbers = [_resultTotalNumber_west, _resultTotalNumber_east, _resultTotalNumber_independent, _resultTotalNumber_civilian];
     _totalNumbers sort false;
 
+    hint  str _totalNumbers;
+
     private _winner = _totalNumbers select 0 select 1;
     private _draw = _resultTotal_west isEqualTo _resultTotal_east &&
                     _resultTotal_independent isEqualTo _resultTotal_civilian &&
@@ -136,8 +132,8 @@ if (hasInterface) then {
         switch (_winner) do { 
             case west : { "Ital. Mafia gewinnt"  }; 
             case east : {  "russ. Mafia gewinnt"  }; 
-            case west : { "chin. Mafia gewinnt"   }; 
-            case east : {  "dt. Mafia gewinnt" }; 
+            case independent : { "chin. Mafia gewinnt"   }; 
+            case civilian : {  "dt. Mafia gewinnt" }; 
             default {}; 
         };
     };
@@ -229,6 +225,36 @@ if (hasInterface) then {
                     _subline ctrlsetFont "RobotoCondensedBold";
                     _subline ctrlSetBackgroundColor [0,0,0,0];
                     _subline ctrlSetStructuredText parseText ("<t size='2' align='center' shadow='0' color='#ffffff'>" + (_results_east select _j) + "</t>");
+                    _subline ctrlSetPosition [
+                        _columnWidth * _multiplicator + safezoneX  + _columnWidth,
+                        (_j * (_rowHeight * 6) + safezoneY) + _rowHeight * 6,
+                        _columnWidth * 4,
+                        _rowHeight * 2
+                    ];
+                    _subline ctrlSetFade _textFadeResult;
+                    _subline ctrlCommit 0;
+                };
+
+                if (_i == 4) then {
+                    private _subline = _display ctrlCreate ["RscStructuredText", -1];
+                    _subline ctrlsetFont "RobotoCondensedBold";
+                    _subline ctrlSetBackgroundColor [0,0,0,0];
+                    _subline ctrlSetStructuredText parseText ("<t size='2' align='center' shadow='0' color='#ffffff'>" + (_results_independent select _j) + "</t>");
+                    _subline ctrlSetPosition [
+                        _columnWidth * _multiplicator + safezoneX  + _columnWidth,
+                        (_j * (_rowHeight * 6) + safezoneY) + _rowHeight * 6,
+                        _columnWidth * 4,
+                        _rowHeight * 2
+                    ];
+                    _subline ctrlSetFade _textFadeResult;
+                    _subline ctrlCommit 0;
+                };
+
+                if (_i == 5) then {
+                    private _subline = _display ctrlCreate ["RscStructuredText", -1];
+                    _subline ctrlsetFont "RobotoCondensedBold";
+                    _subline ctrlSetBackgroundColor [0,0,0,0];
+                    _subline ctrlSetStructuredText parseText ("<t size='2' align='center' shadow='0' color='#ffffff'>" + (_results_civilian select _j) + "</t>");
                     _subline ctrlSetPosition [
                         _columnWidth * _multiplicator + safezoneX  + _columnWidth,
                         (_j * (_rowHeight * 6) + safezoneY) + _rowHeight * 6,
