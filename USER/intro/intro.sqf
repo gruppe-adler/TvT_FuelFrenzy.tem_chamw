@@ -8,7 +8,7 @@ showChat false;
 
 titleText ["","BLACK FADED",999];
 
-playSound "glitch";
+playSound "glitch2";
 
 private _display = findDisplay 46;
 private _pic = _display ctrlCreate ["RscPictureKeepAspect", -1];

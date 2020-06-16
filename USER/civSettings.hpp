@@ -2,7 +2,7 @@
 *   Legt Einstellungen für grad-civs Zivilisten fest.
 *   In der Klasse "userEquipment" können eigene Ausrüstungsgegenstände für die Zivilisten definiert werden.
 */
-enableCivs = 1;
+enableCivs = 0;
 
 debugCivState = 0;
 backpackProbability = 0.15;

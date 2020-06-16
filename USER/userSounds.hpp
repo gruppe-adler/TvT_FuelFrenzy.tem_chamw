@@ -18,10 +18,18 @@ class fueling_end
     titles[] = { 0, "" };
 };
 
-class glitch
+class glitch2
 {
-    name = "glitch";
+    name = "glitch2";
     // filename, volume, pitch, distance (optional)
-    sound[] = { "USER\intro\glitch.ogg", 4, 1, 150 };
+    sound[] = { "USER\intro\glitch2.ogg", 4, 1, 150 };
+    titles[] = { 0, "" };
+};
+
+class glitch_end
+{
+    name = "glitch_end";
+    // filename, volume, pitch, distance (optional)
+    sound[] = { "USER\intro\glitch_end.ogg", 4, 1, 150 };
     titles[] = { 0, "" };
 };

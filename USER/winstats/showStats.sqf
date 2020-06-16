@@ -10,37 +10,59 @@ if (isServer) then {
     [] spawn {
         private _resultInf_west = str (([west, "Players killed"] call grad_points_fnc_getPointsCategory) + ([west, "AI killed"] call grad_points_fnc_getPointsCategory));
         private _resultInf_east = str (([east, "Players killed"] call grad_points_fnc_getPointsCategory) + ([east, "AI killed"] call grad_points_fnc_getPointsCategory));
+        private _resultInf_independent = str (([independent, "Players killed"] call grad_points_fnc_getPointsCategory) + ([independent, "AI killed"] call grad_points_fnc_getPointsCategory));
+        private _resultInf_civilian = str (([civilian, "Players killed"] call grad_points_fnc_getPointsCategory) + ([civilian, "AI killed"] call grad_points_fnc_getPointsCategory));
         // private _resultArmored = ["", "1", "2", "3", "4"];
 
         private _resultSoft_west = str ([west, "VEHICLEKILLED"] call grad_points_fnc_getPointsCategory);
         private _resultSoft_east = str ([east, "VEHICLEKILLED"] call grad_points_fnc_getPointsCategory);
+        private _resultSoft_independent = str ([independent, "VEHICLEKILLED"] call grad_points_fnc_getPointsCategory);
+        private _resultSoft_civilian = str ([civilian, "VEHICLEKILLED"] call grad_points_fnc_getPointsCategory);
         // private _resultArmored = ["", "1", "2", "3", "4"];
         private _resultFuel_west = format ["%1", [west] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
         private _resultFuel_east = format ["%1", [east] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
+        private _resultFuel_independent = format ["%1", [independent] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
+        private _resultFuel_civilian = format ["%1", [civilian] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
 
         private _resultTotalNumber_west = ((parseNumber _resultInf_west) + (parseNumber _resultSoft_west) + (parseNumber _resultFuel_west));
         private _resultTotalNumber_east = ((parseNumber _resultInf_east) + (parseNumber _resultSoft_east) + (parseNumber _resultFuel_east));
+        private _resultTotalNumber_independent = ((parseNumber _resultInf_independent) + (parseNumber _resultSoft_independent) + (parseNumber _resultFuel_independent));
+        private _resultTotalNumber_civilian = ((parseNumber _resultInf_civilian) + (parseNumber _resultSoft_civilian) + (parseNumber _resultFuel_civilian));
 
         private _resultTotal_west = str _resultTotalNumber_west;
         private _resultTotal_east= str _resultTotalNumber_east;
+        private _resultTotal_independent= str _resultTotalNumber_independent;
+        private _resultTotal_civilian= str _resultTotalNumber_civilian;
 
         private _results_west = ["", _resultInf_west, _resultSoft_west, _resultFuel_west, _resultTotal_west];
         private _results_east = ["", _resultInf_east, _resultSoft_east, _resultFuel_east, _resultTotal_east];
+        private _results_independent = ["", _resultInf_independent, _resultSoft_independent, _resultFuel_independent, _resultTotal_independent];
+        private _results_civilian = ["", _resultInf_civilian, _resultSoft_civilian, _resultFuel_civilian, _resultTotal_civilian];
 
-        private _eastWins = _resultTotalNumber_east > _resultTotalNumber_west;
-        private _draw = _resultTotalNumber_west == _resultTotalNumber_east;
+        private _totalNumbers = [_resultTotalNumber_west, _resultTotalNumber_east, _resultTotalNumber_independent, _resultTotalNumber_civilian];
+        _totalNumbers sort false;
+
+        hint str _totalNumbers;
+
+        private _winner = _totalNumbers select 0 select 1;
+        private _draw = _resultTotal_west isEqualTo _resultTotal_east &&
+                        _resultTotal_independent isEqualTo _resultTotal_civilian &&
+                        _resultTotal_west isEqualTo _resultTotal_civilian;
+        
 
         sleep 16;
         [] call GRAD_replay_fnc_stopRecord;
 
-        if (_eastWins) then {
-            [[east]] remoteExec ["grad_endings_fnc_endMissionClient",0,false];
-        } else {
-            if (!_draw) then {
-                [[west]] remoteExec ["grad_endings_fnc_endMissionClient",0,false];
-            } else {
-                [[west,east]] remoteExec ["grad_endings_fnc_endMissionClient",0,false];
+        if (!_draw) then {
+            switch (_winner) do { 
+                case west : { [[west]] remoteExec ["grad_endings_fnc_endMissionClient",0,false];  }; 
+                case east : {  [[east]] remoteExec ["grad_endings_fnc_endMissionClient",0,false];  }; 
+                case independent : { [[independent]] remoteExec ["grad_endings_fnc_endMissionClient",0,false];   }; 
+                case civilian : {  [[civilian]] remoteExec ["grad_endings_fnc_endMissionClient",0,false]; }; 
+                default {}; 
             };
+        } else {
+            [[west,east,independent,civilian]] remoteExec ["grad_endings_fnc_endMissionClient",0,false];
         };
     };
 };
@@ -48,12 +70,9 @@ if (isServer) then {
 
 if (hasInterface) then {
 
-    playMusic "EventTrack01_F_Curator";
+    playSound "glitch_end";
     [player, true] call TFAR_fnc_forceSpectator;
     [player, player] call ace_medical_treatment_fnc_fullHeal;
-
-
-
 
 
     private _screenWidth = safeZoneW;
@@ -63,10 +82,6 @@ if (hasInterface) then {
     private _rowHeight = _screenHeight/40;
 
     disableSerialization;
-
-
-
-
 
     // private _iconKilled = "\A3\ui_f\data\igui\cfg\mptable\killed_ca.paa";
     private _iconInf = "\A3\ui_f\data\igui\cfg\mptable\infantry_ca.paa";
@@ -115,7 +130,7 @@ if (hasInterface) then {
     private _totalNumbers = [_resultTotalNumber_west, _resultTotalNumber_east, _resultTotalNumber_independent, _resultTotalNumber_civilian];
     _totalNumbers sort false;
 
-    hint  str _totalNumbers;
+    hint str _totalNumbers;
 
     private _winner = _totalNumbers select 0 select 1;
     private _draw = _resultTotal_west isEqualTo _resultTotal_east &&
