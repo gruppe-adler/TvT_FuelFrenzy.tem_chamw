@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=222;
+		nextID=227;
 	};
 	class Camera
 	{
-		pos[]={637.96442,131.45799,7604.4526};
-		dir[]={-0.0011691792,-0.64653033,-0.76289815};
-		up[]={-0.00099084957,0.76288623,-0.64653176};
-		aside[]={-1.0000062,-1.7949787e-007,0.0015328408};
+		pos[]={602.65485,112.70724,7629.9063};
+		dir[]={0.072561495,-0.59279525,-0.80209035};
+		up[]={0.053409752,0.80534905,-0.59038907};
+		aside[]={-0.99594289,-2.2805034e-007,-0.090099081};
 	};
 };
 binarizationWanted=0;
@@ -10228,7 +10228,7 @@ class Mission
 							class PositionInfo
 							{
 								position[]={7097.4102,43.802017,7081.7422};
-								angles[]={-0,0,0.0075011365};
+								angles[]={0,0,0.0075011365};
 							};
 							side="Independent";
 							flags=6;
@@ -11480,6 +11480,7 @@ class Mission
 			};
 			id=663;
 			type="RHS_Ural_Fuel_VDV_01";
+			atlOffset=9.5367432e-007;
 			class CustomAttributes
 			{
 				class Attribute0

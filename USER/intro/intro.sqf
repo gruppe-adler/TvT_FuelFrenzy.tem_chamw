@@ -9,97 +9,26 @@ showChat false;
 titleText ["","BLACK FADED",999];
 
 playSound "glitch2";
+uiSleep 2;
 
 private _display = findDisplay 46;
 private _pic = _display ctrlCreate ["RscPictureKeepAspect", -1];
-private _sleep = 0.0335;
+private _sleep = 0.01;
 
-for "_i" from 1 to 20 do {
-    _pic ctrlSetPosition [0,0,1,1];
-    _pic ctrlCommit 0;
-    _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-    _pic ctrlCommit 0;
-    uisleep _sleep;
-};
+FF_showGlitchIntro = true;
 
-for "_i" from 1 to 20 do {
-    _pic ctrlSetPosition [0,0,1,1];
-    _pic ctrlCommit 0;
-    _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-    _pic ctrlCommit 0;
-    uisleep _sleep;
-};
+[{  
+    FF_showGlitchIntro = false;
+}, [], 16] call CBA_fnc_waitAndExecute;
 
-for "_i" from 1 to 20 do {
-    _pic ctrlSetPosition [0,0,1,1];
-    _pic ctrlCommit 0;
-    _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-    _pic ctrlCommit 0;
-    uisleep _sleep;
-};
-
-for "_i" from 1 to 20 do {
-    _pic ctrlSetPosition [0,0,1,1];
-    _pic ctrlCommit 0;
-    _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-    _pic ctrlCommit 0;
-    uisleep _sleep;
-};
-
-for "_i" from 1 to 20 do {
-    _pic ctrlSetPosition [0,0,1,1];
-    _pic ctrlCommit 0;
-    _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-    _pic ctrlCommit 0;
-    uisleep _sleep;
-};
-
-for "_i" from 1 to 20 do {
-    _pic ctrlSetPosition [0,0,1,1];
-    _pic ctrlCommit 0;
-    _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-    _pic ctrlCommit 0;
-    uisleep _sleep;
-};
-
-for "_i" from 1 to 20 do {
-    _pic ctrlSetPosition [0,0,1,1];
-    _pic ctrlCommit 0;
-    _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-    _pic ctrlCommit 0;
-    uisleep _sleep;
-};
-
-for "_i" from 1 to 20 do {
-    _pic ctrlSetPosition [0,0,1,1];
-    _pic ctrlCommit 0;
-    _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-    _pic ctrlCommit 0;
-    uisleep _sleep;
-};
-
-for "_i" from 1 to 20 do {
-    _pic ctrlSetPosition [0,0,1,1];
-    _pic ctrlCommit 0;
-    _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-    _pic ctrlCommit 0;
-    uisleep _sleep;
-};
-
-for "_i" from 1 to 20 do {
-    _pic ctrlSetPosition [0,0,1,1];
-    _pic ctrlCommit 0;
-    _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-    _pic ctrlCommit 0;
-    uisleep _sleep;
-};
-
-for "_i" from 1 to 10 do {
-    _pic ctrlSetPosition [0,0,1,1];
-    _pic ctrlCommit 0;
-    _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-    _pic ctrlCommit 0;
-    uisleep _sleep;
+while {FF_showGlitchIntro} do {
+    for "_i" from 1 to 20 do {
+        _pic ctrlSetPosition [0,0,1,1];
+        _pic ctrlCommit 0;
+        _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
+        _pic ctrlCommit 0;
+        uisleep _sleep;
+    };
 };
 
 ctrlDelete  _pic;
