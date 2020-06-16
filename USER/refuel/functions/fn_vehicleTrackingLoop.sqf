@@ -129,6 +129,8 @@ private _fuelSellPointControls = [];
 
     // dont create control points of other factions
     if (_sidePlayer == (_x getVariable ['FF_sellingPoint', sideUnknown])) then {
+
+
         private _vehicleLabel = _mapDisplay ctrlCreate ["RscText", -1]; 
         _vehicleLabel ctrlsetText "BLABLA";
         _vehicleLabel ctrlSetPosition [0,0,0.05,0.025];
@@ -141,7 +143,7 @@ private _fuelSellPointControls = [];
         _vehicleIcon ctrlsetText '\A3\ui_f\data\map\mapcontrol\fuelstation_ca.paa';
         _vehicleIcon ctrlSetPosition [0,0,0.05,0.05*4/3];
         _vehicleIcon ctrlSetBackgroundColor [0,0,0,1];
-        _vehicleIcon ctrlSetTextColor [1,1,1,1];
+        _vehicleIcon ctrlSetTextColor _color;
         _vehicleIcon ctrlCommit 0;    
 
         _vehicleLabel setVariable ["FF_vehicleAssigned", _fuelSellPoint];
@@ -312,7 +314,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
             _fuelStationLabel ctrlSetPosition [_ctrlPositionX - (ctrlTextWidth _fuelStationLabel/2), _ctrlPositionY + 0.02*4/3, ctrlTextWidth _fuelStationLabel, ctrlTextHeight _fuelStationLabel];
             _fuelStationLabel ctrlCommit 0;           
 
-            _fuelStationIcon ctrlSetPosition  [_ctrlPositionX - 0.025, _ctrlPositionY-0.025];
+            _fuelStationIcon ctrlSetPosition  [_ctrlPositionX - 0.025, _ctrlPositionY-0.05];
             _fuelStationIcon ctrlCommit 0;
             
         } forEach _allFuelStationControls;
@@ -321,7 +323,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
         private _fuelSellPointControls = uiNamespace getVariable ['FF_fuelSellPointControls', []];
 
         {
-            private _fuelStationLabel = _x;
+            private _fuelSellPointLabel = _x;
             private _fuelSellPoint = _x getVariable ['FF_vehicleAssigned', objNull];
             private _position = position _fuelSellPoint;
 

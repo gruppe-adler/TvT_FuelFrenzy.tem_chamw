@@ -67,6 +67,14 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
     };
 }] call CBA_fnc_addEventHandler;
 
+["SetCustomEncryption", "OnRadiosReceived", {
+    params ["_unit", ["_radios", []]];
+    private _customEncryption = player getVariable ["FF_originalSide", sideUnknown];
+    [call TFAR_fnc_activeSwRadio, str _customEncryption] call TFAR_fnc_setSwRadioCode;
+    player setVariable ["tf_receivingDistanceMultiplicator", 0.25];
+    player setVariable ["tf_sendingDistanceMultiplicator", 4];
+}, player] call TFAR_fnc_addEventHandler;
+
 
 ["mrk_safeZone_west", west] execVM "USER\safezone\createSafeZone.sqf";
 ["mrk_safeZone_east", east] execVM "USER\safezone\createSafeZone.sqf";
@@ -96,10 +104,10 @@ if (isServer) then {
         fuelSellPoint_civilian setVariable ["FF_sellingPoint", civilian, true];
     
 
-        private _fuelTrucksEast = [worldsize/2, worldsize/2] nearEntities ["O_G_Van_01_fuel_F",14000];
+        private _fuelTrucksEast = [worldsize/2, worldsize/2] nearEntities ["gm_pl_army_ural375d_refuel",14000];
         private _fuelTrucksWest = [worldsize/2, worldsize/2] nearEntities ["RHS_Ural_Fuel_VDV_01",14000];
-        private _fuelTrucksIndependent = [worldsize/2, worldsize/2] nearEntities ["C_Truck_02_fuel_F",14000];
-        private _fuelTrucksCivilian = [worldsize/2, worldsize/2] nearEntities ["B_T_Truck_01_fuel_F",14000];
+        private _fuelTrucksIndependent = [worldsize/2, worldsize/2] nearEntities ["C_Van_01_fuel_F",14000];
+        private _fuelTrucksCivilian = [worldsize/2, worldsize/2] nearEntities ["C_Truck_02_fuel_F",14000];
         private _fuelTrucks = _fuelTrucksEast + _fuelTrucksWest + _fuelTrucksIndependent + _fuelTrucksCivilian;
         missionNamespace setVariable ["FF_fuelTrucks", _fuelTrucks, true];
 

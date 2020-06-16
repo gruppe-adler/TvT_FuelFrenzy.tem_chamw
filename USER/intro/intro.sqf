@@ -1,5 +1,6 @@
 // dont display for JIP
 if (didJIP) exitWith {};
+titleText ["","BLACK FADED",999];
 waitUntil {!isNull player};
 waitUntil {time > 0};
 player setVariable ["tf_voiceVolume", 0, true];
@@ -7,6 +8,8 @@ diwako_dui_main_toggled_off = true;
 showChat false;
 
 titleText ["","BLACK FADED",999];
+
+waitUntil {CBA_missionTime > 5};
 
 playSound "glitch2";
 uiSleep 2;
@@ -33,10 +36,12 @@ while {FF_showGlitchIntro} do {
 
 ctrlDelete  _pic;
 
-cutText [" ", "BLACK IN", 3];
+cutText [" ", "BLACK IN", 2];
+/*
 private _camera = "camera" camCreate (getpos player);
 _camera cameraeffect ["terminate", "back"];
 camDestroy _camera;
+*/
 
 STHud_UIMode = 1;
 
