@@ -113,7 +113,7 @@ if (isServer) then {
 
         {
           [_x, 0] call ace_refuel_fnc_setfuel;
-          _x setVariable ["ace_refuel_fuelMaxCargo", 3000, true];
+          _x setVariable ["ace_refuel_fuelMaxCargo", 2000, true];
           _x setVariable ["ace_refuel_nozzle", _x, true]; // hack to hide CONNECT action to make all actions equally distinctive
         } forEach _fuelTrucks;
 
@@ -123,10 +123,15 @@ if (isServer) then {
 
         {
             private _fuelStation = _x;
-            private _fuelCargo = 3000;
+            private _fuelCargoMin = 3000;
+            private _fuelCargoMid = 4000;
+            private _fuelCargoMax = 5000;
             private _position = position _fuelStation;
-            _fuelStation setVariable ["ace_refuel_fuelMaxCargo", 3000, true];
-            _fuelStation setVariable ["ace_refuel_currentFuelCargo", 3000, true];
+            private _fuelCargo = random [_fuelCargoMin, _fuelCargoMid, _fuelCargoMax]; // randomize fuel
+
+            // fill up
+            _fuelStation setVariable ["ace_refuel_fuelMaxCargo", _fuelCargo, true];
+            _fuelStation setVariable ["ace_refuel_currentFuelCargo", _fuelCargo, true];
 
             {   
                 private _side = _x;
