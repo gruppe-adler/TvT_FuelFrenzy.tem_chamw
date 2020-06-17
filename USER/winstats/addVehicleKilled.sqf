@@ -16,6 +16,6 @@ _vehicle addEventHandler ["Killed", {
 }];
 
 if (typeOf _vehicle == "gm_pl_army_ural375d_refuel") then {
-    [_vehicle, 0] call ace_refuel_fnc_makeSource;
+    [_vehicle, 0, [0,-2,0]] call ace_refuel_fnc_makeSource;
     [_vehicle, 0] call ace_refuel_fnc_setFuel;
 };
