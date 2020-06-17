@@ -116,7 +116,7 @@
     if (GVAR(WAVERESPAWNCIV)) exitWith {};
 
     //start countdown once first player is added to wave
-    if (count GVAR(wavePlayersInd) > 0) then {
+    if (count GVAR(wavePlayersCiv) > 0) then {
         GVAR(WAVERESPAWNTIMELEFTCIV) = (GVAR(WAVERESPAWNTIMELEFTCIV) - 1) max 0;
         publicVariable QGVAR(WAVERESPAWNTIMELEFTCIV);
     } else {

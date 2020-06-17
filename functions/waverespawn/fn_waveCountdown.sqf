@@ -9,8 +9,10 @@ private _playerSide = [player, true] call BIS_fnc_objectSide; // JIP/init proof 
 [player, _playerSide] remoteExec [QFUNC(addToWave),2,false];
 
 [{
+    params ["_args", "_handle"];
+    _args params ["_timeOfDeath", "_playerSide"];
 
-    _timeOfDeath = (_this select 0) select 0;
+    systemChat ("_timeOfDeath : " + str _timeOfDeath);
 
     //check interrupt
     if (call (player getVariable "wr_interruptCondition")) exitWith {
@@ -33,6 +35,6 @@ private _playerSide = [player, true] call BIS_fnc_objectSide; // JIP/init proof 
         player setVariable ["wr_waveCountdownDone", true];
     };
 
-    [playerSide] call FUNC(respawnHint);
+    [_playerSide] call FUNC(respawnHint);
 
-}, 1, _this] call CBA_fnc_addPerFrameHandler;
+}, 1, [_this, _playerSide]] call CBA_fnc_addPerFrameHandler;

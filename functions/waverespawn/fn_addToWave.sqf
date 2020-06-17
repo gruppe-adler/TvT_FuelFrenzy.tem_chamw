@@ -29,7 +29,7 @@ switch (_deadPlayerSide) do {
     };
     case (CIVILIAN): {
         GVAR(wavePlayersCiv) pushBackUnique _deadPlayer;
-        INFO_2("Added player %1 to wavePlayersCiv. %2 dead opfor total.", _deadPlayer, count GVAR(wavePlayersCiv));
+        INFO_2("Added player %1 to wavePlayersCiv. %2 dead civilian total.", _deadPlayer, count GVAR(wavePlayersCiv));
         GVAR(WAVERESPAWNPLAYERSLEFTCIV) = GVAR(CIVWAVESIZE) - (count GVAR(wavePlayersCiv));
         publicVariable QGVAR(WAVERESPAWNPLAYERSLEFTCIV);
     };
