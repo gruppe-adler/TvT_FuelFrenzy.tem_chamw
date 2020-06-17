@@ -6,8 +6,12 @@ if (isDedicated) exitWith {};
 
         if (_role == "driver") then {
             private _side = _unit getVariable ["FF_originalSide", sideUnknown];
-            _vehicle setVariable ["FF_trackedForSide", _side, true];
-            systemChat ("Marked Vehicle for side " + str _side);
+            private _trackedForSide = _unit getVariable ["FF_trackedForSide", sideUnknown];
+
+            if (_side != _trackedForSide && local _unit) then {
+                hintSilent parseText ("<t color='#FFFFFF'><t size='1'><t align='center'>Taking vehicle into possession for your side.</t>");
+                _vehicle setVariable ["FF_trackedForSide", _side, true];
+            };
         };
     }];
 
