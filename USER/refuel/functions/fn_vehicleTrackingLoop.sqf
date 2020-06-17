@@ -314,7 +314,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
             _fuelStationLabel ctrlSetPosition [_ctrlPositionX - (ctrlTextWidth _fuelStationLabel/2), _ctrlPositionY + 0.02*4/3, ctrlTextWidth _fuelStationLabel, ctrlTextHeight _fuelStationLabel];
             _fuelStationLabel ctrlCommit 0;           
 
-            _fuelStationIcon ctrlSetPosition  [_ctrlPositionX - 0.025, _ctrlPositionY-0.05];
+            _fuelStationIcon ctrlSetPosition  [_ctrlPositionX - 0.025, _ctrlPositionY-0.025];
             _fuelStationIcon ctrlCommit 0;
             
         } forEach _allFuelStationControls;

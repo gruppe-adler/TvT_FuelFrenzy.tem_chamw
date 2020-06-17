@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={7332.3481,81.146332,1217.6602};
-		dir[]={-0.69510722,-0.61862206,0.36624551};
-		up[]={-0.54730123,0.78568834,0.28836784};
-		aside[]={0.4661456,6.8394002e-008,0.88471007};
+		pos[]={7305.3652,73.880264,1236.8331};
+		dir[]={0.25850326,-0.56447893,0.78393137};
+		up[]={0.17677654,0.82544619,0.536089};
+		aside[]={0.94970429,1.4467514e-007,-0.31316665};
 	};
 };
 binarizationWanted=0;
@@ -5185,18 +5185,18 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={862.57086,8.2287245,787.89764};
+								position[]={862.57098,8.2291069,787.89801};
 							};
 							side="West";
 							flags=7;
 							class Attributes
 							{
-								description="Commander@Commander";
+								description="Commander@RussianMafia";
 								isPlayable=1;
 							};
 							id=1545;
 							type="B_Soldier_SL_F";
-							atlOffset=0.0096092224;
+							atlOffset=0.010000229;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -5362,7 +5362,7 @@ class Mission
 					{
 					};
 					id=1544;
-					atlOffset=0.0096092224;
+					atlOffset=0.010000229;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -6811,18 +6811,17 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={978.47699,76.418526,7048.23};
+								position[]={978.47699,76.418518,7048.23};
 							};
 							side="East";
 							flags=7;
 							class Attributes
 							{
-								description="Commander@Commander";
+								description="Commander@ItalianMafia";
 								isPlayable=1;
 							};
 							id=1568;
 							type="O_Soldier_SL_F";
-							atlOffset=7.6293945e-006;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -6969,7 +6968,6 @@ class Mission
 					{
 					};
 					id=1567;
-					atlOffset=7.6293945e-006;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -8421,7 +8419,7 @@ class Mission
 							flags=6;
 							class Attributes
 							{
-								description="Commander@Commander";
+								description="Commander@GermanMafia";
 								isPlayer=1;
 								isPlayable=1;
 							};
@@ -9250,19 +9248,18 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={7128.2783,44.8699,7069.687};
-								angles[]={6.2731848,0,0.0075011365};
+								position[]={7128.2778,44.869892,7069.687};
+								angles[]={6.2731848,0,0.0075049158};
 							};
 							side="Independent";
 							flags=6;
 							class Attributes
 							{
-								description="Commander@Commander";
+								description="Commander@ChineseMafia";
 								isPlayable=1;
 							};
 							id=1640;
 							type="I_Soldier_SL_F";
-							atlOffset=3.8146973e-006;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -9372,7 +9369,6 @@ class Mission
 					{
 					};
 					id=1639;
-					atlOffset=3.8146973e-006;
 				};
 				class Item18
 				{

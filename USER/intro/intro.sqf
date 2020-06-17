@@ -1,52 +1,53 @@
 // dont display for JIP
 if (didJIP) exitWith {};
 titleText ["","BLACK FADED",999];
-waitUntil {!isNull player};
-waitUntil {time > 0};
-player setVariable ["tf_voiceVolume", 0, true];
-diwako_dui_main_toggled_off = true;
-showChat false;
+["CBA_loadingScreenDone", {
 
-titleText ["","BLACK FADED",999];
+    player setVariable ["tf_voiceVolume", 0, true];
+    diwako_dui_main_toggled_off = true;
+    showChat false;
 
-waitUntil {CBA_missionTime > 5};
+    titleText ["","BLACK FADED",999];
 
-playSound "glitch2";
-uiSleep 2;
+    waitUntil {CBA_missionTime > 5};
 
-private _display = findDisplay 46;
-private _pic = _display ctrlCreate ["RscPictureKeepAspect", -1];
-private _sleep = 0.01;
+    playSound "glitch2";
+    uiSleep 2;
 
-FF_showGlitchIntro = true;
+    private _display = findDisplay 46;
+    private _pic = _display ctrlCreate ["RscPictureKeepAspect", -1];
+    private _sleep = 0.01;
 
-[{  
-    FF_showGlitchIntro = false;
-}, [], 16] call CBA_fnc_waitAndExecute;
+    FF_showGlitchIntro = true;
 
-while {FF_showGlitchIntro} do {
-    for "_i" from 1 to 20 do {
-        _pic ctrlSetPosition [0,0,1,1];
-        _pic ctrlCommit 0;
-        _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
-        _pic ctrlCommit 0;
-        uisleep _sleep;
+    [{  
+        FF_showGlitchIntro = false;
+    }, [], 16] call CBA_fnc_waitAndExecute;
+
+    while {FF_showGlitchIntro} do {
+        for "_i" from 1 to 20 do {
+            _pic ctrlSetPosition [0,0,1,1];
+            _pic ctrlCommit 0;
+            _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
+            _pic ctrlCommit 0;
+            uisleep _sleep;
+        };
     };
-};
 
-ctrlDelete  _pic;
+    ctrlDelete  _pic;
 
-cutText [" ", "BLACK IN", 2];
-/*
-private _camera = "camera" camCreate (getpos player);
-_camera cameraeffect ["terminate", "back"];
-camDestroy _camera;
-*/
+    cutText [" ", "BLACK IN", 2];
+    /*
+    private _camera = "camera" camCreate (getpos player);
+    _camera cameraeffect ["terminate", "back"];
+    camDestroy _camera;
+    */
 
-STHud_UIMode = 1;
+    STHud_UIMode = 1;
 
 
-titleText ["", "BLACK IN", 0];
-player setVariable ["tf_voiceVolume", 1, true];
-diwako_dui_main_toggled_off = false;
-showChat true;
+    titleText ["", "BLACK IN", 0];
+    player setVariable ["tf_voiceVolume", 1, true];
+    diwako_dui_main_toggled_off = false;
+    showChat true;
+}] call CBA_fnc_addEventHandler;
