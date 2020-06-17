@@ -28,7 +28,9 @@ private _eventhandlerIdentifier = format ["FF_safeZoneFiredEH_%1", _area];
                 if (_side == player getVariable ["FF_originalSide", sideUnknown] && CBA_missionTime > 30) then {
                     hintSilent parseText "<t color='#009999'><t size='2'><t align='center'>Welcome<br/><br/><t align='center'><t size='1'><t color='#ffffff'>You are entering your base.";
                 } else {
-                    hintSilent parseText "<t color='#ff0000'><t size='2'><t align='center'>Attention<br/><br/><t align='center'><t size='1'><t color='#ffffff'>You are entering an enemy base. Get away sucker.";
+                    if (CBA_missionTime > 30) then {
+                        hintSilent parseText "<t color='#ff0000'><t size='2'><t align='center'>Attention<br/><br/><t align='center'><t size='1'><t color='#ffffff'>You are entering an enemy base. Get away sucker.";
+                    };
                 };
                 
             };
@@ -45,7 +47,9 @@ private _eventhandlerIdentifier = format ["FF_safeZoneFiredEH_%1", _area];
             if (_side == player getVariable ["FF_originalSide", sideUnknown] && CBA_missionTime > 30) then {
                     hintSilent parseText "<t color='#FF0000'><t size='2'><t align='center'>Attention<br/><br/><t align='center'><t size='1'><t color='#ffffff'>You are leaving your base.";
                 } else {
-                    hintSilent parseText "<t color='#FF0000'><t size='2'><t align='center'>Attention<br/><br/><t align='center'><t size='1'><t color='#ffffff'>You are leaving the enemy base. Good.";
+                    if (CBA_missionTime > 30) then {
+                        hintSilent parseText "<t color='#FF0000'><t size='2'><t align='center'>Attention<br/><br/><t align='center'><t size='1'><t color='#ffffff'>You are leaving the enemy base. Good.";
+                    };
                 };
         };
     };
