@@ -28,6 +28,8 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
             };
         } forEach _fuelStations;
 
+        if (_distanceActual > 30) exitWith { diag_log "checking fuel too far away from next fuel station"; };
+
         private _side = player getVariable ["FF_originalSide", sideUnknown];
         private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
         private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
@@ -170,7 +172,7 @@ if (isServer) then {
                 private _fuelKnownFormat = format ["ace_refuel_currentFuelKnown_%1", _side];
                 private _fuelKnownTimeFormat = format ["ace_refuel_currentFuelKnownTime_%1", _side];
                 private _currentTime = [dayTime, "HH:MM"] call BIS_fnc_timeToString;
-                _fuelStation setVariable [_fuelKnownFormat, 3000, true];
+                _fuelStation setVariable [_fuelKnownFormat, _fuelCargo, true];
                 _fuelStation setVariable [_fuelKnownTimeFormat, _currentTime, true];
             } forEach [west, east, independent, civilian];
 
