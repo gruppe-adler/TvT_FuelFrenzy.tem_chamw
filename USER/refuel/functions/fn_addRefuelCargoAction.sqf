@@ -43,6 +43,16 @@ private _refuelReplacementAction = [
     }
 ] call ace_interact_menu_fnc_createAction;
 
+private _returnNozzleAction = [
+    "ReturnNozzle",
+    "Zapfpistole zurückstecken",
+    "",
+    {
+        [player, _target] call ace_refuel_fnc_returnNozzle
+    }, {
+        [player, _target] call ace_refuel_fnc_canReturnNozzle
+}] call ace_interact_menu_fnc_createAction;
+
 
 private _endPointAction = [
     "RefuelStorage",
@@ -63,15 +73,6 @@ private _endPointAction = [
 ] call ace_interact_menu_fnc_createAction;
 
 
-private _returnNozzleAction = [
-    "ReturnNozzle",
-    "Zapfpistole zurückstecken",
-    "",
-    {
-        [player, _target] call ace_refuel_fnc_returnNozzle
-    }, {
-        [player, _target] call ace_refuel_fnc_canReturnNozzle
-}] call ace_interact_menu_fnc_createAction;
 
 
 ["Land_BoreSighter_01_F", 0, ["ACE_MainActions"], _endPointAction, true] call ace_interact_menu_fnc_addActionToClass;

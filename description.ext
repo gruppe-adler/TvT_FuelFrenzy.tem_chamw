@@ -114,6 +114,7 @@ class CfgNotifications
 //SOUNDS =======================================================================
 class CfgSounds {
 	#include "USER\userSounds.hpp"
+    #include "grad-leakage\cfgSounds.hpp"
 };
 
 //GRAD LOADOUT =================================================================
