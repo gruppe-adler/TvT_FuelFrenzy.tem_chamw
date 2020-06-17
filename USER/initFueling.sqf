@@ -7,6 +7,38 @@ private _refuelingSoundPathEnd = getMissionPath "USER\sounds\fueling_end.ogg";
 missionNamespace setVariable ["FF_fuelingSound", _refuelingSoundPath];
 missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 
+["ace_common_displayTextStructured", {
+    params [["_array",[]]];
+
+    _array params ["_string"];
+        
+    if (isDedicated) exitWith {}; // just to make sure
+
+    if (_string isEqualTo (localize "STR_ACE_refuel_Hint_RemainingFuel") || _string isEqualTo (localize "STR_ACE_refuel_Hint_Empty")) then {
+        
+        private _fuelStations = missionNamespace getVariable ["FF_fuelStations", []];
+        private _suspectedFuelStation = objNull;
+        private _distanceTo = 14000;
+
+        {   
+            private _distanceActual = _x distance2D player;
+            if (_distanceActual < _distanceTo) then {
+                _suspectedFuelStation = _x;
+                _distanceTo = _distanceActual;
+            };
+        } forEach _fuelStations;
+
+        private _side = player getVariable ["FF_originalSide", sideUnknown];
+        private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
+        private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
+        private _currentTime = [dayTime, "HH:MM"] call BIS_fnc_timeToString;
+        private _fuelLeft = [_suspectedFuelStation] call ace_refuel_fnc_getFuel;
+        _suspectedFuelStation setVariable [_fuelKnownFormat, _fuelLeft, true];
+        _suspectedFuelStation setVariable [_fuelKnownTimeFormat, _currentTime, true];
+    };
+}] call CBA_fnc_addEventHandler;
+
+
 ["ace_common_fueling", {
     params ["_sourceObject", "_amount", "_sinkObject", "_unit"];
 
@@ -113,7 +145,7 @@ if (isServer) then {
 
         {
           [_x, 0] call ace_refuel_fnc_setfuel;
-          _x setVariable ["ace_refuel_fuelMaxCargo", 3000, true];
+          _x setVariable ["ace_refuel_fuelMaxCargo", 2000, true];
           _x setVariable ["ace_refuel_nozzle", _x, true]; // hack to hide CONNECT action to make all actions equally distinctive
         } forEach _fuelTrucks;
 
@@ -123,10 +155,15 @@ if (isServer) then {
 
         {
             private _fuelStation = _x;
-            private _fuelCargo = 3000;
+            private _fuelCargoMin = 3000;
+            private _fuelCargoMid = 4000;
+            private _fuelCargoMax = 5000;
             private _position = position _fuelStation;
-            _fuelStation setVariable ["ace_refuel_fuelMaxCargo", 3000, true];
-            _fuelStation setVariable ["ace_refuel_currentFuelCargo", 3000, true];
+            private _fuelCargo = random [_fuelCargoMin, _fuelCargoMid, _fuelCargoMax]; // randomize fuel
+
+            // fill up
+            _fuelStation setVariable ["ace_refuel_fuelMaxCargo", _fuelCargo, true];
+            _fuelStation setVariable ["ace_refuel_currentFuelCargo", _fuelCargo, true];
 
             {   
                 private _side = _x;
