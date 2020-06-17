@@ -12,6 +12,7 @@ private _playerSide = [player, true] call BIS_fnc_objectSide; // JIP/init proof 
     params ["_args", "_handle"];
     _args params ["_timeOfDeath", "_playerSide"];
 
+    // todo remove debug
     systemChat ("_timeOfDeath : " + str _timeOfDeath);
 
     //check interrupt

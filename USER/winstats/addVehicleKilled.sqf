@@ -14,3 +14,8 @@ _vehicle addEventHandler ["Killed", {
             _newPoints = [_sideKiller, 200, "VEHICLEKILLED"] call grad_points_fnc_addPoints;
         };
 }];
+
+if (typeOf _vehicle == "gm_pl_army_ural375d_refuel") then {
+    [_vehicle, 0] call ace_refuel_fnc_makeSource;
+    [_vehicle, 0] call ace_refuel_fnc_setFuel;
+};
