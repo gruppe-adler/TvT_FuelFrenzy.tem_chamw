@@ -27,6 +27,17 @@ if (isServer) then {
         params ["_vehicle", "_offset", "_relDir"];
 
         [_vehicle, _offset, _relDir] call GRAD_leakage_fnc_holeRegister;
-       
+
+    }] call CBA_fnc_addEventHandler;
+
+    ["GRAD_leakage_holeRepairing", {
+        params ["_hole", "_vehicle"];
+
+        private _holes = _vehicle getVariable ["GRAD_leakage_holesExisting", []];
+        _holes deleteAt (_holes find _hole);
+        _vehicle setVariable ["GRAD_leakage_holesExisting", _holes];
+
+        deleteVehicle _hole;
+
     }] call CBA_fnc_addEventHandler;
 };

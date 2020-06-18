@@ -4,6 +4,8 @@ class grad_leakage {
 		file = grad-leakage\functions\client;
 
 		class holeFX;
+		class holeRepair;
+		class holeRepairAction;
 		class holeSpall;
 		class registerHit;
 	};
