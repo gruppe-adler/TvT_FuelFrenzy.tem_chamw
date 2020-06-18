@@ -1,4 +1,5 @@
 params ["_area", "_side"];
+/*
 
 if (missionNamespace getVariable [format ["safeZoneSet_%1", _area], false]) exitWith { hint "already set"; };
 missionNamespace setVariable [format ["safeZoneSet_%1", _area], true];
@@ -56,3 +57,4 @@ private _eventhandlerIdentifier = format ["FF_safeZoneFiredEH_%1", _area];
     
  }, 1, [_area, _eventhandlerSet, _eventhandlerIdentifier, _side]] call CBA_fnc_addPerFrameHandler;
  
+ */

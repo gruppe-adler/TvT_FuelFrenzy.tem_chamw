@@ -8,7 +8,7 @@ class EditorData
 	toggles=545;
 	class ItemIDProvider
 	{
-		nextID=3650;
+		nextID=3675;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=495;
+		nextID=557;
 	};
 	class Camera
 	{
-		pos[]={3894.5793,34.601269,2129.0156};
-		dir[]={-0.21460214,-0.83838964,0.50128049};
-		up[]={-0.32996604,0.54502827,0.77074963};
-		aside[]={0.91938758,-5.3847907e-007,0.39359939};
+		pos[]={845.91046,11.674948,731.99768};
+		dir[]={-0.70183516,-0.46594107,0.53887182};
+		up[]={-0.36958057,0.8848086,0.28376499};
+		aside[]={0.60901582,7.833296e-008,0.79319566};
 	};
 };
 binarizationWanted=0;
@@ -109,13 +109,18 @@ addons[]=
 	"A3_Data_F_ParticleEffects",
 	"A3_Structures_F_Argo_Decals_Horizontal",
 	"A3_Structures_F_Enoch_Decals_Horizontal",
-	"CUP_Editor_Plants_Config"
+	"CUP_Editor_Plants_Config",
+	"A3_Structures_F_Enoch_Infrastructure_Railways",
+	"A3_Structures_F_Heli_Civ_Constructions",
+	"A3_Structures_F_Items_Tools",
+	"A3_Props_F_Orange_Items_Tools",
+	"A3_Structures_F_Mark_Items_Sport"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=57;
+		items=59;
 		class Item0
 		{
 			className="A3_Modules_F_Curator";
@@ -496,6 +501,20 @@ class AddonsMetaData
 		{
 			className="CUP_Editor_Plants_Config";
 			name="CUP_Editor_Plants_Config";
+		};
+		class Item57
+		{
+			className="A3_Structures_F_Enoch_Infrastructure";
+			name="Arma 3 Contact Platform - Infrastructure Objects";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item58
+		{
+			className="A3_Structures_F_Mark";
+			name="Arma 3 Marksmen - Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
 		};
 	};
 };
@@ -4830,7 +4849,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=451;
+		items=465;
 		class Item0
 		{
 			dataType="Layer";
@@ -5232,18 +5251,18 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={862.57098,8.2291069,787.89801};
+								position[]={861.58197,9.5312777,712.88098};
 							};
 							side="West";
 							flags=7;
 							class Attributes
 							{
 								description="Commander@RussianMafia";
+								isPlayer=1;
 								isPlayable=1;
 							};
 							id=1545;
 							type="B_Soldier_SL_F";
-							atlOffset=0.010000229;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -5409,7 +5428,6 @@ class Mission
 					{
 					};
 					id=1544;
-					atlOffset=0.010000229;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -8467,7 +8485,6 @@ class Mission
 							class Attributes
 							{
 								description="Commander@GermanMafia";
-								isPlayer=1;
 								isPlayable=1;
 							};
 							id=1617;
@@ -38827,6 +38844,240 @@ class Mission
 			id=3649;
 			type="RoadBarrier_F";
 			atlOffset=-1.9073486e-006;
+		};
+		class Item451
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={861.50848,9.994422,707.91827};
+				angles[]={0,2.146755,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=3652;
+			type="Land_Rail_Platform_Start_F";
+			atlOffset=9.5367432e-007;
+		};
+		class Item452
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={866.23297,9.995759,704.73602};
+				angles[]={0,2.1642084,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=3653;
+			type="Land_Rail_Platform_Segment_F";
+			atlOffset=0.050000191;
+		};
+		class Item453
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={860.26154,10.005764,706.04089};
+				angles[]={0,2.146755,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=3654;
+			type="Land_Rail_Platform_Start_F";
+		};
+		class Item454
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={864.98602,10.005641,702.85901};
+				angles[]={0,2.1642084,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=3655;
+			type="Land_Rail_Platform_Segment_F";
+			atlOffset=0.050000191;
+		};
+		class Item455
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={865.53369,10.206447,707.91431};
+				angles[]={0,5.2883477,6.2706885};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="call{[this, fuelBusSpawn_West] execVM ""USER\fuelbus\addSpawnAction.sqf"";}";
+			};
+			id=3657;
+			type="Land_WeldingTrolley_01_F";
+			atlOffset=-2.8610229e-006;
+		};
+		class Item456
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={867.11725,9.8645287,707.23529};
+				angles[]={0,0,6.270689};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=3658;
+			type="Land_WheelCart_F";
+			atlOffset=-4.7683716e-006;
+		};
+		class Item457
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={865.9646,9.6402111,709.45258};
+				angles[]={0.0049914722,0,6.270689};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=3659;
+			type="Land_DrillAku_F";
+			atlOffset=9.5367432e-007;
+		};
+		class Item458
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={866.33295,9.5181856,709.23981};
+				angles[]={0.0049914722,0,6.270689};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=3660;
+			type="Land_Crowbar_01_F";
+			atlOffset=9.5367432e-007;
+		};
+		class Item459
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={865.25189,9.5868721,709.21338};
+				angles[]={0.0049914722,0,6.270689};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=3661;
+			type="Land_Grinder_F";
+			atlOffset=-1.9073486e-006;
+		};
+		class Item460
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={867.53638,9.4926395,708.62189};
+				angles[]={0.0049914722,0,6.270689};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=3662;
+			type="Land_Saw_F";
+		};
+		class Item461
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={866.08667,10.368946,707.60547};
+				angles[]={0,0,6.270689};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=3664;
+			type="Land_GasTank_02_F";
+		};
+		class Item462
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={865.75696,9.5053568,709.03613};
+				angles[]={0.0049914722,0,6.270689};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=3665;
+			type="Land_Wrench_F";
+			atlOffset=-9.5367432e-007;
+		};
+		class Item463
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={865.34009,10.70511,703.9823};
+				angles[]={0,5.3058009,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				name="fuelBusSpawn_West";
+			};
+			id=3666;
+			type="Land_Pliers_F";
+			atlOffset=0.1270237;
+		};
+		class Item464
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={844.15338,9.9924679,734.79279};
+			};
+			side="Empty";
+			class Attributes
+			{
+			};
+			id=3674;
+			type="Land_Balloon_01_water_F";
+			atlOffset=1.0720491;
 		};
 	};
 	class Connections
