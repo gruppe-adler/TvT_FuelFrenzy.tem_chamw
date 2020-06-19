@@ -39,6 +39,12 @@ missionNamespace setVariable ["FF_fuelTrucks", _existingBusses, true];
 },{
      params ["_bus", "_side", "_pos", "_dir"];
 
+     if (!alive _bus) then {
+        private _fuelBusses = missionNamespace getVariable ["FF_fuelTrucks", []];
+        _fuelBusses deleteAt (_fuelBusses find _bus);
+        missionNamespace setVariable ["FF_fuelTrucks", _fuelBusses, true];
+     };
+
      [_side, _pos, _dir] call refuel_fnc_fuelBusSpawn;
 }, [_bus, _side, _pos, _dir]] call CBA_fnc_waitUntilAndExecute;
 

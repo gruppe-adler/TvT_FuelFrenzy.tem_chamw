@@ -5,11 +5,18 @@
 
 params ["_bus", "_vehicle", "_hole", "_relDir"];
 
-_hole say3d (selectRandom [
+private _sound = (selectRandom [
     "leakage_hit1",
     "leakage_hit2",
     "leakage_hit3",
     "leakage_hit4"
 ]);
+
+_hole say3d _sound;
+
+if (player == driver _bus) then {
+    playSound _sound;
+    hintSilent "fuel tank hit!";
+};
 
 [_bus, _vehicle, _hole, _relDir] call GRAD_leakage_fnc_holeFXcreate;

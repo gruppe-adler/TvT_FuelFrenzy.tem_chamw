@@ -8,6 +8,7 @@ class grad_leakage {
 		class holeRepair;
 		class holeRepairAction;
 		class holeSpall;
+		class holeStreamCreate;
 		class registerHit;
 	};
 

@@ -23,7 +23,7 @@ if (isServer) then {
 	_busTank setVariable ["GRAD_leakage_liquidLevel", _liquidLevel, true];
 
 	if (GRAD_LEAKAGE_DEBUG) then {
-		private _liquidLevelIndicator = "Sign_Arrow_Large_Cyan_F" createVehicle [0,0,0];
+		private _liquidLevelIndicator = "Sign_Sphere10cm_F" createVehicle [0,0,0];
 		_liquidLevelIndicator attachTo [_busTank, [0,0,0]];
 
 		[{
@@ -50,7 +50,7 @@ if (isServer) then {
 					private _fuelCargo = linearConversion [0, 1, _liquidLevel, 0, _fuelMaxCargo, true];
 					// systemChat str _liquidLevel;
 					_bus setVariable ["ace_refuel_fuelCargo", _fuelCargo, true];
-					_busTank setVariable ["GRAD_leakage_liquidLevel", _liquidLevel];
+					_busTank setVariable ["GRAD_leakage_liquidLevel", _liquidLevel, true];
 					_x setVariable ["GRAD_leakage_holeActive", true, true];
 				} else {
 					_x setVariable ["GRAD_leakage_holeActive", false, true];
