@@ -14,5 +14,5 @@ if (random 3 > 1) then {
     _holes pushBackUnique _hole;
     _bus setVariable ["GRAD_leakage_holes", _holes, true];
 
-    ["GRAD_leakage_holeFX", [_vehicle, _hole, _relDir]] call CBA_fnc_globalEvent;
+    ["GRAD_leakage_holeFXinit", [_bus, _vehicle, _hole, _relDir]] call CBA_fnc_globalEvent;
 };

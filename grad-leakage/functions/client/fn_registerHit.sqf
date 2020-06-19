@@ -51,6 +51,7 @@ if (isServer) then {
 					// systemChat str _liquidLevel;
 					_bus setVariable ["ace_refuel_fuelCargo", _fuelCargo, true];
 					_busTank setVariable ["GRAD_leakage_liquidLevel", _liquidLevel];
+					_x setVariable ["GRAD_leakage_holeActive", true, true];
 				} else {
 					_x setVariable ["GRAD_leakage_holeActive", false, true];
 				};

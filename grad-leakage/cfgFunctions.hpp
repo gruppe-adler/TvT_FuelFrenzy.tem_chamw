@@ -3,7 +3,8 @@ class grad_leakage {
 	class client {
 		file = grad-leakage\functions\client;
 
-		class holeFX;
+		class holeFXcreate;
+		class holeFXinit;
 		class holeRepair;
 		class holeRepairAction;
 		class holeSpall;
