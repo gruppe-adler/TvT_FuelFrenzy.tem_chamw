@@ -1,5 +1,7 @@
 params ["_vehicle", "_offset", "_relDir"];
 
+private _bus = _vehicle getVariable ["FF_parentBus", objNull];
+
 if (random 3 > 1) then {
     ["GRAD_leakage_holeSpall", [_vehicle, _offset]] call CBA_fnc_globalEvent;
 } else {
@@ -8,9 +10,9 @@ if (random 3 > 1) then {
     _hole setVariable ["GRAD_leakage_holeOffset", _offset];
     _hole setObjectTextureGlobal [0, "#(rgb,8,8,3)color(0,0,0.05,1)"];
 
-    private _holes = _vehicle getVariable ["GRAD_leakage_holes", []];
+    private _holes = _bus getVariable ["GRAD_leakage_holes", []];
     _holes pushBackUnique _hole;
-    _vehicle setVariable ["GRAD_leakage_holes", _holes, true];
+    _bus setVariable ["GRAD_leakage_holes", _holes, true];
 
     ["GRAD_leakage_holeFX", [_vehicle, _hole, _relDir]] call CBA_fnc_globalEvent;
 };

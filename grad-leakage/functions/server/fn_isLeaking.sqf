@@ -9,6 +9,6 @@ if (_height < _liquidLevel) then {
     _isLeaking = true;
 };
 
-systemChat ("height: " + str _height + " / liquid: " + str _liquidLevel + " / isLeaking: " + str _isLeaking);
+// systemChat ("height: " + str _height + " / liquid: " + str _liquidLevel + " / isLeaking: " + str _isLeaking);
 
 _isLeaking

@@ -1,5 +1,7 @@
 params ["_bus", "_busTank", ["_liquidLevel", 1]];
 
+_busTank setVariable ["FF_parentBus", _bus, true];
+
 if (hasInterface) then {
 	_busTank addEventHandler ["HitPart", {
 	    (_this select 0) params ["_target", "_shooter", "_projectile", "_position", "_velocity", "_selection", "_ammo", "_vector", "_radius", "_surfaceType", "_isDirect"];
@@ -9,7 +11,7 @@ if (hasInterface) then {
 	    private _position = ASLToAGL _position; // HitPart position is ASL
 		private _modelOffset = _target worldToModelVisual _position; // calculate locally for precision
 		private _relDir = _target getRelDir _shooter;
-		systemChat "local hit";
+		// systemChat "local hit";
 		// dont make every hit count
 	    ["GRAD_leakage_holeRegister", [_target, _modelOffset, _relDir]] call CBA_fnc_serverEvent;
 	}];
@@ -40,7 +42,7 @@ if (isServer) then {
 			[_busTank, _liquidLevelIndicator, _liquidLevel] call GRAD_leakage_fnc_adjustLiquidLevelIndicator;
 
 
-			private _holes = _busTank getVariable ["GRAD_leakage_holes", []];
+			private _holes = _bus getVariable ["GRAD_leakage_holes", []];
 			{
 				private _liquidLevel = _busTank getVariable ["GRAD_leakage_liquidLevel", 1];
 				if ([_busTank, _x, _liquidLevel] call GRAD_leakage_fnc_isLeaking) then {
