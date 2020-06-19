@@ -210,7 +210,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
 
             if (_sideVehicle isEqualTo _sidePlayer) then {
 
-                private _fuelCargo = _vehicle getVariable ['ace_refuel_currentFuelCargo', 0];
+                private _fuelCargo = _vehicle getVariable ['ace_refuel_fuelCargo', 0];
                 private _maxCargo = _vehicle getVariable ['ace_refuel_fuelMaxCargo', 0];
                 private _vehicleEmpty = isNull (driver _vehicle);
                 private _groupName = if (_vehicleEmpty) then { ('Empty') } else { (groupId (group (driver _vehicle))) };
@@ -282,7 +282,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
             private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _sidePlayer];
             private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _sidePlayer];
             private _fuelKnown = _fuelStation getVariable [_fuelKnownFormat, 0];
-            private _fuelCargo = _fuelStation getVariable ['ace_refuel_currentFuelCargo', 0];
+            private _fuelCargo = _fuelStation getVariable ['ace_refuel_fuelCargo', 0];
             private _fuelMax = _fuelStation getVariable ['ace_refuel_fuelMaxCargo', 0];
             private _fuelKnownTime = _fuelStation getVariable [_fuelKnownTimeFormat, '00:00'];
             private _fuelStationEntry = (str (round _fuelKnown) + ' | ' + _fuelKnownTime);
@@ -332,7 +332,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
             private _position = position _fuelSellPoint;
 
             private _fuelSellPointIcon = _fuelSellPointLabel getVariable ['FF_iconAssigned', controlNull];
-            private _fuelCargo = _fuelSellPoint getVariable ['ace_refuel_currentFuelCargo', 0];
+            private _fuelCargo = _fuelSellPoint getVariable ['ace_refuel_fuelCargo', 0];
 
             private _ctrlPosition = _map ctrlMapWorldToScreen _position;
             _ctrlPosition params ['_ctrlPositionX', '_ctrlPositionY'];
