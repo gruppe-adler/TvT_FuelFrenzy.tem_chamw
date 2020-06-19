@@ -12,10 +12,10 @@ if (hasInterface) then {
     }] call CBA_fnc_addEventHandler;
 
     ["GRAD_leakage_holeFX", {
-        params ["_vehicle", "_hole", "_relDir"];
+        params ["_bus", "_vehicle", "_hole"];
 
         diag_log format ["holeFX"];
-        [_vehicle, _hole, _relDir] call GRAD_leakage_fnc_holeFX;
+        [_bus, _vehicle, _hole] call GRAD_leakage_fnc_holeFXinit;
         [_vehicle, _offset] call GRAD_leakage_fnc_holeSpall;
     }] call CBA_fnc_addEventHandler;
 };

@@ -1,5 +1,7 @@
 #include "component.hpp"
 
+params ["_timeOfDeath"];
+
 if (player getVariable "wr_interrupted") exitWith {player setVariable ["wr_waveCountdownDone", true]};
 if (player getVariable "wr_isFreeRespawn") exitWith {player setVariable ["wr_waveCountdownDone", true]};
 

@@ -40,5 +40,5 @@ setPlayerRespawnTime 99999;
 
 //do the steps
 [CBA_missionTime] call FUNC(playerCountdown);
-[{player getVariable "wr_playerCountdownDone"}, {_this call FUNC(waveCountdown)}, [CBA_missionTime]] call CBA_fnc_waitUntilAndExecute;
+[{player getVariable "wr_playerCountdownDone"}, {[_this] call FUNC(waveCountdown)}, [CBA_missionTime]] call CBA_fnc_waitUntilAndExecute;
 [{player getVariable "wr_waveCountdownDone"}, {[] call FUNC(prepareRespawn)}, []] call CBA_fnc_waitUntilAndExecute;

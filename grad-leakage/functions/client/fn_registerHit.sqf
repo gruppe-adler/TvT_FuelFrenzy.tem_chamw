@@ -10,10 +10,10 @@ if (hasInterface) then {
 	    if (!_isDirect) exitWith {}; // ricochet
 	    private _position = ASLToAGL _position; // HitPart position is ASL
 		private _modelOffset = _target worldToModelVisual _position; // calculate locally for precision
-		private _relDir = _target getRelDir _shooter;
+		// private _relDir = _target getRelDir _shooter;
 		// systemChat "local hit";
 		// dont make every hit count
-	    ["GRAD_leakage_holeRegister", [_target, _modelOffset, _relDir]] call CBA_fnc_serverEvent;
+	    ["GRAD_leakage_holeRegister", [_target, _modelOffset]] call CBA_fnc_serverEvent;
 	}];
 };
 
@@ -34,7 +34,6 @@ if (isServer) then {
 			private _fuelMaxCargo = _bus getVariable ["ace_refuel_fuelMaxCargo", 0];
 
 			private _liquidLevel = linearConversion [0, _fuelMaxCargo, _fuelCargo, 0, 1, true]; // _bus getVariable ["GRAD_leakage_liquidLevel", 1];
-
 			// if (!(_liquidLevel > 0)) exitWith { systemChat "liquid 0"; };
 
 			// systemChat str _liquidLevel;
@@ -44,13 +43,11 @@ if (isServer) then {
 
 			private _holes = _bus getVariable ["GRAD_leakage_holes", []];
 			{
-				private _liquidLevel = _busTank getVariable ["GRAD_leakage_liquidLevel", 1];
 				if ([_busTank, _x, _liquidLevel] call GRAD_leakage_fnc_isLeaking) then {
 					_liquidLevel = _liquidLevel - GRAD_LEAKAGE_SPEED;
 					private _fuelCargo = linearConversion [0, 1, _liquidLevel, 0, _fuelMaxCargo, true];
 					// systemChat str _liquidLevel;
 					_bus setVariable ["ace_refuel_fuelCargo", _fuelCargo, true];
-					_busTank setVariable ["GRAD_leakage_liquidLevel", _liquidLevel, true];
 					_x setVariable ["GRAD_leakage_holeActive", true, true];
 				} else {
 					_x setVariable ["GRAD_leakage_holeActive", false, true];

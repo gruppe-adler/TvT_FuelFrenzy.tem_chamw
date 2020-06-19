@@ -3,7 +3,7 @@
     [cursorObject, cursorObject, 0] execVM "Grad-leakage\functions\client\fn_holeFX.sqf";
 */
 
-params ["_bus", "_vehicle", "_hole", "_relDir"];
+params ["_bus", "_vehicle", "_hole"];
 
 private _sound = (selectRandom [
     "leakage_hit1",
@@ -19,4 +19,4 @@ if (player == driver _bus) then {
     hintSilent "fuel tank hit!";
 };
 
-[_bus, _vehicle, _hole, _relDir] call GRAD_leakage_fnc_holeFXcreate;
+[_bus, _vehicle, _hole] call GRAD_leakage_fnc_holeFXcreate;
