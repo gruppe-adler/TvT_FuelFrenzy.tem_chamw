@@ -5,21 +5,20 @@
 
 params ["_vehicle", "_hole", "_relDir"];
 
-systemChat "hole fx";
+// systemChat "hole fx";
 
 _hole setVariable ["GRAD_leakage_holeActive", true];
 
 //[_hole] call GRAD_leakage_fnc_holeRepairAction;
 
-/*
+
 _hole say3d (selectRandom [
     "leakage_hit1",
     "leakage_hit2",
     "leakage_hit3",
-    "leakage_hit4",
-    "leakage_hit5"
+    "leakage_hit4"
 ]);
-*/
+
 
 
 private _stream = "#particlesource" createVehicleLocal [0,0,0];

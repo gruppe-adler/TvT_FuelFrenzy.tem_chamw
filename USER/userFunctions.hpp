@@ -9,6 +9,9 @@ class refuel
            class addRefuelCargoAction;
            class connectAndRefuelCargo;
            class connectAndRefuelVehicleTank;
+           class fuelBusAddActions;
+           class fuelBusLoop;
+           class fuelBusSpawn;
            class refuelCargo;
            class refuelVehicleTank;
            class canTurnOn;
