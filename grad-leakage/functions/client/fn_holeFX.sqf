@@ -9,8 +9,6 @@ params ["_vehicle", "_hole", "_relDir"];
 
 _hole setVariable ["GRAD_leakage_holeActive", true];
 
-//[_hole] call GRAD_leakage_fnc_holeRepairAction;
-
 
 _hole say3d (selectRandom [
     "leakage_hit1",

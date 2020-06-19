@@ -15,7 +15,6 @@ class grad_leakage {
 
 		class adjustLiquidLevelIndicator;
 		class getHeightInModel;
-		class holeAdd;
 		class holeRegister;
 		class isLeaking;
 		class main {preInit = 1;};

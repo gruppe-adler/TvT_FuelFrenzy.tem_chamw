@@ -33,11 +33,11 @@ if (isServer) then {
     ["GRAD_leakage_holeRepairing", {
         params ["_hole", "_vehicle"];
 
-        private _holes = _vehicle getVariable ["GRAD_leakage_holesExisting", []];
-        _holes deleteAt (_holes find _hole);
-        _vehicle setVariable ["GRAD_leakage_holesExisting", _holes];
-
-        deleteVehicle _hole;
+        private _holes = _vehicle getVariable ["GRAD_leakage_holes", []];
+        {
+            deleteVehicle _x;
+        } forEach _holes;
+        _vehicle setVariable ["GRAD_leakage_holes", [], true];
 
     }] call CBA_fnc_addEventHandler;
 };

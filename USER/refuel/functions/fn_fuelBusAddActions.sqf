@@ -1,5 +1,7 @@
 params ["_bus"];
 
+[_bus] call GRAD_leakage_fnc_holeRepairAction;
+
 private _fillCargoTankAction = [
     "RefuelStorage",
     "Fill vehicle fuel cargo",

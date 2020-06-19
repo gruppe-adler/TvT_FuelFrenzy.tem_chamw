@@ -32,7 +32,6 @@ missionNamespace setVariable ["FF_fuelTrucks", _existingBusses, true];
 
 [_bus] remoteExec ["refuel_fnc_fuelBusAddActions", [0,-2] select isDedicated, true];
 
-
 [{
     params ["_bus"];
     !((_bus getVariable ["FF_trackedForSide",sideUnknown]) isEqualTo (_bus getVariable ["FF_originalSide",sideUnknown])) ||

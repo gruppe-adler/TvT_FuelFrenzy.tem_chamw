@@ -40,7 +40,7 @@ if (isServer) then {
 			[_busTank, _liquidLevelIndicator, _liquidLevel] call GRAD_leakage_fnc_adjustLiquidLevelIndicator;
 
 
-			private _existingHoles = _busTank getVariable ["GRAD_leakage_holes", []];
+			private _holes = _busTank getVariable ["GRAD_leakage_holes", []];
 			{
 				private _liquidLevel = _busTank getVariable ["GRAD_leakage_liquidLevel", 1];
 				if ([_busTank, _x, _liquidLevel] call GRAD_leakage_fnc_isLeaking) then {
@@ -52,7 +52,7 @@ if (isServer) then {
 				} else {
 					_x setVariable ["GRAD_leakage_holeActive", false, true];
 				};
-			} forEach _existingHoles;
+			} forEach _holes;
 
 		}, 1, [_bus, _busTank, _liquidLevelIndicator]] call CBA_fnc_addPerFrameHandler;
 	};

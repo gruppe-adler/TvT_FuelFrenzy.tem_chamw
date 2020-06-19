@@ -5,8 +5,7 @@ _vehicle say3d (selectRandom [
     "leakage_hit1",
     "leakage_hit2",
     "leakage_hit3",
-    "leakage_hit4",
-    "leakage_hit5"
+    "leakage_hit4"
 ]);
 
 
