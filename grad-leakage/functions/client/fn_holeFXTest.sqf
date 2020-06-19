@@ -1,13 +1,15 @@
 /*
-    
+
     [cursorObject, cursorObject, 0] execVM "Grad-leakage\functions\client\fn_holeFX.sqf";
+
+    only for debugging purposes of stream FX
 */
 
 params ["_vehicle"];
 
 private _ins = lineIntersectsSurfaces [
-        AGLToASL positionCameraToWorld [0,0,0], 
-        AGLToASL positionCameraToWorld [0,0,1000], 
+        AGLToASL positionCameraToWorld [0,0,0],
+        AGLToASL positionCameraToWorld [0,0,1000],
         player
     ];
 _ins params ["_intersectPos1"];
@@ -15,7 +17,7 @@ _intersectPos1 params ["_intersectPosASL"];
 
 private _hole = createVehicle ["Sign_Sphere10cm_F", [0,0,0], [], 0, "CAN_COLLIDE"];
 _hole setPosASL _intersectPosASL;
- 
+
 
 private _stream = "#particlesource" createVehicleLocal [0,0,0];
  // _stream setParticleRandom [0, [0, 0, 0], [0, 0, 0], 0, 0, [0, 0, 0, 0], 0, 0];
@@ -44,8 +46,8 @@ for "_i" from 0 to 1 step 0.01 do {
 
 [cursorObject, _hole, _stream, _dir] spawn {
     params ["_vehicle", "_hole", "_stream", "_dir"];
-    
-        
+
+
         /*
         _stream setParticleParams [
             ["Ca\Data\Cl_basic.p3d", 1, 0, 1], "", "Billboard", 1, 3,[0,0,0],
@@ -61,12 +63,12 @@ for "_i" from 0 to 1 step 0.01 do {
 ];
         _stream setDropInterval 0.01;
 
-    sleep 60;        
+    sleep 60;
 
     deleteVehicle _stream;
 };
 
-[{  
+[{
     params ["_args", "_handle"];
     _args params ["_vehicle", "_stream", "_hole"];
 
@@ -76,14 +78,14 @@ for "_i" from 0 to 1 step 0.01 do {
 
     private _positionASL = getPosASLVisual _hole;
     _stream setPosASL _positionASL;
-    
+
 }, 0, [cursorObject, _stream, _hole]] call CBA_fnc_addPerFrameHandler;
 
 
 
 /*
-    
 
-    createSimpleObject [shapeName, positionWorld, local] 
+
+    createSimpleObject [shapeName, positionWorld, local]
     createSimpleObject ["a3\data_f\krater.p3d", position player]
 */
