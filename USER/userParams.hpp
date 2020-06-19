@@ -39,5 +39,5 @@ class ENABLE_CIVS
     title = "Enable Civs";
     values[] = {0, 1};
     texts[] = {"OFF", "ON"};
-    default = 1;
+    default = 0;
 };
