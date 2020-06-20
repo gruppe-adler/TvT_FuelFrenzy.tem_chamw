@@ -59,7 +59,7 @@ class mafia_it {
                 LIST_1("rhs_mag_rdg2_white")
             };
             addItemsToBackpack[] = {
-                LIST_3("rhs_30Rnd_545x39_AK_green")
+                LIST_6("rhs_30Rnd_545x39_AK_green")
             };
         };
 
@@ -68,7 +68,7 @@ class mafia_it {
             primaryWeapon = "rhs_weap_aks74u";
             primaryWeaponMagazine = "rhs_30Rnd_545x39_AK_green";
             addItemsToBackpack[] = {
-                LIST_3("rhs_30Rnd_545x39_AK_green")
+                LIST_6("rhs_30Rnd_545x39_AK_green")
             };
         };
 
