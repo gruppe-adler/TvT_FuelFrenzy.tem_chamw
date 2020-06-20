@@ -5,7 +5,7 @@ _cacheRefuelClasses params [["_staticClasses", [], [[]]], ["_dynamicClasses", []
 
 private _fillCargoTankAction = [
     "RefuelStorage",
-    "Tankwagenkessel befüllen",
+    "Fill vehicle fuel cargo",
     "",
     {
         private _virtualPosASL = (eyePos player) vectorAdd (positionCameraToWorld [0,0,0.6]) vectorDiff (positionCameraToWorld [0,0,0]);
@@ -25,7 +25,7 @@ private _fillCargoTankAction = [
 // refuel tank
 private _refuelReplacementAction = [
     "RefuelTank",
-    "Fahrzeugtank befüllen",
+    "Refuel vehicle itself",
     "",
     {
         private _virtualPosASL = (eyePos player) vectorAdd (positionCameraToWorld [0,0,0.6]) vectorDiff (positionCameraToWorld [0,0,0]);
@@ -45,7 +45,7 @@ private _refuelReplacementAction = [
 
 private _returnNozzleAction = [
     "ReturnNozzle",
-    "Zapfpistole zurückstecken",
+    "Return nozzle",
     "",
     {
         [player, _target] call ace_refuel_fnc_returnNozzle
@@ -56,7 +56,7 @@ private _returnNozzleAction = [
 
 private _endPointAction = [
     "RefuelStorage",
-    "Treibstoff verkaufen",
+    "Sell fuel",
     "",
     {
         private _virtualPosASL = (eyePos player) vectorAdd (positionCameraToWorld [0,0,0.6]) vectorDiff (positionCameraToWorld [0,0,0]);
