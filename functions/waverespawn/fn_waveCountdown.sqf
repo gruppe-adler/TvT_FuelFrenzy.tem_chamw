@@ -40,4 +40,4 @@ private _playerSide = [player, true] call BIS_fnc_objectSide; // JIP/init proof 
 
     [_playerSide] call FUNC(respawnHint);
 
-}, 1, [_this, _playerSide]] call CBA_fnc_addPerFrameHandler;
+}, 1, [_timeOfDeath, _playerSide]] call CBA_fnc_addPerFrameHandler;
