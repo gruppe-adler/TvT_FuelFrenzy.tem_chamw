@@ -143,13 +143,13 @@ if (hasInterface) then {
     _display displayAddEventHandler ["KeyDown", "if (((_this select 1) == 1) && (!isServer)) then {true} else {false};"];
 
 
-    private _resultText = "Unentschieden!";
+    private _resultText = "Draw!";
     if (!_draw) then {
         switch (_winner) do { 
-            case west : { "Ital. Mafia gewinnt"  }; 
-            case east : {  "russ. Mafia gewinnt"  }; 
-            case independent : { "chin. Mafia gewinnt"   }; 
-            case civilian : {  "dt. Mafia gewinnt" }; 
+            case west : { _resultText = "Ital. Mafia wins";  }; 
+            case east : {  _resultText = "Russ. Mafia wins";  }; 
+            case independent : { _resultText = "Chin. Mafia wins";   }; 
+            case civilian : {  _resultText = "Ger. Mafia wins"; }; 
             default {}; 
         };
     };
