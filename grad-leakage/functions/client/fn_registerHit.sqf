@@ -19,9 +19,6 @@ if (hasInterface) then {
 
 
 if (isServer) then {
-	// doublecheck fuel is maxed out at 1
-	_busTank setVariable ["GRAD_leakage_liquidLevel", _liquidLevel, true];
-
 	if (GRAD_LEAKAGE_DEBUG) then {
 		private _liquidLevelIndicator = "Sign_Sphere10cm_F" createVehicle [0,0,0];
 		_liquidLevelIndicator attachTo [_busTank, [0,0,0]];
@@ -33,24 +30,23 @@ if (isServer) then {
 			private _fuelCargo = _bus getVariable ["ace_refuel_fuelCargo", 0];
 			private _fuelMaxCargo = _bus getVariable ["ace_refuel_fuelMaxCargo", 0];
 
-			private _liquidLevel = linearConversion [0, _fuelMaxCargo, _fuelCargo, 0, 1, true]; // _bus getVariable ["GRAD_leakage_liquidLevel", 1];
-			// if (!(_liquidLevel > 0)) exitWith { systemChat "liquid 0"; };
-
-			// systemChat str _liquidLevel;
-
+			private _liquidLevel = linearConversion [0, _fuelMaxCargo, _fuelCargo, 0, 1, true];
 			[_busTank, _liquidLevelIndicator, _liquidLevel] call GRAD_leakage_fnc_adjustLiquidLevelIndicator;
 
 
 			private _holes = _bus getVariable ["GRAD_leakage_holes", []];
 			{
-				if ([_busTank, _x, _liquidLevel] call GRAD_leakage_fnc_isLeaking) then {
-					_liquidLevel = _liquidLevel - GRAD_LEAKAGE_SPEED;
-					private _fuelCargo = linearConversion [0, 1, _liquidLevel, 0, _fuelMaxCargo, true];
-					// systemChat str _liquidLevel;
+				private _hole = _x;
+				if ([_busTank, _hole, _liquidLevel] call GRAD_leakage_fnc_isLeaking) then {
+					_fuelCargo = _fuelCargo - GRAD_LEAKAGE_SPEED;
 					_bus setVariable ["ace_refuel_fuelCargo", _fuelCargo, true];
-					_x setVariable ["GRAD_leakage_holeActive", true, true];
+
+					// only broadcast if not already set
+					if (!(_hole getVariable ["GRAD_leakage_holeActive", false])) then {
+						_hole setVariable ["GRAD_leakage_holeActive", true, true];
+					};
 				} else {
-					_x setVariable ["GRAD_leakage_holeActive", false, true];
+					_hole setVariable ["GRAD_leakage_holeActive", false, true];
 				};
 			} forEach _holes;
 

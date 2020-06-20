@@ -5,18 +5,18 @@ GRAD_LEAKAGE_SPEED = 0.001;
 if (hasInterface) then {
 
     ["GRAD_leakage_holeSpall", {
-        params ["_vehicle", "_offset"];
+        params ["_busTank", "_offset"];
 
         diag_log format ["holeSpall"];
-        [_vehicle, _offset] call GRAD_leakage_fnc_holeSpall;
+        [_busTank, _offset] call GRAD_leakage_fnc_holeSpall;
     }] call CBA_fnc_addEventHandler;
 
     ["GRAD_leakage_holeFX", {
-        params ["_bus", "_vehicle", "_hole"];
+        params ["_bus", "_busTank", "_hole"];
 
         diag_log format ["holeFX"];
-        [_bus, _vehicle, _hole] call GRAD_leakage_fnc_holeFXinit;
-        [_vehicle, _offset] call GRAD_leakage_fnc_holeSpall;
+        [_bus, _busTank, _hole] call GRAD_leakage_fnc_holeFXinit;
+        [_busTank, _offset] call GRAD_leakage_fnc_holeSpall;
     }] call CBA_fnc_addEventHandler;
 };
 
@@ -24,20 +24,20 @@ if (hasInterface) then {
 if (isServer) then {
 
     ["GRAD_leakage_holeRegister", {
-        params ["_vehicle", "_offset", "_relDir"];
+        params ["_vehicle", "_offset"];
 
-        [_vehicle, _offset, _relDir] call GRAD_leakage_fnc_holeRegister;
+        [_vehicle, _offset] call GRAD_leakage_fnc_holeRegister;
 
     }] call CBA_fnc_addEventHandler;
 
     ["GRAD_leakage_holeRepairing", {
-        params ["_hole", "_vehicle"];
+        params ["_bus"];
 
-        private _holes = _vehicle getVariable ["GRAD_leakage_holes", []];
+        private _holes = _bus getVariable ["GRAD_leakage_holes", []];
         {
             deleteVehicle _x;
         } forEach _holes;
-        _vehicle setVariable ["GRAD_leakage_holes", [], true];
+        _bus setVariable ["GRAD_leakage_holes", [], true];
 
     }] call CBA_fnc_addEventHandler;
 };
