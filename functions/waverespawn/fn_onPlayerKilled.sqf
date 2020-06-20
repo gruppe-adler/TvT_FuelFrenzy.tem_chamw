@@ -13,7 +13,8 @@ if (player getVariable ["wr_interrupted", false]) exitWith {};
 private _joinTime = player getVariable ["joinTime", 0];
 private _playerSide = [player, true] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
 INFO("onPlayerKilled playerSide is " + str _playerSide);
-if (serverTime - _joinTime < 30 && didJIP) exitWith {INFO("Player is JIP. Exiting onPlayerKilled.")};
+
+// if (serverTime - _joinTime < 30 && didJIP) exitWith {INFO("Player is JIP. Exiting onPlayerKilled.")};
 
 [false] call ace_spectator_fnc_setSpectator;
 
