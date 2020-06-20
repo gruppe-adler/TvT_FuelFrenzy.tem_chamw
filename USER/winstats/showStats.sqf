@@ -42,14 +42,15 @@ if (isServer) then {
         private _totalNumbers = [_resultTotalNumber_west, _resultTotalNumber_east, _resultTotalNumber_independent, _resultTotalNumber_civilian];
         _totalNumbers sort false;
 
-        // hint str _totalNumbers;
+        diag_log ("total numbers server: " + str _totalNumbers);
 
         private _winner = _totalNumbers select 0 select 1;
         private _draw = (_resultTotal_west isEqualTo _resultTotal_east &&
                         _resultTotal_independent isEqualTo _resultTotal_civilian &&
                         _resultTotal_west isEqualTo _resultTotal_civilian);
         
-
+        diag_log ("draw is: " + str _draw);
+        diag_log ("winner is: " + str _winner);
         sleep 16;
         [] call GRAD_replay_fnc_stopRecord;
 

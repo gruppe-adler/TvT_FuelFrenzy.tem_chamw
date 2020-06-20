@@ -1,6 +1,7 @@
 if (!isServer) exitWith {};
 
-waitUntil {CBA_missionTime > 16};
+// wait until fuel trucks are spawned
+waitUntil {missionNamespace getVariable ["FF_fuelTrucks", []] > 0};
 
 private _fuelStations = nearestObjects [[worldsize/2, worldsize/2], ["Land_fs_feed_F"], worldsize/2];
 
@@ -15,7 +16,7 @@ private _fuelStations = nearestObjects [[worldsize/2, worldsize/2], ["Land_fs_fe
     private _allTrucksDestroyed = count (_allFuelTrucks select { (!(canMove _x)) })  == count _allFuelTrucks;
 
     {
-        if (_x getVariable ["ace_refuel_currentFuelCargo", 0] > 1) exitWith {
+        if (_x getVariable ["ace_refuel_fuelCargo", 0] > 1) exitWith {
         // if ([_x] call ace_refuel_fnc_getFuel > 1) exitWith {
             _fuelStationsAreEmpty = false;
         };
@@ -32,7 +33,7 @@ private _fuelStations = nearestObjects [[worldsize/2, worldsize/2], ["Land_fs_fe
         systemChat "all fuel stations are empty";
         diag_log "all fuel stations are empty";
 
-        private _trucksStillRunning = count (_allFuelTrucks select { (canMove _x) && (_x getVariable ["ace_refuel_currentFuelCargo", 0] > 1) }) > 0;
+        private _trucksStillRunning = count (_allFuelTrucks select { (canMove _x) && (_x getVariable ["ace_refuel_fuelCargo", 0] > 1) }) > 0;
         
         if (!_trucksStillRunning) then {
             ["USER\winstats\showStats.sqf"] remoteExec ["execVM", 0, true];
