@@ -11,6 +11,7 @@
     };
 
     private _fnc_respawn = {
+            if (!(player getVariable ["ace_spectator_isSet", false])) exitWith { systemChat "You are not dead."; };
             player setVariable ["wr_interrupted", false];
             [] call GRAD_waverespawn_fnc_prepareRespawn;
     };
