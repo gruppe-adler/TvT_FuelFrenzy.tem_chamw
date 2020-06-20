@@ -24,20 +24,20 @@ if (isServer) then {
         private _resultFuel_independent = format ["%1", [independent] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
         private _resultFuel_civilian = format ["%1", [civilian] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
 
-        private _resultTotalNumber_west = ((parseNumber _resultInf_west) + (parseNumber _resultSoft_west) + (parseNumber _resultFuel_west));
-        private _resultTotalNumber_east = ((parseNumber _resultInf_east) + (parseNumber _resultSoft_east) + (parseNumber _resultFuel_east));
-        private _resultTotalNumber_independent = ((parseNumber _resultInf_independent) + (parseNumber _resultSoft_independent) + (parseNumber _resultFuel_independent));
-        private _resultTotalNumber_civilian = ((parseNumber _resultInf_civilian) + (parseNumber _resultSoft_civilian) + (parseNumber _resultFuel_civilian));
+        private _resultTotalNumber_west = [((parseNumber _resultInf_west) + (parseNumber _resultSoft_west) + (parseNumber _resultFuel_west)), west];
+        private _resultTotalNumber_east = [((parseNumber _resultInf_east) + (parseNumber _resultSoft_east) + (parseNumber _resultFuel_east)), east];
+        private _resultTotalNumber_independent = [((parseNumber _resultInf_independent) + (parseNumber _resultSoft_independent) + (parseNumber _resultFuel_independent)), independent];
+        private _resultTotalNumber_civilian = [((parseNumber _resultInf_civilian) + (parseNumber _resultSoft_civilian) + (parseNumber _resultFuel_civilian)), civilian];
 
-        private _resultTotal_west = str _resultTotalNumber_west;
-        private _resultTotal_east= str _resultTotalNumber_east;
-        private _resultTotal_independent= str _resultTotalNumber_independent;
-        private _resultTotal_civilian= str _resultTotalNumber_civilian;
+        _resultTotalNumber_west params ["_resultTotal_west"];
+        _resultTotalNumber_east params ["_resultTotal_east"];
+        _resultTotalNumber_independent params ["_resultTotal_independent"];
+        _resultTotalNumber_civilian params ["_resultTotal_civilian"];
 
-        private _results_west = ["", _resultInf_west, _resultSoft_west, _resultFuel_west, _resultTotal_west];
-        private _results_east = ["", _resultInf_east, _resultSoft_east, _resultFuel_east, _resultTotal_east];
-        private _results_independent = ["", _resultInf_independent, _resultSoft_independent, _resultFuel_independent, _resultTotal_independent];
-        private _results_civilian = ["", _resultInf_civilian, _resultSoft_civilian, _resultFuel_civilian, _resultTotal_civilian];
+        private _results_west = ["", _resultInf_west, _resultSoft_west, _resultFuel_west, str _resultTotal_west];
+        private _results_east = ["", _resultInf_east, _resultSoft_east, _resultFuel_east, str _resultTotal_east];
+        private _results_independent = ["", _resultInf_independent, _resultSoft_independent, _resultFuel_independent, str _resultTotal_independent];
+        private _results_civilian = ["", _resultInf_civilian, _resultSoft_civilian, _resultFuel_civilian, str _resultTotal_civilian];
 
         private _totalNumbers = [_resultTotalNumber_west, _resultTotalNumber_east, _resultTotalNumber_independent, _resultTotalNumber_civilian];
         _totalNumbers sort false;
@@ -45,9 +45,9 @@ if (isServer) then {
         diag_log ("total numbers server: " + str _totalNumbers);
 
         private _winner = _totalNumbers select 0 select 1;
-        private _draw = (_resultTotal_west isEqualTo _resultTotal_east &&
+        private _draw = _resultTotal_west isEqualTo _resultTotal_east &&
                         _resultTotal_independent isEqualTo _resultTotal_civilian &&
-                        _resultTotal_west isEqualTo _resultTotal_civilian);
+                        _resultTotal_west isEqualTo _resultTotal_civilian;
         
         diag_log ("draw is: " + str _draw);
         diag_log ("winner is: " + str _winner);
@@ -295,7 +295,7 @@ if (hasInterface) then {
         };
     };
 
-    sleep 5; // todo raise to 16 again
+    sleep 16; // todo raise to 16 again
     _display displayRemoveAllEventHandlers "KeyDown";
     _display closeDisplay 1;
 
