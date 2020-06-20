@@ -5,7 +5,7 @@
 */
 
 // todo remove debug
-/*
+
 if (isServer) then {
     [] spawn {
         private _resultInf_west = str (([west, "Players killed"] call grad_points_fnc_getPointsCategory) + ([west, "AI killed"] call grad_points_fnc_getPointsCategory));
@@ -42,12 +42,12 @@ if (isServer) then {
         private _totalNumbers = [_resultTotalNumber_west, _resultTotalNumber_east, _resultTotalNumber_independent, _resultTotalNumber_civilian];
         _totalNumbers sort false;
 
-        hint str _totalNumbers;
+        // hint str _totalNumbers;
 
         private _winner = _totalNumbers select 0 select 1;
-        private _draw = _resultTotal_west isEqualTo _resultTotal_east &&
+        private _draw = (_resultTotal_west isEqualTo _resultTotal_east &&
                         _resultTotal_independent isEqualTo _resultTotal_civilian &&
-                        _resultTotal_west isEqualTo _resultTotal_civilian;
+                        _resultTotal_west isEqualTo _resultTotal_civilian);
         
 
         sleep 16;
@@ -66,7 +66,7 @@ if (isServer) then {
         };
     };
 };
-*/
+
 
 if (hasInterface) then {
 
@@ -130,7 +130,7 @@ if (hasInterface) then {
     private _totalNumbers = [_resultTotalNumber_west, _resultTotalNumber_east, _resultTotalNumber_independent, _resultTotalNumber_civilian];
     _totalNumbers sort false;
 
-    hint str _totalNumbers;
+    // hint str _totalNumbers;
 
     private _winner = _totalNumbers select 0 select 1;
     private _draw = _resultTotal_west isEqualTo _resultTotal_east &&

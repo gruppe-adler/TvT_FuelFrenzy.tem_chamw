@@ -86,7 +86,7 @@ if (isServer) then {
     WEATHER_WIND = (random 2) - (random 4);
     };
 
-    diag_log format ["BC setup: setting wind to %1", WEATHER_WIND];
+    diag_log format ["FF setup: setting wind to %1", WEATHER_WIND];
 
     // basics
     10 setOvercast WEATHER_OVERCAST;
