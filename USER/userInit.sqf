@@ -12,6 +12,41 @@
     []
 ] call CBA_fnc_waitUntilAndExecute;
 
+
+// JIP relevant
+private _westGroup = createGroup east;
+missionNamespace setVariable ["FF_groupWest", _westGroup, true];
+private _eastGroup = createGroup east;
+missionNamespace setVariable ["FF_groupEast", _eastGroup, true];
+private _independentGroup = createGroup east;
+missionNamespace setVariable ["FF_groupIndependent", _independentGroup, true];
+private _civilianGroup = createGroup east;
+missionNamespace setVariable ["FF_groupCivilian", _civilianGroup, true];
+
+private _originalSide = [player, true] call BIS_fnc_objectSide;
+player setVariable ["FF_originalSide", _originalSide, true];
+
+switch (_originalSide) do {
+    case west : {  [player] joinSilent _westGroup; }; 
+    case east : {  [player] joinSilent _eastGroup; }; 
+    case independent : {  [player] joinSilent _independentGroup; }; 
+    case civilian : {  [player] joinSilent _civilianGroup; }; 
+    default {}; 
+};
+
+[   
+    player,
+    [player] call refuel_fnc_getFace,
+    "Male01ENGB",
+    1.0,
+    name player
+] remoteExec [
+    "BIS_fnc_setIdentity",
+    0,
+    true
+];
+
+
 if (isServer) then {
     TIME_OF_DAY = ["TIME_OF_DAY", 10] call BIS_fnc_getParamValue;
     publicVariable "TIME_OF_DAY";

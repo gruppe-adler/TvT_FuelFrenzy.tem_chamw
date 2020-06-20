@@ -231,9 +231,13 @@ if (isServer) then {
         [] execVM "USER\loadout\changeLoadoutFactions.sqf";
 
         private _westGroup = createGroup east;
+        missionNamespace setVariable ["FF_groupWest", _westGroup, true];
         private _eastGroup = createGroup east;
+        missionNamespace setVariable ["FF_groupEast", _eastGroup, true];
         private _independentGroup = createGroup east;
+        missionNamespace setVariable ["FF_groupIndependent", _independentGroup, true];
         private _civilianGroup = createGroup east;
+        missionNamespace setVariable ["FF_groupCivilian", _civilianGroup, true];
         {
             private _originalSide = [_x, true] call BIS_fnc_objectSide;
             _x setVariable ["FF_originalSide", _originalSide, true];
@@ -257,5 +261,5 @@ if (isServer) then {
                 0,
                 true
             ];
-        } forEach playableUnits + switchableUnits;
+        } forEach (playableUnits + switchableUnits);
 };
