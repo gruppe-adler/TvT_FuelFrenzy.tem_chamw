@@ -1,13 +1,15 @@
 if (!isServer) exitWith {};
 
+waitUntil {CBA_missionTime > 16};
+
 private _fuelStations = nearestObjects [[worldsize/2, worldsize/2], ["Land_fs_feed_F"], worldsize/2];
-private _allFuelTrucks = missionNamespace getVariable ["FF_fuelTrucks", []];
 
 [{
 
     params ["_args", "_handle"];
-    _args params ["_allFuelTrucks", "_fuelStations"];
+    _args params ["_fuelStations"];
 
+    private _allFuelTrucks = missionNamespace getVariable ["FF_fuelTrucks", []];
     private _fuelStationsAreEmpty = true;
     private _allFuelTrucksDestroyedOrEmpty = false;
     private _allTrucksDestroyed = count (_allFuelTrucks select { (!(canMove _x)) })  == count _allFuelTrucks;
@@ -40,4 +42,4 @@ private _allFuelTrucks = missionNamespace getVariable ["FF_fuelTrucks", []];
         };
     };
     
-}, 1, [_allFuelTrucks, _fuelStations]] call CBA_fnc_addPerFramehandler;
+}, 1, [_fuelStations]] call CBA_fnc_addPerFramehandler;

@@ -318,7 +318,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
                 _fuelStationIcon ctrlSetTextColor [0.8,0.2,0.2,1];
             };
 
-            _fuelStationIcon ctrlSetPosition  [_ctrlPositionX - 0.025, _ctrlPositionY-0.025];
+            _fuelStationIcon ctrlSetPosition  [_ctrlPositionX - 0.025, _ctrlPositionY-0.031];
             _fuelStationIcon ctrlCommit 0;
 
         } forEach _allFuelStationControls;

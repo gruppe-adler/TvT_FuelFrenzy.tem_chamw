@@ -153,8 +153,13 @@ if (isServer) then {
             private _fuelCargoMin = 3000;
             private _fuelCargoMid = 4000;
             private _fuelCargoMax = 5000;
+            private _existingFuel = _fuelStation getVariable ["ace_refuel_fuelCargo", -1];
             private _position = position _fuelStation;
             private _fuelCargo = random [_fuelCargoMin, _fuelCargoMid, _fuelCargoMax]; // randomize fuel
+
+            if (_existingFuel > 0) then {
+                _fuelCargo = _existingFuel;
+            };
 
             // fill up
             _fuelStation setVariable ["ace_refuel_fuelMaxCargo", _fuelCargo, true];

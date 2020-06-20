@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3175.342,75.181694,5159.2261};
-		dir[]={0.79895163,-0.52819598,0.28755432};
-		up[]={0.49698642,0.84912288,0.17887262};
-		aside[]={0.33864871,-6.519258e-009,-0.94091421};
+		pos[]={4417.7783,44.83485,4265.209};
+		dir[]={-0.024705235,-0.69714421,0.71650583};
+		up[]={-0.024023365,0.71693134,0.69673038};
+		aside[]={0.99940664,-3.6379788e-011,0.034459691};
 	};
 };
 binarizationWanted=0;
@@ -25632,13 +25632,14 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={4409.394,20.29232,4296.1553};
+				position[]={4409.394,20.292337,4296.1548};
 				angles[]={0,4.8520155,0};
 			};
 			side="Empty";
 			flags=5;
 			class Attributes
 			{
+				init="call{if (isServer) then { this setVariable [""ace_refuel_fuelCargo"", 7000, true]; };}";
 			};
 			id=1906;
 			type="Land_fs_feed_F";
