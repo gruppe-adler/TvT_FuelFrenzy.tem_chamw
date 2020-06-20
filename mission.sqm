@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=774;
+		nextID=805;
 	};
 	class Camera
 	{
-		pos[]={4405.7051,26.503147,4345.5908};
-		dir[]={-0.88966602,-0.35779512,0.28369728};
-		up[]={-0.3408871,0.93379843,0.10870225};
-		aside[]={0.30380866,2.978486e-007,0.95273632};
+		pos[]={858.20007,34.501873,692.2251};
+		dir[]={0,-0.70710683,0.70710683};
+		up[]={0,0.70710677,0.70710677};
+		aside[]={0.99999994,0,-0};
 	};
 };
 binarizationWanted=0;
@@ -563,7 +563,7 @@ class ScenarioData
 };
 class CustomAttributes
 {
-	class Category1
+	class Category0
 	{
 		name="Scenario";
 		class Attribute0
@@ -33359,18 +33359,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={865.53369,10.206447,707.91431};
+				position[]={865.53369,10.206449,707.914};
 				angles[]={0,5.2883477,6.2706885};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{[this, fuelBusSpawn_West] execVM ""USER\fuelbus\addSpawnAction.sqf"";}";
 			};
 			id=3657;
 			type="Land_WeldingTrolley_01_F";
-			atlOffset=-2.8610229e-006;
+			atlOffset=-9.5367432e-007;
 		};
 		class Item356
 		{
@@ -34018,17 +34017,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1026.7202,78.417145,7010.7329};
-				angles[]={0.01499443,5.2883477,0.037482351};
+				position[]={1026.7198,78.41713,7010.7334};
+				angles[]={0.014992379,5.2883477,0.037489671};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{[this, fuelBusSpawn_West] execVM ""USER\fuelbus\addSpawnAction.sqf"";}";
 			};
 			id=3704;
 			type="Land_WeldingTrolley_01_F";
+			atlOffset=7.6293945e-006;
 		};
 		class Item394
 		{
@@ -34230,18 +34229,17 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={7131.667,44.806759,7029.0898};
-				angles[]={6.270689,5.2883477,0.0075011365};
+				position[]={7131.6665,44.806774,7029.0903};
+				angles[]={6.2706885,5.2883477,0.0075049158};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{[this, fuelBusSpawn_West] execVM ""USER\fuelbus\addSpawnAction.sqf"";}";
 			};
 			id=3717;
 			type="Land_WeldingTrolley_01_F";
-			atlOffset=-7.6293945e-006;
+			atlOffset=3.8146973e-006;
 		};
 		class Item407
 		{
@@ -34448,14 +34446,13 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={7288.6685,54.566608,1272.3231};
-				angles[]={6.2357221,2.0943952,0.064907812};
+				position[]={7288.668,54.56657,1272.323};
+				angles[]={6.2357297,2.0943952,0.064908795};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{[this, fuelBusSpawn_West] execVM ""USER\fuelbus\addSpawnAction.sqf"";}";
 			};
 			id=3730;
 			type="Land_WeldingTrolley_01_F";

@@ -201,7 +201,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
                     _ctrlIcon ctrlShow true;
                 };
 
-                private _fuelBarOffsetY = _ctrlPositionY + 0.03;
+                private _fuelBarOffsetY = _ctrlPositionY-0.025;
                 private _fuelBarMaxHeight = 0.03*4/3;
 
                 _fuelBarBG ctrlSetPosition [_ctrlPositionX + 0.04, _fuelBarOffsetY, 0.005, _fuelBarMaxHeight];
