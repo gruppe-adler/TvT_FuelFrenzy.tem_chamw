@@ -13,4 +13,10 @@ _vehicle addEventHandler ["Killed", {
         if (_side != _sideKiller) then {
             _newPoints = [_sideKiller, 200, "VEHICLEKILLED"] call grad_points_fnc_addPoints;
         };
+
+        // if bus, delete from fueltrucks
+        private _fuelBusses = missionNamespace getVariable ["FF_fuelTrucks", []];
+        _fuelBusses deleteAt (_fuelBusses find _unit);
+        missionNamespace setVariable ["FF_fuelTrucks", _fuelBusses, true];
+        
 }];
