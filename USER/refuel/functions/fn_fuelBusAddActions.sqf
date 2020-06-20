@@ -50,6 +50,18 @@ private _returnNozzleAction = [
         [player, _target] call ace_refuel_fnc_canReturnNozzle
 }] call ace_interact_menu_fnc_createAction;
 
+private _nudgeBus = [
+    "NudgeBus",
+    "Nudge Bus",
+    "",
+    {
+        private _vectorDir = vectorDir player;
+        _target setVelocityModelSpace (_vectorDir vectorMultiply 3);
+    }, {
+        true
+    },{},nil,"",3,[false,false,false,false,false]
+] call ace_interact_menu_fnc_createAction;
+
 {
     [_bus, 0, ["ACE_MainActions", "ace_refuel_Refuel"], _x] call ace_interact_menu_fnc_addActionToObject;
-} forEach [_fillCargoTankAction, _returnNozzleAction, _refuelReplacementAction];
+} forEach [_fillCargoTankAction, _returnNozzleAction, _refuelReplacementAction, _nudgeBus];
