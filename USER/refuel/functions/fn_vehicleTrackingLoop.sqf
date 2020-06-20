@@ -50,7 +50,7 @@ private _allVehicleControls = [];
 
 
     private _vehicleIcon = _mapDisplay ctrlCreate ["RscPicture", -1];
-    _vehicleIcon ctrlsetText (getMissionPath 'USER\refuel\fueltruck2.paa');
+    _vehicleIcon ctrlsetText (getMissionPath 'USER\refuel\fuelbus.paa');
     _vehicleIcon ctrlSetPosition [0,0,0.05,0.05*4/3];
     _vehicleIcon ctrlSetBackgroundColor [0,0,0,1];
     _vehicleIcon ctrlSetTextColor _color;
