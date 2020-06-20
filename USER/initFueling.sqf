@@ -158,7 +158,7 @@ if (isServer) then {
 
             // fill up
             _fuelStation setVariable ["ace_refuel_fuelMaxCargo", _fuelCargo, true];
-            _fuelStation setVariable ["ace_refuel_currentFuelCargo", _fuelCargo, true];
+            _fuelStation setVariable ["ace_refuel_fuelCargo", _fuelCargo, true];
 
             {   
                 private _side = _x;

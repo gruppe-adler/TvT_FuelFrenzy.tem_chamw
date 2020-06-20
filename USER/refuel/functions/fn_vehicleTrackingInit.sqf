@@ -11,6 +11,9 @@ if (isDedicated) exitWith {};
             if (_side != _trackedForSide && local _unit) then {
                 hintSilent parseText ("<t color='#FFFFFF'><t size='1'><t align='center'>Taking vehicle into possession for your side.</t>");
                 _vehicle setVariable ["FF_trackedForSide", _side, true];
+
+                ["Your fuel truck was stolen."] remoteExec ["hintSilent", _side];
+                _vehicle setVariable ["FF_originalSide", _side, true];
             };
         };
     }];

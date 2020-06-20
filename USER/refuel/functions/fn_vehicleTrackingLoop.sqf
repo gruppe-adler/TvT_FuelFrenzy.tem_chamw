@@ -297,7 +297,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
             _fuelBarBG ctrlSetPosition [_ctrlPositionX + 0.02, _fuelBarOffsetY, 0.005, _fuelBarMaxHeight];
             _fuelBarBG ctrlCommit 0;
 
-            private _fuelBarHeight = linearConversion [0, _fuelMax, _fuelCargo, 0, _fuelBarMaxHeight, true];
+            private _fuelBarHeight = linearConversion [0, _fuelMax, _fuelKnown, 0, _fuelBarMaxHeight, true];
             _fuelBar ctrlSetPosition [_ctrlPositionX + 0.02, _fuelBarOffsetY + _fuelBarMaxHeight - _fuelBarHeight, 0.005, _fuelBarHeight];
             _fuelBar ctrlCommit 0;
 
