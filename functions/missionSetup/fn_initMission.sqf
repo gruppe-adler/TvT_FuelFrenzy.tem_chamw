@@ -32,7 +32,7 @@ if (!isServer) then {[] call GRAD_replay_fnc_init};
     };
 
     if (hasInterface) then {
-        [QGVAR(onRadiosReceivedEH),"OnRadiosReceived",{[playerSide,_newRadios] remoteExec [QEFUNC(common,receiveSwRadioSide),2,false]},player] call TFAR_fnc_addEventHandler;
+        // [QGVAR(onRadiosReceivedEH),"OnRadiosReceived",{[playerSide,_newRadios] remoteExec [QEFUNC(common,receiveSwRadioSide),2,false]},player] call TFAR_fnc_addEventHandler;
     };
 
 },[]] call CBA_fnc_waitUntilAndExecute;
