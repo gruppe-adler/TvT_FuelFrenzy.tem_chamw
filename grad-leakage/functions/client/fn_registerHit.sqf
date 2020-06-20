@@ -27,7 +27,7 @@ if (isServer) then {
 			params ["_args", "_handle"];
 			_args params ["_bus", "_busTank", "_liquidLevelIndicator"];
 
-			private _fuelCargo = _bus getVariable ["ace_refuel_fuelCargo", 0];
+			private _fuelCargo = _bus getVariable ["ace_refuel_currentFuelCargo", 0];
 			private _fuelMaxCargo = _bus getVariable ["ace_refuel_fuelMaxCargo", 0];
 
 			private _liquidLevel = linearConversion [0, _fuelMaxCargo, _fuelCargo, 0, 1, true];
@@ -40,7 +40,7 @@ if (isServer) then {
 				if ([_busTank, _hole, _liquidLevel] call GRAD_leakage_fnc_isLeaking) then {
 					// _fuelCargo = _fuelCargo - GRAD_LEAKAGE_SPEED;
 					_fuelCargo = _fuelCargo - (GRAD_LEAKAGE_SPEED * sqrt (20 * _fuelCargo));
-					_bus setVariable ["ace_refuel_fuelCargo", _fuelCargo, true];
+					_bus setVariable ["ace_refuel_currentFuelCargo", _fuelCargo, true];
 
 					// only broadcast if not already set
 					if (!(_hole getVariable ["GRAD_leakage_holeActive", false])) then {

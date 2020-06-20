@@ -35,7 +35,7 @@ private _rate =  getNumber (_config >> "ace_refuel_flowRate") * grad_refuel_rate
 if (_rate == 0) then {
     _rate = _sink getVariable ["ace_refuel_cargoRate", 0];
 };
-private _maxFuel = _sink getVariable ["ace_refuel_fuelMaxCargo", 0]; // getNumber (_config >> "ace_refuel_fuelCargo")
+private _maxFuel = _sink getVariable ["ace_refuel_fuelMaxCargo", 0]; // getNumber (_config >> "ace_refuel_currentFuelCargo")
 private _sinkStartFuel = [_sink] call ace_refuel_fnc_getFuel;
 private _sourceStartFuel = [_source] call ace_refuel_fnc_getFuel;
 

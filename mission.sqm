@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=712;
+		nextID=743;
 	};
 	class Camera
 	{
@@ -24984,7 +24984,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="call{if (isServer) then { this setVariable [""ace_refuel_fuelCargo"", 7000, true]; };}";
+				init="call{if (isServer) then { this setVariable [""ace_refuel_currentFuelCargo"", 7000, true]; };}";
 			};
 			id=1906;
 			type="Land_fs_feed_F";

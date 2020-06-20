@@ -174,7 +174,6 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
             private _vehicleLabel = _x;
             private _vehicle = _vehicleLabel getVariable ['FF_vehicleAssigned', objNull];
             private _ctrlIcon = _vehicleLabel getVariable ['FF_iconAssigned', controlNull];
-            private _ctrlIcon = _vehicleLabel getVariable ['FF_iconAssigned', controlNull];
             private _sideVehicle = _vehicle getVariable ['FF_trackedForSide', sideUnknown];
             private _fuelBarBG = _vehicleLabel getVariable ['FF_fuelBarBGAssigned', controlNull];
             private _fuelBar = _vehicleLabel getVariable ['FF_fuelBarAssigned', controlNull];
@@ -185,7 +184,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
 
             if (_sideVehicle isEqualTo _sidePlayer) then {
 
-                private _fuelCargo = _vehicle getVariable ['ace_refuel_fuelCargo', 0];
+                private _fuelCargo = _vehicle getVariable ['ace_refuel_currentFuelCargo', 0];
                 private _maxCargo = _vehicle getVariable ['ace_refuel_fuelMaxCargo', 0];
                 private _vehicleEmpty = isNull (driver _vehicle);
                 private _groupName = if (_vehicleEmpty) then { ('Empty') } else { (groupId (group (driver _vehicle))) };
@@ -307,7 +306,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
             private _position = position _fuelSellPoint;
 
             private _fuelSellPointIcon = _fuelSellPointLabel getVariable ['FF_iconAssigned', controlNull];
-            private _fuelCargo = _fuelSellPoint getVariable ['ace_refuel_fuelCargo', 0];
+            private _fuelCargo = _fuelSellPoint getVariable ['ace_refuel_currentFuelCargo', 0];
 
             private _ctrlPosition = _map ctrlMapWorldToScreen _position;
             _ctrlPosition params ['_ctrlPositionX', '_ctrlPositionY'];
