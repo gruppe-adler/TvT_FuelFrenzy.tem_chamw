@@ -24,7 +24,7 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
     };
 
     switch (toLower _commandType) do {
-        case ("endMission"): _endMission;
+        case ("endmission"): _endMission;
         default _fnc_default;
     };
 
