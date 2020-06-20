@@ -184,6 +184,11 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
 
             if (_sideVehicle isEqualTo _sidePlayer) then {
 
+
+                _ctrlFuelBar ctrlShow true;
+                _ctrlFuelBarBG ctrlShow true;
+                
+
                 private _fuelCargo = _vehicle getVariable ['ace_refuel_currentFuelCargo', 0];
                 private _maxCargo = _vehicle getVariable ['ace_refuel_fuelMaxCargo', 0];
                 private _vehicleEmpty = isNull (driver _vehicle);
@@ -197,8 +202,6 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
                 if (!(ctrlshown _vehicleLabel)) then {
                     _vehicleLabel ctrlShow true;
                     _ctrlIcon ctrlShow true;
-                    _ctrlFuelBar ctrlShow true;
-                    _ctrlFuelBarBG ctrlShow true;
                 };
 
                 private _fuelBarOffsetY = _ctrlPositionY + 0.03;
@@ -234,11 +237,12 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
                 _ctrlIcon ctrlCommit 0;
 
             } else {
+                _ctrlFuelBar ctrlShow false;
+                _ctrlFuelBarBG ctrlShow false;
+                
                 if (ctrlshown _vehicleLabel) then {
                     _vehicleLabel ctrlShow false;
                     _ctrlIcon ctrlShow false;
-                    _ctrlFuelBar ctrlShow false;
-                    _ctrlFuelBarBG ctrlShow false;
                 };
             };
         } forEach _allVehicleControls;
