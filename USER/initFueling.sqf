@@ -91,7 +91,11 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
     systemChat ("made " + (str (_points + _newPoints)) + " points");
 
     // show hint if fuel is sold
-    if (_sourceObject == fuelSellPoint_west || _sourceObject == fuelSellPoint_east) then {
+    if (_sourceObject == fuelSellPoint_west ||
+        _sourceObject == fuelSellPoint_east || 
+        _sourceObject == fuelSellPoint_independent || 
+        _sourceObject == fuelSellPoint_civilian
+       ) then {
         [
             {
                 private _fuelCount  = format ["%1", [player getVariable ["FF_originalSide", sideUnknown]] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];

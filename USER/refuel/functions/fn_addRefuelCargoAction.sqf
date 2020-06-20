@@ -68,7 +68,7 @@ private _endPointAction = [
         ] call refuel_fnc_connectAndRefuelCargo;
     }, {
         private _nozzle = player getVariable ["ace_refuel_nozzle", objNull];
-        !(isNull _nozzle)/* && ((player distance _target) <= REFUEL_NOZZLE_ACTION_DISTANCE)*/ && !(_nozzle getVariable ["ace_refuel_isConnected", false])
+        !(isNull _nozzle) && !(_nozzle getVariable ["ace_refuel_isConnected", false])
     },{},nil,"",3,[false,false,false,false,false]
 ] call ace_interact_menu_fnc_createAction;
 

@@ -1,5 +1,5 @@
 GRAD_LEAKAGE_DEBUG = true;
-GRAD_LEAKAGE_SPEED = 0.001;
+GRAD_LEAKAGE_SPEED = 0.005;
 
 // CLIENT EH
 if (hasInterface) then {

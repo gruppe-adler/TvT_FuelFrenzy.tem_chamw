@@ -168,31 +168,6 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
         private _allVehicles = missionNamespace getVariable ['FF_fuelTrucks', []];
         private _sidePlayer = player getVariable ['FF_originalSide', sideUnknown];
 
-        {
-            private _group = _x;
-            private _sideGroup = (leader _group) getVariable ['FF_originalSide', sideUnknown];
-            private _color = [_sideGroup, false] call BIS_fnc_sideColor;
-
-            if (_sideGroup isEqualTo _sidePlayer && isNull (objectParent (leader _group))) then {
-                _map drawIcon [
-                        getMissionPath 'USER\refuel\mafia.paa',
-                        _color,
-                        getPos leader _group,
-                        64,
-                        64,
-                        0,
-                        groupId _group,
-                        0,
-                        0.05,
-                        'RobotoCondensedBold',
-                        'center'
-                    ];
-            };
-
-        } forEach allGroups;
-
-
-
         private _allVehicleControls = uiNamespace getVariable ['FF_allVehicleControls', []];
 
         {
@@ -353,6 +328,29 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
             _fuelSellPointIcon ctrlCommit 0;
 
         } forEach _fuelSellPointControls;
+
+        {
+            private _group = _x;
+            private _sideGroup = (leader _group) getVariable ['FF_originalSide', sideUnknown];
+            private _color = [_sideGroup, false] call BIS_fnc_sideColor;
+
+            if (_sideGroup isEqualTo _sidePlayer && isNull (objectParent (leader _group))) then {
+                _map drawIcon [
+                        getMissionPath 'USER\refuel\mafia.paa',
+                        _color,
+                        getPos leader _group,
+                        64,
+                        64,
+                        0,
+                        groupId _group,
+                        0,
+                        0.05,
+                        'RobotoCondensedBold',
+                        'center'
+                    ];
+            };
+
+        } forEach allGroups;
 
     };
 "];
