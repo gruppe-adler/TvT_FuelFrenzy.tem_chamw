@@ -14,14 +14,10 @@
 
 
 // JIP relevant
-private _westGroup = createGroup east;
-missionNamespace setVariable ["FF_groupWest", _westGroup, true];
-private _eastGroup = createGroup east;
-missionNamespace setVariable ["FF_groupEast", _eastGroup, true];
-private _independentGroup = createGroup east;
-missionNamespace setVariable ["FF_groupIndependent", _independentGroup, true];
-private _civilianGroup = createGroup east;
-missionNamespace setVariable ["FF_groupCivilian", _civilianGroup, true];
+private _westGroup = missionNamespace getVariable ["FF_groupWest", grpNull];
+private _eastGroup = missionNamespace getVariable ["FF_groupEast", grpNull];
+private _independentGroup = missionNamespace getVariable ["FF_groupIndependent", grpNull];
+private _civilianGroup = missionNamespace getVariable ["FF_groupCivilian", grpNull];
 
 private _originalSide = [player, true] call BIS_fnc_objectSide;
 player setVariable ["FF_originalSide", _originalSide, true];
