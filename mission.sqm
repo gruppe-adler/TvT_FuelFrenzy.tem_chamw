@@ -5,10 +5,10 @@ class EditorData
 	angleGridStep=0.017453292;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=554;
+	toggles=545;
 	class ItemIDProvider
 	{
-		nextID=4013;
+		nextID=4016;
 	};
 	class MarkerIDProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={889.46246,56.729401,621.97894};
-		dir[]={-0.14103608,-0.53437811,0.83339781};
-		up[]={-0.089165404,0.84524494,0.52688807};
-		aside[]={0.98598236,-5.1804818e-009,0.16685802};
+		pos[]={4412.916,82.015305,4252.8462};
+		dir[]={0.24846889,-0.82279181,0.5111565};
+		up[]={0.35970685,0.56834209,0.73999822};
+		aside[]={0.89937651,-3.259629e-008,-0.43717894};
 	};
 };
 binarizationWanted=0;
@@ -4887,7 +4887,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=599;
+		items=601;
 		class Item0
 		{
 			dataType="Layer";
@@ -24945,17 +24945,16 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3879.0579,13.462308,2164.4778};
+				position[]={3879.1436,13.026935,2163.6719};
 				angles[]={0,5.8468533,0};
 			};
 			side="Empty";
-			flags=1;
+			flags=5;
 			class Attributes
 			{
 			};
 			id=1903;
 			type="Land_fs_feed_F";
-			atlOffset=0.44644547;
 		};
 		class Item167
 		{
@@ -41079,8 +41078,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={7298.3628,53.619148,1270.5093};
-				angles[]={0,2.0943952,0};
+				position[]={7298.3418,54.086952,1270.5215};
+				angles[]={0.034949172,2.0954521,0.060447693};
 			};
 			side="Empty";
 			flags=4;
@@ -41089,7 +41088,41 @@ class Mission
 			};
 			id=4012;
 			type="Land_RampConcrete_F";
-			atlOffset=-0.27886963;
+			atlOffset=0.1875;
+		};
+		class Item599
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={7299.7583,54.414494,1269.6693};
+				angles[]={0.087936118,2.1010494,0.15095642};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=4014;
+			type="Land_RampConcrete_F";
+			atlOffset=0.052822113;
+		};
+		class Item600
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={7306.6602,54.862236,1265.7159};
+				angles[]={0.12402412,2.1075497,0.21107441};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=4015;
+			type="Land_RampConcrete_F";
+			atlOffset=-0.3522644;
 		};
 	};
 	class Connections
