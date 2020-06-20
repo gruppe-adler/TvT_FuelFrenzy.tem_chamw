@@ -30,6 +30,7 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 
         if (_distanceActual > 30) exitWith { diag_log "checking fuel too far away from next fuel station"; };
 
+
         private _side = player getVariable ["FF_originalSide", sideUnknown];
         private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
         private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
@@ -37,6 +38,8 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
         private _fuelLeft = [_suspectedFuelStation] call ace_refuel_fnc_getFuel;
         _suspectedFuelStation setVariable [_fuelKnownFormat, _fuelLeft, true];
         _suspectedFuelStation setVariable [_fuelKnownTimeFormat, _currentTime, true];
+
+        diag_log ("logging fuel for station: " + str _fuelLeft);
     };
 }] call CBA_fnc_addEventHandler;
 
@@ -165,7 +168,7 @@ if (isServer) then {
             // fill up
             _fuelStation setVariable ["ace_refuel_fuelMaxCargo", _fuelCargo, true];
             _fuelStation setVariable ["ace_refuel_fuelCargo", _fuelCargo, true];
-
+            [_fuelStation, _fuelCargo] call ace_refuel_fnc_setFuel;
             {   
                 private _side = _x;
                 private _fuelKnownFormat = format ["ace_refuel_currentFuelKnown_%1", _side];
@@ -185,10 +188,10 @@ if (isServer) then {
         [] execVM "USER\winstats\checkWinConditions.sqf";
         [] execVM "USER\loadout\changeLoadoutFactions.sqf";
 
-        private _westGroup = createGroup west;
-        private _eastGroup = createGroup west;
-        private _independentGroup = createGroup west;
-        private _civilianGroup = createGroup west;
+        private _westGroup = createGroup east;
+        private _eastGroup = createGroup east;
+        private _independentGroup = createGroup east;
+        private _civilianGroup = createGroup east;
         {
             _x setVariable ["FF_originalSide", [_x] call BIS_fnc_objectSide, true];
 

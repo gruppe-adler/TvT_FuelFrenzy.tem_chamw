@@ -35,17 +35,5 @@ _spark setDropInterval _amount;
 [{
     params ["_spark", "_light"];
     deleteVehicle _spark;
-
-    [_light] spawn {
-        params ["_light"];
-        private _brightness = 0.1;
-        for "_i" from 0 to 100 do {
-            _brightness = _brightness/2;
-            _light setLightBrightness _brightness;
-            sleep 0.1;
-        };
-
-        deleteVehicle _light;
-    };
-
+    deleteVehicle _light;
 }, [_spark, _light], _duration] call CBA_fnc_waitAndExecute;

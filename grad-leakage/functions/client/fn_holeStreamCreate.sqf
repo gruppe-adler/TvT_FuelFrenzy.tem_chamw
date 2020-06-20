@@ -1,6 +1,6 @@
 params ["_vehicle", "_hole", "_dir"];
 
-systemChat "entering holeStreamCreate";
+// systemChat "entering holeStreamCreate";
 diag_log "entering holeStreamCreate";
 
 private _stream = "#particlesource" createVehicleLocal [0,0,0];

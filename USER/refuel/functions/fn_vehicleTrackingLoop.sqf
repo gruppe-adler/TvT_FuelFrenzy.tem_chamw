@@ -282,7 +282,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
             private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _sidePlayer];
             private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _sidePlayer];
             private _fuelKnown = _fuelStation getVariable [_fuelKnownFormat, 0];
-            private _fuelCargo = _fuelStation getVariable ['ace_refuel_fuelCargo', 0];
+            
             private _fuelMax = _fuelStation getVariable ['ace_refuel_fuelMaxCargo', 0];
             private _fuelKnownTime = _fuelStation getVariable [_fuelKnownTimeFormat, '00:00'];
             private _fuelStationEntry = (str (round _fuelKnown) + ' | ' + _fuelKnownTime);
