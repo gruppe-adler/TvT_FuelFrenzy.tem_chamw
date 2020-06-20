@@ -21,7 +21,7 @@ _bus setDir _dir;
 
 [_bus, 0] call ace_refuel_fnc_makeSource; 
 [_bus, 0] call ace_refuel_fnc_setfuel;
-_bus setVariable ["ace_refuel_fuelMaxCargo", 2000, true];
+_bus setVariable ["ace_refuel_fuelMaxCargo", 3000, true];
 _bus setVariable ["ace_refuel_nozzle", _bus, true]; // hack to hide CONNECT action to make all actions equally distinctive
 
 _bus setVariable ["FF_originalSide", _side, true];
