@@ -7,6 +7,29 @@ private _refuelingSoundPathEnd = getMissionPath "USER\sounds\fueling_end.ogg";
 missionNamespace setVariable ["FF_fuelingSound", _refuelingSoundPath];
 missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 
+["ff",{
+    params ["_commandType"];
+
+    private _availableCommands = [
+        "endMission"
+    ];
+
+    private _fnc_default = {
+        systemChat format ["%1 is not a ff chatcommand.",_commandType];
+        systemChat format ["Available commands are %1",_availableCommands];
+    };
+
+    private _endMission = {
+            ["USER\winstats\showStats.sqf"] remoteExec ["execVM", 0, true];
+    };
+
+    switch (toLower _commandType) do {
+        case ("endMission"): _endMission;
+        default _fnc_default;
+    };
+
+},"admin"] call CBA_fnc_registerChatCommand;
+
 ["ace_common_displayTextStructured", {
     params [["_array",[]]];
 
@@ -212,7 +235,7 @@ if (isServer) then {
         private _independentGroup = createGroup east;
         private _civilianGroup = createGroup east;
         {
-            private _originalSide = [_x, true] call BIS_fnc_objectSide
+            private _originalSide = [_x, true] call BIS_fnc_objectSide;
             _x setVariable ["FF_originalSide", _originalSide, true];
 
             switch (_originalSide) do {
