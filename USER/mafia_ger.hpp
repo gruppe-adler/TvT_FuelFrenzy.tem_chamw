@@ -6,9 +6,9 @@ class mafia_ger {
         headgear[] = {"H_Watchcap_blk", "H_Watchcap_cbr", "H_Watchcap_camo", "H_Watchcap_khk", "H_Beret_blk", "rhs_beanie_green", "H_Watchcap_blk", "H_Watchcap_blk"};
         goggles[] = {"TRYK_Beard", "TRYK_Beard", "TRYK_Beard_BW", "TRYK_Beard2", "TRYK_Beard_BW2"};
 
-        primaryWeapon = "rhs_weap_akm";
+        primaryWeapon = "rhsusf_weap_MP7A2";
         primaryWeaponOptics = "";
-        primaryWeaponMagazine = "rhs_30Rnd_762x39mm";
+        primaryWeaponMagazine = "rhsusf_mag_40Rnd_46x30_FMJ";
         primaryWeaponPointer = "";
         primaryWeaponMuzzle = "";
         primaryWeaponUnderbarrel = "";
@@ -17,8 +17,8 @@ class mafia_ger {
         secondaryWeapon = "";
         secondaryWeaponMagazine = "";
 
-        handgunWeapon = "";
-        handgunWeaponMagazine = "";
+        handgunWeapon = "rhs_weap_cz99";
+        handgunWeaponMagazine = "rhssaf_mag_15Rnd_9x19_FMJ";
 
         binoculars = "Binocular";
         map = "ItemMap";
@@ -45,7 +45,7 @@ class mafia_ger {
         //Rifleman
         class man_1 {
             addItemsToBackpack[] = {
-                LIST_7("rhs_30Rnd_762x39mm"),
+                LIST_7("rhsusf_mag_40Rnd_46x30_FMJ"),
                 LIST_2("rhs_mag_rdg2_white"),
                 LIST_2("rhs_mag_rgd5")
             };
@@ -54,21 +54,21 @@ class mafia_ger {
         //Asst. Autorifleman
         class man_sport_1_F: man_1 {
             addItemsToVest[] = {
-                LIST_7("rhs_30Rnd_762x39mm"),
+                LIST_7("rhsusf_mag_40Rnd_46x30_FMJ"),
                 LIST_2("rhs_mag_rgd5"),
                 LIST_1("rhs_mag_rdg2_white")
             };
             addItemsToBackpack[] = {
-                LIST_3("rhs_100Rnd_762x54mmR")
+                LIST_3("rhs_30Rnd_545x39_AK_green")
             };
         };
 
         //Autorifleman
         class man_sport_2_F: man_1 {
-            primaryWeapon = "rhs_weap_pkp";
-            primaryWeaponMagazine = "rhs_100Rnd_762x54mmR";
+            primaryWeapon = "rhs_weap_aks74u";
+            primaryWeaponMagazine = "rhs_30Rnd_545x39_AK_green";
             addItemsToBackpack[] = {
-                LIST_3("rhs_100Rnd_762x54mmR")
+                LIST_3("rhs_30Rnd_545x39_AK_green")
             };
         };
 
@@ -90,21 +90,17 @@ class mafia_ger {
 
         //Squad Leader
         class Man_casual_1_F: man_1 {
-            primaryWeapon = "rhs_weap_akm_gp25";
-            primaryWeaponUnderbarrelMagazine = "rhs_GRD40_White";
 
             addItemsToBackpack[] = {
-                LIST_7("rhs_30Rnd_762x39mm"),
+                LIST_7("rhsusf_mag_40Rnd_46x30_FMJ"),
                 LIST_2("rhs_mag_rdg2_white"),
-                LIST_2("rhs_mag_rgd5"),
-                LIST_2("rhs_GRD40_White"),
-                LIST_2("rhs_GRD40_Red")
+                LIST_2("rhs_mag_rgd5")
             };
         };
 
         //Team Leader
         class Man_casual_2_F: Man_casual_1_F {
-            uniform = "U_NikosAgedBody";
+            uniform = "rhsgref_uniform_gorka_1_f";
         };
     };
 

@@ -6,9 +6,9 @@ class mafia_chin {
         headgear[] = {"rhssaf_booniehat_woodland", "rhs_Booniehat_m81", "H_Hat_brown", "H_Hat_grey", "H_Booniehat_oli", "H_Booniehat_tan", "H_Booniehat_khk_hs", "H_Bandanna_sgg", "H_Bandanna_sand"};
         goggles[] = {"rhsusf_shemagh_od", "rhsusf_shemagh2_od", "rhsusf_shemagh2_grn", "rhsusf_shemagh_grn"};
 
-        primaryWeapon = "rhs_weap_akm";
+        primaryWeapon = "rhsusf_weap_MP7A2";
         primaryWeaponOptics = "";
-        primaryWeaponMagazine = "rhs_30Rnd_762x39mm";
+        primaryWeaponMagazine = "rhsusf_mag_40Rnd_46x30_FMJ";
         primaryWeaponPointer = "";
         primaryWeaponMuzzle = "";
         primaryWeaponUnderbarrel = "";
@@ -17,8 +17,8 @@ class mafia_chin {
         secondaryWeapon = "";
         secondaryWeaponMagazine = "";
 
-        handgunWeapon = "";
-        handgunWeaponMagazine = "";
+        handgunWeapon = "rhs_weap_cz99";
+        handgunWeaponMagazine = "rhssaf_mag_15Rnd_9x19_FMJ";
 
         binoculars = "Binocular";
         map = "ItemMap";
@@ -45,7 +45,7 @@ class mafia_chin {
         //Rifleman
         class Soldier_F {
             addItemsToBackpack[] = {
-                LIST_7("rhs_30Rnd_762x39mm"),
+                LIST_7("rhsusf_mag_40Rnd_46x30_FMJ"),
                 LIST_2("rhs_mag_rdg2_white"),
                 LIST_2("rhs_mag_rgd5")
             };
@@ -54,21 +54,21 @@ class mafia_chin {
         //Asst. Autorifleman
         class soldier_AAR_F: Soldier_F {
             addItemsToVest[] = {
-                LIST_7("rhs_30Rnd_762x39mm"),
+                LIST_7("rhsusf_mag_40Rnd_46x30_FMJ"),
                 LIST_2("rhs_mag_rgd5"),
                 LIST_1("rhs_mag_rdg2_white")
             };
             addItemsToBackpack[] = {
-                LIST_3("rhs_100Rnd_762x54mmR")
+                LIST_3("rhs_30Rnd_545x39_AK_green")
             };
         };
 
         //Autorifleman
         class soldier_AR_F: Soldier_F {
-            primaryWeapon = "rhs_weap_pkp";
-            primaryWeaponMagazine = "rhs_100Rnd_762x54mmR";
+            primaryWeapon = "rhs_weap_aks74u";
+            primaryWeaponMagazine = "rhs_30Rnd_545x39_AK_green";
             addItemsToBackpack[] = {
-                LIST_3("rhs_100Rnd_762x54mmR")
+                LIST_3("rhs_30Rnd_545x39_AK_green")
             };
         };
 
@@ -88,23 +88,21 @@ class mafia_chin {
             secondaryWeapon = "rhs_weap_rpg26";
         };
 
-        //Squad Leader
+        //Team Leader
         class Soldier_TL_F: Soldier_F {
-            primaryWeapon = "rhs_weap_akm_gp25";
-            primaryWeaponUnderbarrelMagazine = "rhs_GRD40_White";
+            
+            primaryWeapon = "rhsusf_weap_MP7A2";
 
             addItemsToBackpack[] = {
-                LIST_7("rhs_30Rnd_762x39mm"),
+                LIST_7("rhsusf_mag_40Rnd_46x30_FMJ"),
                 LIST_2("rhs_mag_rdg2_white"),
-                LIST_2("rhs_mag_rgd5"),
-                LIST_2("rhs_GRD40_White"),
-                LIST_2("rhs_GRD40_Red")
+                LIST_2("rhs_mag_rgd5")
             };
         };
 
-        //Team Leader
+        //Squad Leader
         class Soldier_SL_F: Soldier_TL_F {
-            uniform = "U_NikosAgedBody";
+            uniform= "U_I_C_Soldier_Para_2_F";
         };
     };
 
