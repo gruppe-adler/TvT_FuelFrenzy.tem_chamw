@@ -1,13 +1,11 @@
 // dont display for JIP
 if (didJIP) exitWith {};
-titleText ["","BLACK FADED",999];
-["CBA_loadingScreenDone", {
 
+["CBA_loadingScreenDone", {
+    titleText ["","BLACK FADED",999];
     player setVariable ["tf_voiceVolume", 0, true];
     diwako_dui_main_toggled_off = true;
     showChat false;
-
-    titleText ["","BLACK FADED",999];
 
     [{
 
@@ -20,9 +18,10 @@ titleText ["","BLACK FADED",999];
 
                 FF_showGlitchIntro = true;
 
-                [{  
+                [] spawn {
+                    sleep 16; // fuckery with CBA fnc when not suspending
                     FF_showGlitchIntro = false;
-                }, [], 16] call CBA_fnc_waitAndExecute;
+                };
 
                 while {FF_showGlitchIntro} do {
                     for "_i" from 1 to 20 do {
@@ -30,12 +29,11 @@ titleText ["","BLACK FADED",999];
                         _pic ctrlCommit 0;
                         _pic ctrlSetText (getMissionPath ("USER\intro\" + (str _i) + ".jpg"));
                         _pic ctrlCommit 0;
-                        uisleep _sleep;
+                        sleep _sleep;
                     };
                 };
 
-                ctrlDelete  _pic;
-
+                
                 cutText [" ", "BLACK IN", 2];
 
                 STHud_UIMode = 1;
@@ -44,6 +42,8 @@ titleText ["","BLACK FADED",999];
                 player setVariable ["tf_voiceVolume", 1, true];
                 diwako_dui_main_toggled_off = false;
                 showChat true;
+
+                ctrlDelete  _pic;
             };
         }, [], 2] call CBA_fnc_waitAndExecute;
     }, [], 5] call CBA_fnc_waitAndExecute;

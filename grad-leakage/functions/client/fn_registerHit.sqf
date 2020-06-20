@@ -38,7 +38,8 @@ if (isServer) then {
 			{
 				private _hole = _x;
 				if ([_busTank, _hole, _liquidLevel] call GRAD_leakage_fnc_isLeaking) then {
-					_fuelCargo = _fuelCargo - GRAD_LEAKAGE_SPEED;
+					// _fuelCargo = _fuelCargo - GRAD_LEAKAGE_SPEED;
+					_fuelCargo = _fuelCargo - (GRAD_LEAKAGE_SPEED * sqrt (20 * _fuelCargo));
 					_bus setVariable ["ace_refuel_fuelCargo", _fuelCargo, true];
 
 					// only broadcast if not already set
