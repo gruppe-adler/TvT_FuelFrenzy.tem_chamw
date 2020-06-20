@@ -56,7 +56,7 @@ private _nudgeBus = [
     "",
     {
         private _vectorDir = vectorDir player;
-        _target setVelocityModelSpace (_vectorDir vectorMultiply 3);
+        _target setVelocity (_vectorDir vectorMultiply 3);
     }, {
         true
     },{},nil,"",3,[false,false,false,false,false]
@@ -64,4 +64,6 @@ private _nudgeBus = [
 
 {
     [_bus, 0, ["ACE_MainActions", "ace_refuel_Refuel"], _x] call ace_interact_menu_fnc_addActionToObject;
-} forEach [_fillCargoTankAction, _returnNozzleAction, _refuelReplacementAction, _nudgeBus];
+} forEach [_fillCargoTankAction, _returnNozzleAction, _refuelReplacementAction];
+
+[_bus, 0, ["ACE_MainActions"], _nudgeBus] call ace_interact_menu_fnc_addActionToObject;
