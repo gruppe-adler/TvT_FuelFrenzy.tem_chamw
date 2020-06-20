@@ -1,7 +1,7 @@
 if (!isServer) exitWith {};
 
 // wait until fuel trucks are spawned
-waitUntil {missionNamespace getVariable ["FF_fuelTrucks", []] > 0};
+waitUntil {count (missionNamespace getVariable ["FF_fuelTrucks", []]) > 0};
 
 private _fuelStations = nearestObjects [[worldsize/2, worldsize/2], ["Land_fs_feed_F"], worldsize/2];
 
