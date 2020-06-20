@@ -125,8 +125,8 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 
 
 {
-    params ["_area", "_side"];
-    private _playerSide = [player] call BIS_fnc_objectSide;
+    _x params ["_area", "_side"];
+    private _playerSide = [player, true] call BIS_fnc_objectSide;
     if (_playerSide == _side) then {
         _area setMarkerBrushLocal "FDiagonal";
         _area setMarkerColorLocal "ColorGreen";
@@ -212,9 +212,10 @@ if (isServer) then {
         private _independentGroup = createGroup east;
         private _civilianGroup = createGroup east;
         {
-            _x setVariable ["FF_originalSide", [_x] call BIS_fnc_objectSide, true];
+            private _originalSide = [_x, true] call BIS_fnc_objectSide
+            _x setVariable ["FF_originalSide", _originalSide, true];
 
-            switch ([_x] call BIS_fnc_objectSide) do { 
+            switch (_originalSide) do {
                 case west : {  [_x] joinSilent _westGroup; }; 
                 case east : {  [_x] joinSilent _eastGroup; }; 
                 case independent : {  [_x] joinSilent _independentGroup; }; 
