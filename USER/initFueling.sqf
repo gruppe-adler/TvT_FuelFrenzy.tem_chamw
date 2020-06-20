@@ -61,7 +61,7 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
     hintSilent composeText [ 
         parseText ("<t color='#FF0000'><t size='2'><t align='center'>" + (str (floor _liters)) + "</t><br/>"), 
         parseText ("<t color='#ffffff'><t size='1'><t align='center'>Liters transferred</t><br/>"), 
-        parseText ("<t color='#ffffff'><t size ='0.7'><t align='center'>" + (str (round _fuelLeft)) + "liters fuel left</t><br/>")
+        parseText ("<t color='#ffffff'><t size ='0.7'><t align='center'>" + (str (round _fuelLeft)) + " liters fuel left</t><br/>")
     ];
 
     private _refuelingSoundPath = missionNamespace getVariable ["FF_fuelingSound", ""];

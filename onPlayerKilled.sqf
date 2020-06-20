@@ -18,11 +18,16 @@ if (([missionConfigFile >> "missionsettings","waveRespawnEnabled",0] call BIS_fn
     _respawnTime = [missionConfigFile >> "missionsettings",_respawnTimeVar,10] call BIS_fnc_returnConfigEntry;
 
     if (_respawnTime > 1800) then {
-        ["Terminate"] call BIS_fnc_EGSpectator;
-        ["Initialize", [player, [WEST,EAST,INDEPENDENT], true]] call BIS_fnc_EGSpectator;
+        [[west, east, independent, civilian], []] call ace_spectator_fnc_updateSides;
+        [true] call ace_spectator_fnc_setSpectator;
     } else {
-        ["Terminate"] call BIS_fnc_EGSpectator;
-        ["Initialize", [player, [playerside], false, false, false, true, true, true, true, true]] call BIS_fnc_EGSpectator;
+        private _side = player getVariable ["FF_originalSide", sideUnknown];
+        private _playersOfSide = [];
+        private _unitsOfSide = { 
+            if (_x getVariable ["FF_originalSide", sideUnknown] == _side) then { _playersOfSide pushBackUnique _x; };
+        } count (playableUnits + switchableUnits);
+        [_playersOfSide, []] call ace_spectator_fnc_updateUnits;
+        [true] call ace_spectator_fnc_setSpectator;
     };
 
     setPlayerRespawnTime _respawnTime;
