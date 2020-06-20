@@ -122,10 +122,26 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 }, player] call TFAR_fnc_addEventHandler;
 
 
-["mrk_safeZone_west", west] execVM "USER\safezone\createSafeZone.sqf";
-["mrk_safeZone_east", east] execVM "USER\safezone\createSafeZone.sqf";
-["mrk_safeZone_independent", independent] execVM "USER\safezone\createSafeZone.sqf";
-["mrk_safeZone_civilian", civilian] execVM "USER\safezone\createSafeZone.sqf";
+
+
+{
+    params ["_area", "_side"];
+    private _playerSide = [player] call BIS_fnc_objectSide;
+    if (_playerSide == _side) then {
+        _area setMarkerBrushLocal "FDiagonal";
+        _area setMarkerColorLocal "ColorGreen";
+    } else {
+        _area setMarkerBrushLocal "SolidBorder";
+        _area setMarkerColorLocal "ColorPink";
+    };
+    [_area, _side] execVM "USER\safezone\createSafeZone.sqf";
+} forEach [
+    ["mrk_safeZone_west", west],
+    ["mrk_safeZone_east", east],
+    ["mrk_safeZone_independent", independent],
+    ["mrk_safeZone_civilian", civilian]
+];
+
 
 if (isServer) then {
 
@@ -149,7 +165,6 @@ if (isServer) then {
         fuelSellPoint_civilian setVariable ["ace_refuel_cargoRate", 200, true];
         fuelSellPoint_civilian setVariable ["FF_sellingPoint", civilian, true];
     
-
         [] call refuel_fnc_fuelBusLoop;
 
         // private _fuelStations = nearestTerrainObjects [[worldSize/2, worldSize/2], ["Fuelstation"], worldSize/2] select { !isObjectHidden _x};
