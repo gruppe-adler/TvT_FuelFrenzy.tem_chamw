@@ -2,7 +2,7 @@ params ["_busTank", "_offset"];
 
 private _bus = _busTank getVariable ["FF_parentBus", objNull];
 
-if (random 10 > 1) then {
+if (random 20 > 1) then {
     ["GRAD_leakage_holeSpall", [_busTank, _offset]] call CBA_fnc_globalEvent;
 } else {
     private _hole = createVehicle ["Sign_Sphere10cm_F", [0,0,0], [], 0, "CAN_COLLIDE"];
