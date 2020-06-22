@@ -27,7 +27,7 @@ switch (_originalSide) do {
     case east : {  [player] joinSilent _eastGroup; }; 
     case independent : {  [player] joinSilent _independentGroup; }; 
     case civilian : {  [player] joinSilent _civilianGroup; }; 
-    default {}; 
+    default {diag_log "client: error in originalSide: none of the sides!"; }; 
 };
 
 [   

@@ -7,163 +7,163 @@ private _refuelingSoundPathEnd = getMissionPath "USER\sounds\fueling_end.ogg";
 missionNamespace setVariable ["FF_fuelingSound", _refuelingSoundPath];
 missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 
-["ff",{
-    params ["_commandType"];
+if (hasInterface) then {
+    ["ff",{
+        params ["_commandType"];
 
-    private _availableCommands = [
-        "endMission"
-    ];
+        private _availableCommands = [
+            "endMission"
+        ];
 
-    private _fnc_default = {
-        systemChat format ["%1 is not a ff chatcommand.",_commandType];
-        systemChat format ["Available commands are %1",_availableCommands];
-    };
+        private _fnc_default = {
+            systemChat format ["%1 is not a ff chatcommand.",_commandType];
+            systemChat format ["Available commands are %1",_availableCommands];
+        };
 
-    private _endMission = {
-            ["USER\winstats\showStats.sqf"] remoteExec ["execVM", 0, true];
-    };
+        private _endMission = {
+                ["USER\winstats\showStats.sqf"] remoteExec ["execVM", 0, true];
+        };
 
-    switch (toLower _commandType) do {
-        case ("endmission"): _endMission;
-        default _fnc_default;
-    };
+        switch (toLower _commandType) do {
+            case ("endmission"): _endMission;
+            default _fnc_default;
+        };
 
-},"admin"] call CBA_fnc_registerChatCommand;
+    },"admin"] call CBA_fnc_registerChatCommand;
 
-["ace_common_displayTextStructured", {
-    params [["_array",[]]];
+    ["ace_common_displayTextStructured", {
+        params [["_array",[]]];
 
-    _array params ["_string"];
-        
-    if (isDedicated) exitWith {}; // just to make sure
+        _array params ["_string"];
+            
+        if (isDedicated) exitWith {}; // just to make sure
 
-    if (_string isEqualTo (localize "STR_ACE_refuel_Hint_RemainingFuel") || _string isEqualTo (localize "STR_ACE_refuel_Hint_Empty")) then {
-        
-        private _fuelStations = missionNamespace getVariable ["FF_fuelStations", []];
-        private _suspectedFuelStation = objNull;
-        private _distanceTo = 14000;
+        if (_string isEqualTo (localize "STR_ACE_refuel_Hint_RemainingFuel") || _string isEqualTo (localize "STR_ACE_refuel_Hint_Empty")) then {
+            
+            private _fuelStations = missionNamespace getVariable ["FF_fuelStations", []];
+            private _suspectedFuelStation = objNull;
+            private _distanceTo = 14000;
 
-        {   
-            private _distanceActual = _x distance2D player;
-            if (_distanceActual < _distanceTo) then {
-                _suspectedFuelStation = _x;
-                _distanceTo = _distanceActual;
-            };
-        } forEach _fuelStations;
+            {   
+                private _distanceActual = _x distance2D player;
+                if (_distanceActual < _distanceTo) then {
+                    _suspectedFuelStation = _x;
+                    _distanceTo = _distanceActual;
+                };
+            } forEach _fuelStations;
 
-        if (_distanceActual > 30) exitWith { diag_log "checking fuel too far away from next fuel station"; };
+            if (_distanceActual > 30) exitWith { diag_log "checking fuel too far away from next fuel station"; };
 
 
-        private _side = player getVariable ["FF_originalSide", sideUnknown];
+            private _side = player getVariable ["FF_originalSide", sideUnknown];
+            private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
+            private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
+            private _currentTime = [dayTime, "HH:MM"] call BIS_fnc_timeToString;
+            private _fuelLeft = [_suspectedFuelStation] call ace_refuel_fnc_getFuel;
+            _suspectedFuelStation setVariable [_fuelKnownFormat, _fuelLeft, true];
+            _suspectedFuelStation setVariable [_fuelKnownTimeFormat, _currentTime, true];
+
+            diag_log ("logging fuel for station: " + str _fuelLeft);
+        };
+    }] call CBA_fnc_addEventHandler;
+
+
+    ["ace_common_fueling", {
+        params ["_sourceObject", "_amount", "_sinkObject", "_unit"];
+
+        private _fuelLeft = [_sourceObject] call ace_refuel_fnc_getFuel;
+        private _side = _unit getVariable ["FF_originalSide", sideUnknown];
         private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
         private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
         private _currentTime = [dayTime, "HH:MM"] call BIS_fnc_timeToString;
-        private _fuelLeft = [_suspectedFuelStation] call ace_refuel_fnc_getFuel;
-        _suspectedFuelStation setVariable [_fuelKnownFormat, _fuelLeft, true];
-        _suspectedFuelStation setVariable [_fuelKnownTimeFormat, _currentTime, true];
-
-        diag_log ("logging fuel for station: " + str _fuelLeft);
-    };
-}] call CBA_fnc_addEventHandler;
+        _sourceObject setVariable [_fuelKnownFormat, _fuelLeft, true];
+        _sourceObject setVariable [_fuelKnownTimeFormat, _currentTime, true];
 
 
-["ace_common_fueling", {
-    params ["_sourceObject", "_amount", "_sinkObject", "_unit"];
+        private _liters = [_sinkObject] call ace_refuel_fnc_getFuel;
 
-    private _fuelLeft = [_sourceObject] call ace_refuel_fnc_getFuel;
-    private _side = _unit getVariable ["FF_originalSide", sideUnknown];
-    private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
-    private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
-    private _currentTime = [dayTime, "HH:MM"] call BIS_fnc_timeToString;
-    _sourceObject setVariable [_fuelKnownFormat, _fuelLeft, true];
-    _sourceObject setVariable [_fuelKnownTimeFormat, _currentTime, true];
+        hintSilent composeText [ 
+            parseText ("<t color='#FF0000'><t size='2'><t align='center'>" + (str (floor _liters)) + "</t><br/>"), 
+            parseText ("<t color='#ffffff'><t size='1'><t align='center'>Liters transferred</t><br/>"), 
+            parseText ("<t color='#ffffff'><t size ='0.7'><t align='center'>" + (str (round _fuelLeft)) + " liters fuel left</t><br/>")
+        ];
 
+        private _refuelingSoundPath = missionNamespace getVariable ["FF_fuelingSound", ""];
+        playSound3D [_refuelingSoundPath, _sourceObject, false, getPos _sourceObject, 10, 1, 100];
+    }] call CBA_fnc_addEventHandler;
 
-    private _liters = [_sinkObject] call ace_refuel_fnc_getFuel;
+    ["ace_common_addCargoFuelFinished", {
+        // systemChat str _this;
+        // diag_log str _this;
+        params ["_sourceObject", "_startFuel", "_newFuel", "_unit"];
 
-    hintSilent composeText [ 
-        parseText ("<t color='#FF0000'><t size='2'><t align='center'>" + (str (floor _liters)) + "</t><br/>"), 
-        parseText ("<t color='#ffffff'><t size='1'><t align='center'>Liters transferred</t><br/>"), 
-        parseText ("<t color='#ffffff'><t size ='0.7'><t align='center'>" + (str (round _fuelLeft)) + " liters fuel left</t><br/>")
+        // update map stuff
+        private _side = _unit getVariable ["FF_originalSide", sideUnknown];
+        private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
+        private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
+        private _currentTime = [dayTime, "HH:MM"] call BIS_fnc_timeToString;
+        _sourceObject setVariable [_fuelKnownFormat, _startFuel - _newFuel, true];
+        _sourceObject setVariable [_fuelKnownTimeFormat, _currentTime, true];
+
+        // assign points
+        private _newPoints = _newFuel - _startFuel;
+
+        // play satisfying sound
+        private _refuelingSoundPathEnd = missionNamespace getVariable ["FF_fuelingSoundEnd", ""];
+        playSound3D [_refuelingSoundPathEnd, _sourceObject, false, getPos _sourceObject, 10, 1, 100];
+
+        systemChat ("made " + (str (_points + _newPoints)) + " points");
+
+        // show hint if fuel is sold
+        if (_sourceObject == fuelSellPoint_west ||
+            _sourceObject == fuelSellPoint_east || 
+            _sourceObject == fuelSellPoint_independent || 
+            _sourceObject == fuelSellPoint_civilian
+           ) then {
+            [
+                {
+                    private _fuelCount  = format ["%1", [player getVariable ["FF_originalSide", sideUnknown]] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
+                    private _totalPoints = format ["%1", [player getVariable ["FF_originalSide", sideUnknown]] call (compile preprocessFileLineNumbers "USER\getPoints.sqf")];
+                    hintSilent parseText ("
+                            <t color='#009999'><t size='2'><t align='center'>" + _fuelCount + "<br/>
+                            <t align='center'><t size='1'><t color='#ffffff'>L Treibstoff<br/><br/>
+                            <t color='#009999'><t size='2'><t align='center'>" + _totalPoints + "<br/>
+                            <t align='center'><t size='1'><t color='#ffffff'>Siegpunkte<br/><br/>");
+
+                },
+                [],
+                1
+            ] call CBA_fnc_waitAndExecute;
+        };
+    }] call CBA_fnc_addEventHandler;
+
+    ["SetCustomEncryption", "OnRadiosReceived", {
+        params ["_unit", ["_radios", []]];
+        private _customEncryption = player getVariable ["FF_originalSide", sideUnknown];
+        [call TFAR_fnc_activeSwRadio, str _customEncryption] call TFAR_fnc_setSwRadioCode;
+        player setVariable ["tf_receivingDistanceMultiplicator", 0.25];
+        player setVariable ["tf_sendingDistanceMultiplicator", 4];
+    }, player] call TFAR_fnc_addEventHandler;
+
+    {
+        _x params ["_area", "_side"];
+        private _playerSide = [player, true] call BIS_fnc_objectSide;
+        if (_playerSide == _side) then {
+            _area setMarkerBrushLocal "FDiagonal";
+            _area setMarkerColorLocal "ColorGreen";
+        } else {
+            _area setMarkerBrushLocal "SolidBorder";
+            _area setMarkerColorLocal "ColorPink";
+        };
+        [_area, _side] execVM "USER\safezone\createSafeZone.sqf";
+    } forEach [
+        ["mrk_safeZone_west", west],
+        ["mrk_safeZone_east", east],
+        ["mrk_safeZone_independent", independent],
+        ["mrk_safeZone_civilian", civilian]
     ];
 
-    private _refuelingSoundPath = missionNamespace getVariable ["FF_fuelingSound", ""];
-    playSound3D [_refuelingSoundPath, _sourceObject, false, getPos _sourceObject, 10, 1, 100];
-}] call CBA_fnc_addEventHandler;
-
-["ace_common_addCargoFuelFinished", {
-    // systemChat str _this;
-    // diag_log str _this;
-    params ["_sourceObject", "_startFuel", "_newFuel", "_unit"];
-
-    // update map stuff
-    private _side = _unit getVariable ["FF_originalSide", sideUnknown];
-    private _fuelKnownFormat = format ['ace_refuel_currentFuelKnown_%1', _side];
-    private _fuelKnownTimeFormat = format ['ace_refuel_currentFuelKnownTime_%1', _side];
-    private _currentTime = [dayTime, "HH:MM"] call BIS_fnc_timeToString;
-    _sourceObject setVariable [_fuelKnownFormat, _startFuel - _newFuel, true];
-    _sourceObject setVariable [_fuelKnownTimeFormat, _currentTime, true];
-
-    // assign points
-    private _newPoints = _newFuel - _startFuel;
-
-    // play satisfying sound
-    private _refuelingSoundPathEnd = missionNamespace getVariable ["FF_fuelingSoundEnd", ""];
-    playSound3D [_refuelingSoundPathEnd, _sourceObject, false, getPos _sourceObject, 10, 1, 100];
-
-    systemChat ("made " + (str (_points + _newPoints)) + " points");
-
-    // show hint if fuel is sold
-    if (_sourceObject == fuelSellPoint_west ||
-        _sourceObject == fuelSellPoint_east || 
-        _sourceObject == fuelSellPoint_independent || 
-        _sourceObject == fuelSellPoint_civilian
-       ) then {
-        [
-            {
-                private _fuelCount  = format ["%1", [player getVariable ["FF_originalSide", sideUnknown]] call (compile preprocessFileLineNumbers "USER\getFuelPoints.sqf")];
-                private _totalPoints = format ["%1", [player getVariable ["FF_originalSide", sideUnknown]] call (compile preprocessFileLineNumbers "USER\getPoints.sqf")];
-                hintSilent parseText ("
-                        <t color='#009999'><t size='2'><t align='center'>" + _fuelCount + "<br/>
-                        <t align='center'><t size='1'><t color='#ffffff'>L Treibstoff<br/><br/>
-                        <t color='#009999'><t size='2'><t align='center'>" + _totalPoints + "<br/>
-                        <t align='center'><t size='1'><t color='#ffffff'>Siegpunkte<br/><br/>");
-
-            },
-            [],
-            1
-        ] call CBA_fnc_waitAndExecute;
-    };
-}] call CBA_fnc_addEventHandler;
-
-["SetCustomEncryption", "OnRadiosReceived", {
-    params ["_unit", ["_radios", []]];
-    private _customEncryption = player getVariable ["FF_originalSide", sideUnknown];
-    [call TFAR_fnc_activeSwRadio, str _customEncryption] call TFAR_fnc_setSwRadioCode;
-    player setVariable ["tf_receivingDistanceMultiplicator", 0.25];
-    player setVariable ["tf_sendingDistanceMultiplicator", 4];
-}, player] call TFAR_fnc_addEventHandler;
-
-
-
-
-{
-    _x params ["_area", "_side"];
-    private _playerSide = [player, true] call BIS_fnc_objectSide;
-    if (_playerSide == _side) then {
-        _area setMarkerBrushLocal "FDiagonal";
-        _area setMarkerColorLocal "ColorGreen";
-    } else {
-        _area setMarkerBrushLocal "SolidBorder";
-        _area setMarkerColorLocal "ColorPink";
-    };
-    [_area, _side] execVM "USER\safezone\createSafeZone.sqf";
-} forEach [
-    ["mrk_safeZone_west", west],
-    ["mrk_safeZone_east", east],
-    ["mrk_safeZone_independent", independent],
-    ["mrk_safeZone_civilian", civilian]
-];
+};
 
 
 if (isServer) then {
@@ -232,12 +232,17 @@ if (isServer) then {
 
         private _westGroup = createGroup east;
         missionNamespace setVariable ["FF_groupWest", _westGroup, true];
+        publicVariable "FF_groupWest";
         private _eastGroup = createGroup east;
         missionNamespace setVariable ["FF_groupEast", _eastGroup, true];
+        publicVariable "FF_groupEast";
         private _independentGroup = createGroup east;
         missionNamespace setVariable ["FF_groupIndependent", _independentGroup, true];
+        publicVariable "FF_groupIndependent";
         private _civilianGroup = createGroup east;
         missionNamespace setVariable ["FF_groupCivilian", _civilianGroup, true];
+        publicVariable "FF_groupCivilian";
+        
         {
             private _originalSide = [_x, true] call BIS_fnc_objectSide;
             _x setVariable ["FF_originalSide", _originalSide, true];
@@ -247,7 +252,7 @@ if (isServer) then {
                 case east : {  [_x] joinSilent _eastGroup; }; 
                 case independent : {  [_x] joinSilent _independentGroup; }; 
                 case civilian : {  [_x] joinSilent _civilianGroup; }; 
-                default {}; 
+                default {diag_log "server:error in originalSide: none of the sides!"; }; 
             };
 
             [   
