@@ -1,16 +1,16 @@
-params ["_vehicle", "_helper"];
+params ["_classname", "_vehicle", "_helper"];
 
 private _addSpawnAction = [
     "AddSpawn",
-    "Spawn Fuel Bus",
+    "Spawn Car",
     "",
     {
         params ["_target", "_player", "_params"];
-        _params params ["_helper"];
-        [getPos _helper, getDir _helper] execVM "USER\fuelbus\createFuelBus.sqf";
+        _params params ["_helper", "_classname"];
+        [_classname, getPos _helper, getDir _helper] execVM "USER\fuelbus\createCar.sqf";
     }, {
         (player distance _target) <= 4
-    }, {}, [_helper]
+    }, {}, [_helper, _classname]
 ] call ace_interact_menu_fnc_createAction;
 
 

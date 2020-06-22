@@ -122,6 +122,7 @@ class Loadouts {
     baseDelay = 1;
     handleRadios = 1;
     resetLoadout = 0;
+    customGear = -1;
 
     class Faction {
 		#include "node_modules\grad-factions-tvt\loadouts.hpp"
