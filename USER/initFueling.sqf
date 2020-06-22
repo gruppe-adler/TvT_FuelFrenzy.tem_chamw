@@ -8,6 +8,8 @@ missionNamespace setVariable ["FF_fuelingSound", _refuelingSoundPath];
 missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 
 if (hasInterface) then {
+    [] call grad_linearSD_fnc_transferRadiosAcrossRespawn;
+
     ["ff",{
         params ["_commandType"];
 
@@ -137,14 +139,6 @@ if (hasInterface) then {
         };
     }] call CBA_fnc_addEventHandler;
 
-    ["SetCustomEncryption", "OnRadiosReceived", {
-        params ["_unit", ["_radios", []]];
-        private _customEncryption = player getVariable ["FF_originalSide", sideUnknown];
-        [call TFAR_fnc_activeSwRadio, str _customEncryption] call TFAR_fnc_setSwRadioCode;
-        player setVariable ["tf_receivingDistanceMultiplicator", 0.25];
-        player setVariable ["tf_sendingDistanceMultiplicator", 4];
-    }, player] call TFAR_fnc_addEventHandler;
-
     {
         _x params ["_area", "_side"];
         private _playerSide = [player, true] call BIS_fnc_objectSide;
@@ -242,7 +236,7 @@ if (isServer) then {
         private _civilianGroup = createGroup east;
         missionNamespace setVariable ["FF_groupCivilian", _civilianGroup, true];
         publicVariable "FF_groupCivilian";
-        
+
         {
             private _originalSide = [_x, true] call BIS_fnc_objectSide;
             _x setVariable ["FF_originalSide", _originalSide, true];
