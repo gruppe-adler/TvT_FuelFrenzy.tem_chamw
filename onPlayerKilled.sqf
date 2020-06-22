@@ -13,6 +13,7 @@ if (([missionConfigFile >> "missionsettings","waveRespawnEnabled",0] call BIS_fn
         case (WEST): {"respawntimeBlu"};
         case (EAST): {"respawntimeOpf"};
         case (INDEPENDENT): {"respawntimeInd"};
+        case (CIVILIAN): {"respawntimeCiv"};
         default {"respawntimeBlu"};
     };
     _respawnTime = [missionConfigFile >> "missionsettings",_respawnTimeVar,10] call BIS_fnc_returnConfigEntry;
