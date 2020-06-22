@@ -12,7 +12,6 @@ private _eventhandlerIdentifier = format ["FF_safeZoneFiredEH_%1", _area];
     params ["_args", "_handle"];
     _args params ["_area", "_eventhandlerSet", "_eventhandlerIdentifier", "_side"];
 
-    if (!alive player) exitWith {};
     private _isInZone = (count ([player] inAreaArray _area) > 0);
     // systemChat str _isInZone;
     
