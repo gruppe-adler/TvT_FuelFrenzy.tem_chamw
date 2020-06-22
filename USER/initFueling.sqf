@@ -168,22 +168,22 @@ missionNamespace setVariable ["FF_fuelingSoundEnd", _refuelingSoundPathEnd];
 
 if (isServer) then {
 
-        [fuelSellPoint_east, 0] call ace_refuel_fnc_makeSource;
+        // [fuelSellPoint_east, 0] call ace_refuel_fnc_makeSource;
         fuelSellPoint_east setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
         fuelSellPoint_east setVariable ["ace_refuel_cargoRate", 200, true];
         fuelSellPoint_east setVariable ["FF_sellingPoint", east, true];
 
-        [fuelSellPoint_west, 0] call ace_refuel_fnc_makeSource;
+        // [fuelSellPoint_west, 0] call ace_refuel_fnc_makeSource;
         fuelSellPoint_west setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
         fuelSellPoint_west setVariable ["ace_refuel_cargoRate", 200, true];
         fuelSellPoint_west setVariable ["FF_sellingPoint", west, true];
 
-        [fuelSellPoint_independent, 0] call ace_refuel_fnc_makeSource;
+        // [fuelSellPoint_independent, 0] call ace_refuel_fnc_makeSource;
         fuelSellPoint_independent setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
         fuelSellPoint_independent setVariable ["ace_refuel_cargoRate", 200, true];
         fuelSellPoint_independent setVariable ["FF_sellingPoint", independent, true];
 
-        [fuelSellPoint_civilian, 0] call ace_refuel_fnc_makeSource;
+        // [fuelSellPoint_civilian, 0] call ace_refuel_fnc_makeSource;
         fuelSellPoint_civilian setVariable ["ace_refuel_fuelMaxCargo", 1000000, true];
         fuelSellPoint_civilian setVariable ["ace_refuel_cargoRate", 200, true];
         fuelSellPoint_civilian setVariable ["FF_sellingPoint", civilian, true];

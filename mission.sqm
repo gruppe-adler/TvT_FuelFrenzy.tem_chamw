@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=929;
+		nextID=960;
 	};
 	class Camera
 	{
-		pos[]={7284.5747,65.342613,1290.9473};
-		dir[]={0.17127392,-0.75338548,-0.63489872};
-		up[]={0.19622488,0.65757197,-0.72739154};
-		aside[]={-0.96549618,-1.1500379e-007,-0.26045793};
+		pos[]={845.48511,28.234282,725.61462};
+		dir[]={0.15993921,-0.4447872,0.88126141};
+		up[]={0.079430714,0.89562422,0.43766475};
+		aside[]={0.98394889,7.6190918e-007,-0.17857289};
 	};
 };
 binarizationWanted=0;
@@ -23676,8 +23676,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={835.16852,10.676573,724.85327};
-				angles[]={0.06739822,5.358161,0.02999169};
+				position[]={846.24243,9.7755394,781.06226};
+				angles[]={6.2756844,2.2514749,0.0075011365};
 			};
 			side="Empty";
 			flags=4;
@@ -23693,8 +23693,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={838.86005,10.454083,729.25574};
-				angles[]={0.064908728,5.358161,0.019996032};
+				position[]={841.1344,9.6918764,774.96893};
+				angles[]={6.2756844,2.2514749,0.0075011365};
 			};
 			side="Empty";
 			flags=4;
@@ -23710,8 +23710,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={840.74823,10.365708,731.46411};
-				angles[]={0.064907812,5.358161,0.0049914722};
+				position[]={838.76947,9.6565275,772.60596};
+				angles[]={6.2756844,2.2514749,0.0075011365};
 			};
 			side="Empty";
 			flags=4;
@@ -23721,15 +23721,14 @@ class Mission
 			};
 			id=1862;
 			type="RDS_Gaz24_Civ_02";
-			atlOffset=0.028909683;
 		};
 		class Item150
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={842.79865,10.173922,734.20892};
-				angles[]={0.062417556,5.358161,0.0049914722};
+				position[]={836.21155,9.6144285,769.58832};
+				angles[]={6.2756844,2.2514749,0.0049914722};
 			};
 			side="Empty";
 			flags=4;
@@ -23739,15 +23738,14 @@ class Mission
 			};
 			id=1863;
 			type="RDS_Gaz24_Civ_02";
-			atlOffset=-9.5367432e-007;
 		};
 		class Item151
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={844.09296,10.039149,736.46906};
-				angles[]={0.059927464,5.358161,6.278194};
+				position[]={843.95166,9.738163,778.25403};
+				angles[]={6.2756844,2.2514749,0.0075011365};
 			};
 			side="Empty";
 			flags=4;
@@ -23763,8 +23761,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={846.1745,9.9004316,738.53271};
-				angles[]={0.067397334,5.358161,6.270689};
+				position[]={831.20062,9.5359707,764.11761};
+				angles[]={0.087277837,2.2514749,0.0050033992};
 			};
 			side="Empty";
 			flags=4;
@@ -23774,15 +23772,14 @@ class Mission
 			};
 			id=1865;
 			type="RDS_Gaz24_Civ_02";
-			atlOffset=9.5367432e-007;
 		};
 		class Item153
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={848.06628,9.7529097,740.74524};
-				angles[]={0.029989703,5.358161,6.2756844};
+				position[]={829.00073,9.5170288,761.59387};
+				angles[]={6.278194,2.2514749,0.0049914722};
 			};
 			side="Empty";
 			flags=4;
@@ -23798,8 +23795,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={850.29254,9.6492672,742.90344};
-				angles[]={0.049958061,5.358161,6.255693};
+				position[]={826.59033,9.4943066,759.1369};
+				angles[]={6.278194,2.2514749,0.0024897563};
 			};
 			side="Empty";
 			flags=4;
@@ -23815,8 +23812,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={851.58246,9.5340395,745.16791};
-				angles[]={0.019996032,5.358161,6.255693};
+				position[]={824.36884,9.4841862,755.97809};
+				angles[]={-0,2.2514749,0};
 			};
 			side="Empty";
 			flags=4;
@@ -23826,15 +23823,14 @@ class Mission
 			};
 			id=1868;
 			type="RDS_Gaz24_Civ_02";
-			atlOffset=1.9073486e-006;
 		};
 		class Item156
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={853.66797,9.4845161,747.23206};
-				angles[]={0.044969428,5.358161,6.2731848};
+				position[]={822.12799,9.4846821,753.46704};
+				angles[]={0.0024897563,2.2514749,6.2806959};
 			};
 			side="Empty";
 			flags=4;
@@ -23844,15 +23840,14 @@ class Mission
 			};
 			id=1869;
 			type="RDS_Gaz24_Civ_02";
-			atlOffset=4.7683716e-007;
 		};
 		class Item157
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={855.55798,9.4127941,749.44708};
-				angles[]={0.019996032,5.358161,6.248199};
+				position[]={819.46863,9.546299,750.30658};
+				angles[]={0.0024897563,2.2514749,6.2008719};
 			};
 			side="Empty";
 			flags=4;
@@ -23868,8 +23863,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={854.54266,10.008955,797.29346};
-				angles[]={0.022495884,2.3038344,0.052451372};
+				position[]={859.39886,9.8855162,800.0517};
+				angles[]={0.029989703,2.3038344,0.064908728};
 			};
 			side="Empty";
 			flags=4;
@@ -24004,8 +23999,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={851.15747,10.072163,793.76965};
-				angles[]={0.079830162,2.3038344,0.014998405};
+				position[]={856.01367,10.06045,796.52789};
+				angles[]={0.1120284,2.3038344,6.2581916};
 			};
 			side="Empty";
 			flags=4;
@@ -24139,8 +24134,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={847.27612,10.09468,789.62885};
-				angles[]={0.047463283,2.2340212,0.09471602};
+				position[]={852.13232,10.182516,792.38708};
+				angles[]={0.079830162,2.2340212,6.2731848};
 			};
 			side="Empty";
 			flags=4;
@@ -24274,8 +24269,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={844.20239,10.098791,785.83435};
-				angles[]={0.057435457,2.2340212,0.0049914722};
+				position[]={849.05859,10.203962,788.59259};
+				angles[]={0.047463283,2.2340212,0};
 			};
 			side="Empty";
 			flags=4;
@@ -33515,7 +33510,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={844.15338,9.9924679,734.79279};
+				position[]={833.99585,9.4438181,768.40375};
+				angles[]={0,3.1764994,0};
 			};
 			side="Empty";
 			class Attributes
