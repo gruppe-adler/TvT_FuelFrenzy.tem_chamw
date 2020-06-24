@@ -119,6 +119,7 @@ private _sourceStartFuel = [_source] call ace_refuel_fnc_getFuel;
             ["ace_common_addCargoFuel", [_source, - _transferVolume], _source] call CBA_fnc_targetEvent;
         };
         ["ace_common_fueling", [_source, _transferVolume, _sink, _unit], _unit] call CBA_fnc_targetEvent;
+        ["ace_common_fuelSoundLoop", [_source]] call CBA_fnc_globalEvent;
     } else {
         _nozzle setVariable ["ace_refuel_sinkFuel", [_sink] call ace_refuel_fnc_getFuel];
         _nozzle setVariable ["ace_refuel_sourceFuel", [_source] call ace_refuel_fnc_getFuel];
@@ -127,6 +128,7 @@ private _sourceStartFuel = [_source] call ace_refuel_fnc_getFuel;
         _nozzle setVariable ["ace_refuel_lastTickMissionTime", nil];
         _nozzle setVariable ["ace_refuel_isRefueling", false, true];
         ["ace_common_addCargoFuelFinished", [_sink, _sinkStartFuel, _fuelInSink, _unit], _unit] call CBA_fnc_targetEvent;
+        ["ace_common_fuelSoundFinished", [_source]] call CBA_fnc_globalEvent;
     };
 }, 1, [
     _nozzle getVariable "ace_refuel_source",

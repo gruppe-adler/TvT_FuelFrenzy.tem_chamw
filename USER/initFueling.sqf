@@ -29,7 +29,7 @@ if (hasInterface) then {
 
     
     [
-        [player] call refuel_fnc_getFace
+        player, [player] call refuel_fnc_getFace
     ] remoteExec [
         "setFace",
         0,
@@ -98,6 +98,23 @@ if (hasInterface) then {
         };
     }] call CBA_fnc_addEventHandler;
 
+    ["ace_common_fuelSoundLoop", {
+        params ["_sourceObject"];
+
+        private _refuelingSoundPath = missionNamespace getVariable ["FF_fuelingSound", ""];
+        playSound3D [_refuelingSoundPath, _sourceObject, false, getPos _sourceObject, 10, 1, 100];
+
+    }] call CBA_fnc_addEventHandler;
+
+    ["ace_common_fuelSoundFinished", {
+        params ["_sourceObject"];
+
+        // play satisfying sound
+        private _refuelingSoundPathEnd = missionNamespace getVariable ["FF_fuelingSoundEnd", ""];
+        playSound3D [_refuelingSoundPathEnd, _sourceObject, false, getPos _sourceObject, 10, 1, 100];
+
+    }] call CBA_fnc_addEventHandler;
+    
 
     ["ace_common_fueling", {
         params ["_sourceObject", "_amount", "_sinkObject", "_unit"];
@@ -118,9 +135,6 @@ if (hasInterface) then {
             parseText ("<t color='#ffffff'><t size='1'><t align='center'>Liters transferred</t><br/>"), 
             parseText ("<t color='#ffffff'><t size ='0.7'><t align='center'>" + (str (round _fuelLeft)) + " liters fuel left</t><br/>")
         ];
-
-        private _refuelingSoundPath = missionNamespace getVariable ["FF_fuelingSound", ""];
-        playSound3D [_refuelingSoundPath, _sourceObject, false, getPos _sourceObject, 10, 1, 100];
     }] call CBA_fnc_addEventHandler;
 
     ["ace_common_addCargoFuelFinished", {
@@ -138,10 +152,6 @@ if (hasInterface) then {
 
         // assign points
         private _newPoints = _newFuel - _startFuel;
-
-        // play satisfying sound
-        private _refuelingSoundPathEnd = missionNamespace getVariable ["FF_fuelingSoundEnd", ""];
-        playSound3D [_refuelingSoundPathEnd, _sourceObject, false, getPos _sourceObject, 10, 1, 100];
 
         systemChat ("made " + (str (_points + _newPoints)) + " points");
 
