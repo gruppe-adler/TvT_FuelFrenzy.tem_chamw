@@ -10,7 +10,7 @@
     if (GVAR(WAVERESPAWNBLU)) exitWith {};
 
     //start countdown once first player is added to wave
-    if (count GVAR(wavePlayersBlu) > 0) then {
+    if ({!isNull _x} count GVAR(wavePlayersBlu) > 0) then {
         GVAR(WAVERESPAWNTIMELEFTBLU) = (GVAR(WAVERESPAWNTIMELEFTBLU) - 1) max 0;
         publicVariable QGVAR(WAVERESPAWNTIMELEFTBLU);
     } else {
@@ -45,7 +45,7 @@
     if (GVAR(WAVERESPAWNOPF)) exitWith {};
 
     //start countdown once first player is added to wave
-    if (count GVAR(wavePlayersOpf) > 0) then {
+    if ({!isNull _x} count GVAR(wavePlayersOpf) > 0) then {
         GVAR(WAVERESPAWNTIMELEFTOPF) = (GVAR(WAVERESPAWNTIMELEFTOPF) - 1) max 0;
         publicVariable QGVAR(WAVERESPAWNTIMELEFTOPF);
     } else {
@@ -80,7 +80,7 @@
     if (GVAR(WAVERESPAWNIND)) exitWith {};
 
     //start countdown once first player is added to wave
-    if (count GVAR(wavePlayersInd) > 0) then {
+    if ({!isNull _x} count GVAR(wavePlayersInd) > 0) then {
         GVAR(WAVERESPAWNTIMELEFTIND) = (GVAR(WAVERESPAWNTIMELEFTIND) - 1) max 0;
         publicVariable QGVAR(WAVERESPAWNTIMELEFTIND);
     } else {
@@ -116,7 +116,7 @@
     if (GVAR(WAVERESPAWNCIV)) exitWith {};
 
     //start countdown once first player is added to wave
-    if (count GVAR(wavePlayersCiv) > 0) then {
+    if ({!isNull _x} count GVAR(wavePlayersCiv) > 0) then {
         GVAR(WAVERESPAWNTIMELEFTCIV) = (GVAR(WAVERESPAWNTIMELEFTCIV) - 1) max 0;
         publicVariable QGVAR(WAVERESPAWNTIMELEFTCIV);
     } else {

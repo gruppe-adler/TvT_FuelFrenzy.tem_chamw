@@ -3,6 +3,7 @@
 INFO("Ready to respawn. Preparing...");
 
 //respawn not possible
+/*
 if (player getVariable ["wr_interrupted", false]) exitWith {
     private _playerSide = [player, true] call BIS_fnc_objectSide; // JIP/init proof alternative to playerSide
 
@@ -24,7 +25,7 @@ if (player getVariable ["wr_interrupted", false]) exitWith {
     [_playerSide, _explanation] call FUNC(respawnHint);
     [{hint ""}, [], 3] call CBA_fnc_waitAndExecute;
 };
+*/
 
-
-setPlayerRespawnTime 0;
+setPlayerRespawnTime 5;
 forceRespawn player;

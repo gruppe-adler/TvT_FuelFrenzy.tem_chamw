@@ -39,7 +39,31 @@ switch (_side) do {
         };
     };
 
-    default {ERROR_1("Player %1 is neither WEST nor EAST nor INDEPENDENT nor CIVILIAN.", _unit)};
+    default {
+        INFO_1("Player %1 is neither WEST nor EAST nor INDEPENDENT nor CIVILIAN.", _unit);
+
+        if (_unit in GVAR(wavePlayersBlu)) exitWith {
+            GVAR(wavePlayersBlu) deleteAt (GVAR(wavePlayersBlu) find _unit);
+            INFO("...but could be found in and has been removed from wavePlayersBlu.");
+        };
+        
+        if (_unit in GVAR(wavePlayersOpf)) exitWith {
+            GVAR(wavePlayersOpf) deleteAt (GVAR(wavePlayersOpf) find _unit);
+            INFO("...but could be found in and has been removed from wavePlayersOpf.");
+        };
+
+        if (_unit in GVAR(wavePlayersInd)) exitWith {
+            GVAR(wavePlayersInd) deleteAt (GVAR(wavePlayersInd) find _unit);
+            INFO("...but could be found in and has been removed from wavePlayersInd.");
+        };
+
+        if (_unit in GVAR(wavePlayersCiv)) exitWith {
+            GVAR(wavePlayersCiv) deleteAt (GVAR(wavePlayersCiv) find _unit);
+            INFO("...but could be found in and has been removed from wavePlayersCiv.");
+        };        
+
+        ERROR_1("Player %1 is neither WEST nor EAST nor INDEPENDENT and not in any of the respawn arrays.", _unit);
+    };
 };
 
 [{

@@ -28,11 +28,10 @@ if (hasInterface) then {
     };
 
     
-    [   
-        player,
+    [
         [player] call refuel_fnc_getFace
     ] remoteExec [
-        "BIS_fnc_setIdentity",
+        "setFace",
         0,
         true
     ];

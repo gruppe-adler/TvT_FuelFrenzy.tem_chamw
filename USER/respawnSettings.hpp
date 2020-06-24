@@ -19,10 +19,10 @@ civInterruptCondition = "missionNameSpace getVariable ['tembelanTrap_lastFight',
 waverespawntimePlayer = 10;                                                     //Spielerrespawnzeit, bevor er der Welle hinzugefügt wird
 
 // todo remove debug
-waverespawntimeBlu = 10;                                                        //Wellenrespawnzeit Blufor in Sekunden
-waverespawntimeOpf = 10;                                                        //Wellenrespawnzeit Opfor in Sekunden
-waverespawntimeInd = 10;                                                        //Wellenrespawnzeit Independent in Sekunden
-waverespawntimeCiv = 10;                                                        //Wellenrespawnzeit Civilian in Sekunden
+waverespawntimeBlu = 15;                                                        //Wellenrespawnzeit Blufor in Sekunden
+waverespawntimeOpf = 15;                                                        //Wellenrespawnzeit Opfor in Sekunden
+waverespawntimeInd = 15;                                                        //Wellenrespawnzeit Independent in Sekunden
+waverespawntimeCiv = 15;                                                        //Wellenrespawnzeit Civilian in Sekunden
 
 
 //NORMALER RESPAWN =============================================================//Diese Einträge sind nur bei ausgeschaltetem Wave Respawn wichtig

@@ -44,8 +44,8 @@ private _modelVectorLow = _startingPosASL vectorFromTo (AGLtoASL (_sink modelToW
 
 {
     private _endPosASL = _x;
-    [_startingPosASL, _endPosASL, [1,0,0,1]] call EFUNC(common,addLineToDebugDraw); // Debug scan lines
-    private _intersections = lineIntersectsSurfaces [_startingPosASL, _endPosASL, _unit, objNull, 3];
+    // [_startingPosASL, _endPosASL, [1,0,0,1]] call EFUNC(common,addLineToDebugDraw); // Debug scan lines
+    private _intersections = lineIntersectsSurfaces [_startingPosASL, _endPosASL, _unit, objNull, true, 3];
     {
         _x params ["_intersectPosASL", "", "_intersectObject"];
         if (_intersectObject == _sink) then {
