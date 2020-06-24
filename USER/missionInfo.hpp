@@ -25,7 +25,7 @@ class CfgHints
           // Optional structured text, filled by arguments from 'arguments' param (first argument is %11, see notes bellow), grey color of text
           tip = "Access the fuel station with %3ACE-interact%4 , take fuel nozzle. %1 Move to fuel truck, ACE Interact on it. %1 Choose 'Fill fuel cargo'.; ";
           arguments[] = {
-            "name player" // Simple string will be simply compiled and called, String can also link to localization database in case it starts by str_
+            "str player" // Simple string will be simply compiled and called, String can also link to localization database in case it starts by str_
           };
           // Optional image
           image = "";
@@ -48,7 +48,7 @@ class CfgHints
           // Optional structured text, filled by arguments from 'arguments' param (first argument is %11, see notes bellow), grey color of text
           tip = "Access the fuel truck with %3ACE-interact%4 , take fuel nozzle. %1 Move to fuel tower in your base, ACE Interact on it. %1 Choose 'Sell fuel cargo'.; ";
           arguments[] = {
-            "name player" // Simple string will be simply compiled and called, String can also link to localization database in case it starts by str_
+            "str player" // Simple string will be simply compiled and called, String can also link to localization database in case it starts by str_
           };
           // Optional image
           image = "";

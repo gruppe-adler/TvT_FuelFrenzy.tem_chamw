@@ -87,6 +87,11 @@ missionNamespace setVariable ["FF_fuelTrucks", _existingBusses, true];
         private _fuelBusses = missionNamespace getVariable ["FF_fuelTrucks", []];
         _fuelBusses deleteAt (_fuelBusses find _bus);
         missionNamespace setVariable ["FF_fuelTrucks", _fuelBusses, true];
+
+        private _fuelBussesNoRespawn = missionNamespace getVariable ["FF_fuelTrucksNoRespawn", []];
+        _fuelBussesNoRespawn pushBackUnique _bus;
+        missionNamespace setVariable ["FF_fuelTrucksNoRespawn", _fuelBussesNoRespawn, true];
+
      };
 
      [_side, _pos, _dir] call refuel_fnc_fuelBusSpawn;

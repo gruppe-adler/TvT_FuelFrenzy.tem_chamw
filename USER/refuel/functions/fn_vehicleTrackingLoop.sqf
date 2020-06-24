@@ -17,7 +17,11 @@ private _mapDisplay = findDisplay 12;
 } forEach ((uiNamespace getVariable ["FF_allVehicleControls", []]) + (uiNamespace getVariable ["FF_allFuelStationControls", []]));
 
 
-private _allVehicles = missionNamespace getVariable ['FF_fuelTrucks', []];
+private _allVehicles = (
+        (missionNamespace getVariable ['FF_fuelTrucks', []]) +
+        (missionNamespace getVariable ["FF_fuelTrucksNoRespawn", []])
+    );
+
 private _allFuelStations = missionNamespace getVariable ['FF_fuelStations', []];
 
 private _sidePlayer = player getVariable ['FF_originalSide', sideUnknown];
@@ -165,7 +169,11 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
     params ['_map'];
 
     if (visibleMap) then {
-        private _allVehicles = missionNamespace getVariable ['FF_fuelTrucks', []];
+        private _allVehicles = 
+            (
+                (missionNamespace getVariable ['FF_fuelTrucks', []]) +
+                (missionNamespace getVariable [''FF_fuelTrucksNoRespawn'', []])
+            );
         private _sidePlayer = player getVariable ['FF_originalSide', sideUnknown];
 
         private _allVehicleControls = uiNamespace getVariable ['FF_allVehicleControls', []];

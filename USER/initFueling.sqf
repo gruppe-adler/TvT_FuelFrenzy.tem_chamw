@@ -27,17 +27,17 @@ if (hasInterface) then {
         default {diag_log "client: error in originalSide: none of the sides!"; }; 
     };
 
+    
     [   
         player,
-        [player] call refuel_fnc_getFace,
-        "Male01ENGB",
-        1.0,
-        name player
+        [player] call refuel_fnc_getFace
     ] remoteExec [
         "BIS_fnc_setIdentity",
         0,
         true
     ];
+    
+    
     
 
     ["ff",{
@@ -279,16 +279,5 @@ if (isServer) then {
                 default {diag_log "server:error in originalSide: none of the sides!"; }; 
             };
 
-            [   
-                _x,
-                [_x] call refuel_fnc_getFace,
-                "Male01ENGB",
-                1.0,
-                name player
-            ] remoteExec [
-                "BIS_fnc_setIdentity",
-                0,
-                true
-            ];
         } forEach (playableUnits + switchableUnits);
 };

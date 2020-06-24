@@ -40,8 +40,7 @@ switch (_unit getVariable ["FF_originalSide", sideUnknown]) do {
             "GreekHead_A3_06",
             "GreekHead_A3_07", 
             "GreekHead_A3_08",
-            "GreekHead_A3_09",
-            "GreekHead_A3_10"
+            "GreekHead_A3_09"
         ];
     };
 

@@ -62,6 +62,18 @@ private _fnc_saveLRSettings = {
         [call TFAR_fnc_activeSwRadio, str _customEncryption] call TFAR_fnc_setSwRadioCode;
         player setVariable ["tf_receivingDistanceMultiplicator", 0.25];
         player setVariable ["tf_sendingDistanceMultiplicator", 4];
+
+        // logging for debugging side errors
+        [
+            [
+                player,
+                [call TFAR_fnc_activeSwRadio] call TFAR_fnc_getSwRadioCode,
+                player getVariable ["FF_originalSide", sideUnknown],
+                side player,
+                didJIP
+            ],
+            "USER\debug\logSides.sqf"
+        ] remoteExec ["BIS_fnc_execVM", 2];
     }
 ] call CBA_fnc_addEventHandler;
 
