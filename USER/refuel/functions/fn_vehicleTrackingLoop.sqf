@@ -19,7 +19,7 @@ private _mapDisplay = findDisplay 12;
 
 private _allVehicles = (
         (missionNamespace getVariable ['FF_fuelTrucks', []]) +
-        (missionNamespace getVariable ["FF_fuelTrucksNoRespawn", []])
+        (missionNamespace getVariable ['FF_fuelTrucksNoRespawn', []])
     );
 
 private _allFuelStations = missionNamespace getVariable ['FF_fuelStations', []];
@@ -172,7 +172,7 @@ uiNamespace setVariable ["FF_fuelSellPointControls", _fuelSellPointControls];
         private _allVehicles = 
             (
                 (missionNamespace getVariable ['FF_fuelTrucks', []]) +
-                (missionNamespace getVariable [''FF_fuelTrucksNoRespawn'', []])
+                (missionNamespace getVariable ['FF_fuelTrucksNoRespawn', []])
             );
         private _sidePlayer = player getVariable ['FF_originalSide', sideUnknown];
 

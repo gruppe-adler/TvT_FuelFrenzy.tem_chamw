@@ -81,18 +81,17 @@ missionNamespace setVariable ["FF_fuelTrucks", _existingBusses, true];
     !((_bus getVariable ["FF_trackedForSide",sideUnknown]) isEqualTo (_bus getVariable ["FF_originalSide",sideUnknown])) ||
     !alive _bus
 },{
-     params ["_bus", "_side", "_pos", "_dir"];
+    params ["_bus", "_side", "_pos", "_dir"];
 
-     if (!alive _bus) then {
-        private _fuelBusses = missionNamespace getVariable ["FF_fuelTrucks", []];
-        _fuelBusses deleteAt (_fuelBusses find _bus);
-        missionNamespace setVariable ["FF_fuelTrucks", _fuelBusses, true];
-
-        private _fuelBussesNoRespawn = missionNamespace getVariable ["FF_fuelTrucksNoRespawn", []];
-        _fuelBussesNoRespawn pushBackUnique _bus;
-        missionNamespace setVariable ["FF_fuelTrucksNoRespawn", _fuelBussesNoRespawn, true];
-
-     };
+    // remove bus from respawn
+    private _fuelBusses = missionNamespace getVariable ["FF_fuelTrucks", []];
+    _fuelBusses deleteAt (_fuelBusses find _bus);
+    missionNamespace setVariable ["FF_fuelTrucks", _fuelBusses, true];
+    
+    // add bus to tracking without respawn 
+    private _fuelBussesNoRespawn = missionNamespace getVariable ["FF_fuelTrucksNoRespawn", []];
+    _fuelBussesNoRespawn pushBackUnique _bus;
+    missionNamespace setVariable ["FF_fuelTrucksNoRespawn", _fuelBussesNoRespawn, true];
 
      [_side, _pos, _dir] call refuel_fnc_fuelBusSpawn;
 }, [_bus, _side, _pos, _dir]] call CBA_fnc_waitUntilAndExecute;
