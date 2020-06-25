@@ -53,6 +53,9 @@ private _fnc_saveLRSettings = {
     {
         params ["_unit","_radio"];
         if (_unit != player) exitWith {};
+        if (typeOf _radio != "tf_fadak") exitWith {
+            player linkItem "tf_fadak";
+        };
         private _settings = player getVariable [QGVAR(swSettings),[]];
         if (count _settings > 0) then {
             [call TFAR_fnc_activeSwRadio, _settings] call TFAR_fnc_setSwSettings;
