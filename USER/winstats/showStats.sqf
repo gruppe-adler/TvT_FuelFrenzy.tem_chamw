@@ -4,7 +4,7 @@
 
 */
 
-// todo remove debug
+
 
 if (isServer) then {
     [] spawn {
@@ -295,7 +295,7 @@ if (hasInterface) then {
         };
     };
 
-    sleep 16; // todo raise to 16 again
+    sleep 16;
     _display displayRemoveAllEventHandlers "KeyDown";
     _display closeDisplay 1;
 
