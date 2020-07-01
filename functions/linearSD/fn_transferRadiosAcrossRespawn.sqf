@@ -55,8 +55,8 @@ private _fnc_saveLRSettings = {
         if (_unit != player) exitWith {};
         _radio params ["_firstRadio"];
         _radioClass = getText (configFile >> "CfgWeapons" >> _firstRadio >> "tf_parent");
-        if (_radioClass != "tf_fadak") exitWith {
-            player linkItem "tf_fadak";
+        if (_radioClass != "tfar_fadak") exitWith {
+            player linkItem "tfar_fadak";
         };
         private _settings = player getVariable [QGVAR(swSettings),[]];
         if (count _settings > 0) then {
