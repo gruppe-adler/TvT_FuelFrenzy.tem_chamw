@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=1115;
+		nextID=1177;
 	};
 	class Camera
 	{
-		pos[]={6443.271,57.390926,4152.8926};
-		dir[]={0.2527357,-0.6662364,-0.70165426};
-		up[]={0.22578517,0.74572504,-0.62682921};
-		aside[]={-0.94085908,-2.8908835e-007,-0.33889785};
+		pos[]={7293.8384,60.139717,1268.8855};
+		dir[]={-0.64997101,-0.67472351,0.34971553};
+		up[]={-0.594181,0.7380656,0.31969702};
+		aside[]={0.47382051,-9.1094989e-008,0.88062954};
 	};
 };
 binarizationWanted=0;
@@ -33369,7 +33369,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="call{[""RDS_Gaz24_Civ_02"", this, fuelBusSpawn_west] execVM ""USER\fuelbus\addSpawnAction.sqf"";}";
+				init="call{[""RDS_Gaz24_Civ_02"", this, fuelBusSpawn_west, west] execVM ""USER\fuelbus\addSpawnAction.sqf"";}";
 			};
 			id=3657;
 			type="Land_WeldingTrolley_01_F";
@@ -34036,7 +34036,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="call{[""RDS_Gaz24_Civ_03"", this, fuelBusSpawn_east] execVM ""USER\fuelbus\addSpawnAction.sqf"";}";
+				init="call{[""RDS_Gaz24_Civ_03"", this, fuelBusSpawn_east, east] execVM ""USER\fuelbus\addSpawnAction.sqf"";}";
 			};
 			id=3704;
 			type="Land_WeldingTrolley_01_F";
@@ -34249,7 +34249,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="call{[""RDS_Lada_Civ_03"", this, fuelBusSpawn_independent] execVM ""USER\fuelbus\addSpawnAction.sqf"";}";
+				init="call{[""RDS_Lada_Civ_03"", this, fuelBusSpawn_independent, independent] execVM ""USER\fuelbus\addSpawnAction.sqf"";}";
 			};
 			id=3717;
 			type="Land_WeldingTrolley_01_F";
@@ -34493,7 +34493,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="call{[""RDS_Lada_Civ_01"", this, fuelBusSpawn_civilian] execVM ""USER\fuelbus\addSpawnAction.sqf""; }";
+				init="call{[""RDS_Lada_Civ_01"", this, fuelBusSpawn_civilian, civilian] execVM ""USER\fuelbus\addSpawnAction.sqf""; }";
 			};
 			id=3730;
 			type="Land_WeldingTrolley_01_F";
@@ -41126,6 +41126,7 @@ class Mission
 			};
 			id=4039;
 			type="Land_ConcreteWall_03_m_6m_F";
+			atlOffset=1.9073486e-006;
 		};
 		class Item598
 		{

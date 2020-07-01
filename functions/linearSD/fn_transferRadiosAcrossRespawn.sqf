@@ -47,13 +47,15 @@ private _fnc_saveLRSettings = {
     }
 ] call CBA_fnc_addEventHandler;
 
-// apply SR settings every time a radio is instanced
+// apply SR settings every time a radio is instanced, force tf_fadak
 [
     "TFAR_event_OnRadiosReceived",
     {
         params ["_unit","_radio"];
         if (_unit != player) exitWith {};
-        if (typeOf _radio != "tf_fadak") exitWith {
+        _radio params ["_firstRadio"];
+        _radioClass = getText (configFile >> "CfgWeapons" >> _firstRadio >> "tf_parent");
+        if (_radioClass != "tf_fadak") exitWith {
             player linkItem "tf_fadak";
         };
         private _settings = player getVariable [QGVAR(swSettings),[]];
