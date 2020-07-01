@@ -16,7 +16,7 @@ opforInterruptCondition = "missionNameSpace getVariable ['tembelanTrap_lastFight
 indepInterruptCondition = "missionNameSpace getVariable ['tembelanTrap_lastFight', false]";                                              //Bedingung nach der der Independent Waverespawn deaktiviert wird
 civInterruptCondition = "missionNameSpace getVariable ['tembelanTrap_lastFight', false]";                                              //Bedingung nach der der Civilian Waverespawn deaktiviert wird
 
-waverespawntimePlayer = 10;                                                     //Spielerrespawnzeit, bevor er der Welle hinzugefügt wird
+waverespawntimePlayer = 3;                                                     //Spielerrespawnzeit, bevor er der Welle hinzugefügt wird
 
 // todo remove debug
 waverespawntimeBlu = 120;                                                        //Wellenrespawnzeit Blufor in Sekunden
