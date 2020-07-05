@@ -146,8 +146,8 @@ if (hasInterface) then {
     private _resultText = "Draw!";
     if (!_draw) then {
         switch (_winner) do { 
-            case west : { _resultText = "Ital. Mafia wins";  }; 
-            case east : {  _resultText = "Russ. Mafia wins";  }; 
+            case west : { _resultText = "Russ. Mafia wins";  }; 
+            case east : {  _resultText = "Ital. Mafia wins";  }; 
             case independent : { _resultText = "Chin. Mafia wins";   }; 
             case civilian : {  _resultText = "Ger. Mafia wins"; }; 
             default {}; 
